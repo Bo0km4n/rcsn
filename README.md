@@ -7,3 +7,10 @@ This repository is my graduation project.
 * Contiki
 * RE-MOTE
 * C
+
+## How to learn in VirtualBox(Contiki)
+
+### Run Cooja
+- `cd /mnt`
+- `sudo sh mount.sh`
+- `cd contiki_dev/contiki/tools/cooja && sudo ant run`
