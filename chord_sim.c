@@ -108,11 +108,7 @@ typedef struct msg {
   int is_from_cluster_head;
   sha1_hash_t range_start;
   sha1_hash_t range_last;
-  sha1_hash_t range_child_start;
-  sha1_hash_t range_child_last;
   sha1_hash_t unit;
-  sha1_hash_t child_unit;
-
 } message_t;
 
 typedef struct node_t {
@@ -133,10 +129,11 @@ typedef struct node_t {
   int progress_num;
   sha1_hash_t range_start;
   sha1_hash_t range_last;
+  sha1_hash_t unit;
   sha1_hash_t range_child_start;
   sha1_hash_t range_child_last;
-  sha1_hash_t unit;
   sha1_hash_t child_unit;
+  sha1_hash_t white_list[128];
 } node_t;
 
 node_t node;
@@ -199,6 +196,7 @@ static void recv_uc(struct unicast_conn *c, const linkaddr_t *from) {
         printf("RSSI of last received packet = %d from %d\n", rss, from->u8[0]);
       }
       break;
+
     case 0x2:
       printf("[DEBUG] received link request from %d\n", from->u8[0]);
       if(node.is_linked[0]){
@@ -209,6 +207,7 @@ static void recv_uc(struct unicast_conn *c, const linkaddr_t *from) {
       m.type = 0x3;
       packetbuf_copyfrom(&m, 64);
       unicast_send(&uc, from);
+
     case 0x3:
       printf("[DEBUG] received link response from %d\n", from->u8[0]);
       if(res_m->status == 200) {
@@ -219,6 +218,7 @@ static void recv_uc(struct unicast_conn *c, const linkaddr_t *from) {
         printf("[INFO] duplicated request to %d...\n", from->u8[0]);
         break;
       }
+
     case 0x4:
       printf("[INFO] received link completed from %d, now progress : %d, level_node_num: %d level: %d, cluster_head_id : %d\n", from->u8[0], res_m->progress_num + 1, level_node_num, res_m->level, node.cluster_head_id);
       node.is_linked[0] = 1;
@@ -233,10 +233,12 @@ static void recv_uc(struct unicast_conn *c, const linkaddr_t *from) {
         loopback_link_request(node.cluster_head_id);
       }
       break;
+
     case 0x10:
       printf("[INFO] received notification from %d, cluster_head_id : %d\n", from->u8[0], res_m->cluster_head_id);
       node.cluster_head_id = res_m->cluster_head_id;
       break;
+
     case 0x11:
       node.is_completed = 1;
       node.is_cluster_head = 1;
@@ -246,7 +248,13 @@ static void recv_uc(struct unicast_conn *c, const linkaddr_t *from) {
         printf("[DEBUG] send complete notification to %d\n", node.link_list[0]);
         notification_completed_ring(node.link_list[0]);
       }
-      break; 
+      break;
+
+    // search hash
+    case 0x30:
+      printf("[INFO] received search hash request from %d\n", from->u8[0]);
+      
+
     // loopback request
     case 0x80:
       printf("[INFO] received loop back request from %d level is %d\n", from->u8[0], res_m->level);
@@ -268,34 +276,35 @@ static void recv_uc(struct unicast_conn *c, const linkaddr_t *from) {
       {
         printf("[DEBUG] sha-1 routing message from %d\n", from->u8[0]);
         sha1_hash_t calc_buf;
+        sha1_hash_t *child_unit;
         if(res_m->level == node.level) {
           hash_copy(&calc_buf, &res_m->range_last);
           increment(&calc_buf);
+          
           hash_copy(&node.range_start, &calc_buf);
           hash_copy(&node.range_child_start, &calc_buf);
-          hash_copy(&node.range_last, &calc_buf);
-          hash_copy(&node.range_child_last, & calc_buf);
           hash_copy(&node.unit, &res_m->unit);
-          hash_copy(&node.child_unit, &res_m->child_unit);
-          add(&node.range_last, &res_m->unit);
-          add(&node.range_child_last, &res_m->child_unit);
+          hash_copy(&node.range_last, &calc_buf);
+          hash_copy(&node.range_child_last, &calc_buf);
+          
+          child_unit = division(&node.unit, (TOP_NODE_NUM/org_pow(2, node.level - 1)));
+          hash_copy(&node.child_unit, child_unit);
 
-          transmission_hash(node.link_list[0]);
+          add(&node.range_last, &node.unit);
+          add(&node.range_child_last, &node.child_unit);
+          if(node.cluster_head_id != node.link_list[0])transmission_hash(node.link_list[0]);
           transmission_hash(node.link_list[1]);
-          show_hash_info();
         } else if(level_node_num <= 2) {
-          hash_copy(&calc_buf, &res_m->range_child_last);
+          hash_copy(&calc_buf, &res_m->range_last);
           increment(&calc_buf);
+
           hash_copy(&node.range_start, &calc_buf);
           hash_copy(&node.range_last, &calc_buf);
-          hash_copy(&node.unit, &res_m->child_unit);
-          add(&node.range_last, &res_m->child_unit);
+          hash_copy(&node.unit, &res_m->unit);
 
-          show_hash_info();
+          add(&node.range_last, &node.unit);
         } else {
-          hash_copy(&calc_buf, &res_m->range_child_last);
         }
-        debug_print(&res_m->range_last);
         break;
       }
     case 0x99:
@@ -465,11 +474,8 @@ static void transmission_hash(int id) {
   m.level = node.level;
   hash_copy(&m.range_start, &node.range_start);
   hash_copy(&m.range_last, &node.range_last);
-  hash_copy(&m.range_child_start, &node.range_child_start);
-  hash_copy(&m.range_child_last, &node.range_child_last);
   hash_copy(&m.unit, &node.unit);
-  hash_copy(&m.child_unit, &node.child_unit);
-  packetbuf_copyfrom(&m, 70);
+  packetbuf_copyfrom(&m, 80);
   unicast_send(&uc, &to_addr);
 
   printf("[SUCCESS] send hash info to %d\n", id);
@@ -535,23 +541,6 @@ PROCESS_THREAD(example_broadcast_process, ev, data)
   broadcast_open(&broadcast, 129, &broadcast_call);
 
 
-    // sha-1 routing
-  if(node.id == SINK_NODE_ID && !is_started_routing) {
-    printf("[INFO] start transmission hash id\n");
-    sha1_hash_t buf;
-    init_max_hash(&buf);
-    sha1_hash_t *unit = division(&buf, TOP_NODE_NUM);
-    hash_copy(&node.unit, unit);
-    sha1_hash_t *child_unit = division(unit, (TOP_NODE_NUM / org_pow(2, 1)));
-    hash_copy(&node.child_unit, child_unit);
-    add(&node.range_last, unit);
-    add(&node.range_child_last, child_unit);
-
-    transmission_hash(2); 
-    
-    is_started_routing = 1;
-  }
-
   // current level
   while(1) {
     if (node_id == SINK_NODE_ID && node.link_list[0] == 0) {
@@ -595,6 +584,30 @@ PROCESS_THREAD(example_broadcast_process, ev, data)
   etimer_set(&et, CLOCK_SECOND * 4 + random_rand() % (CLOCK_SECOND * 4));
   PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
 
+  // sha-1 routing
+  if(node.id == SINK_NODE_ID && !is_started_routing) {
+    etimer_set(&et, CLOCK_SECOND * 15 + random_rand() % (CLOCK_SECOND * 15));
+    PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
+
+    printf("[INFO] start transmission hash id\n");
+    sha1_hash_t buf;
+    init_max_hash(&buf);
+    sha1_hash_t *unit = division(&buf, TOP_NODE_NUM);
+    hash_copy(&node.unit, unit);
+    sha1_hash_t *child_unit = division(unit, (TOP_NODE_NUM / org_pow(2, 1)));
+    hash_copy(&node.child_unit, child_unit);
+    add(&node.range_last, unit);
+    add(&node.range_child_last, child_unit);
+
+    transmission_hash(node.link_list[0]); 
+    transmission_hash(node.link_list[1]); 
+    
+    is_started_routing = 1;
+  }
+
+  etimer_set(&et, CLOCK_SECOND * 4 + random_rand() % (CLOCK_SECOND * 4));
+  PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
+ 
   
   PROCESS_END();
 }
