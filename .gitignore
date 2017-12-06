@@ -1,2 +1,7 @@
 /InstantContiki3.0
 /contiki
+powertrace/*.a
+powertrace/*.map
+powertrace/*.z1
+powertrace/obj_native/
+powertrace/obj_z1/

@@ -77,11 +77,11 @@ void sha1Sub(sha1_hash_t *a, sha1_hash_t *b, sha1_hash_t *c) {
 void sha1Copy(unsigned short *in, unsigned short *out) {
   int i;
   if(in) {
-		for(int i=0;i<DEFAULT_HASH_SIZE;i++) {
+		for(i=0;i<DEFAULT_HASH_SIZE;i++) {
 			out[i] = in[i];
 		}
 	}else{
-		for(int i=0;i<DEFAULT_HASH_SIZE;i++){
+		for(i=0;i<DEFAULT_HASH_SIZE;i++){
 			out[i] = 0;
 		}
 	}
