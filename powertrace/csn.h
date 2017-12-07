@@ -18,6 +18,7 @@ typedef struct CSN{
   int ChildClusterHeadID;
   int ChildPrevious;
   int ChildLevel;
+  int RetryCounter;
   void (*SendCreationMessage) (CSNMessage *m); 
   void (*SendUCPacket) (CSNMessage *m, int id);
   void (*InsertCSNMessage) (CSNMessage *m, int type, int nodeLevel, int clusterHead, int progress);
@@ -33,7 +34,8 @@ void SendLinkRequest(CSNMessage *, int);
 void CsnUCReceiver(struct unicast_conn *, const linkaddr_t *);
 void CsnBCReceiver(struct broadcast_conn *, const linkaddr_t *);
 void CsnInit(void);
-void ResponseReject(CSN *, int);
+void RetrySearchBC(CSN *, int);
+void ResponseReject(CSN *, int, int);
 int orgPow(int, int);
 
 enum MessageTypes {
@@ -45,6 +47,7 @@ enum MessageTypes {
   StartChildRingType,
   ChildLinkRequestType,
   ChildLinkRequestACKType,
-  RequestRejectType
+  RequestRejectType,
+  ChildRequestRejectType
 };
 #endif

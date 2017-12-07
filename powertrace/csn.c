@@ -32,6 +32,7 @@ void init(void) {
   csn.ChildSuccessor = 0;
   csn.ChildPrevious = 0;
   csn.ChildLevel = 0;
+  csn.RetryCounter = 0;
   csn.M = (CSNMessage *)malloc(sizeof(CSNMessage));
   csn.ClusterHeadID = 0;
   csn.SendCreationMessage = SendCreationMessage;
@@ -67,7 +68,7 @@ PROCESS_THREAD(csnProcess, ev, data)
     csn.SendCreationMessage(csn.M);
   }
   
-  etimer_set(&et, CLOCK_SECOND * 10 + random_rand() % (CLOCK_SECOND * 10));
+  etimer_set(&et, CLOCK_SECOND * RAND_MARGIN + random_rand() % (CLOCK_SECOND * RAND_MARGIN));
   PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
 
   if (successorRSSI == RSSI) {
@@ -95,6 +96,8 @@ PROCESS_THREAD(csnChildProcess, ev, data)
   csn.ChildLevel = csn.Level + 1;
   csn.ChildClusterHeadID = csn.ID;
   csn.InsertCSNMessage(csn.M, CreationType, csn.ChildLevel, csn.ChildClusterHeadID, progress);
+  etimer_set(&et, CLOCK_SECOND * 3 + random_rand() % (CLOCK_SECOND * 3));
+  PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
   csn.SendCreationMessage(csn.M);
   
   etimer_set(&et, CLOCK_SECOND * 10 + random_rand() % (CLOCK_SECOND * 10));
@@ -136,7 +139,7 @@ void CsnUCReceiver(struct unicast_conn *c, const linkaddr_t *from) {
       break;
     case LinkRequestType:
       if (ucLock) {
-        ResponseReject(&csn, from->u8[0]);
+        ResponseReject(&csn, from->u8[0], 0);
       }
       ucLock = 1;
       csn.InsertCSNMessage(csn.M, LinkRequestACKType, 0, 0, 0);
@@ -170,11 +173,14 @@ void CsnUCReceiver(struct unicast_conn *c, const linkaddr_t *from) {
         csn.ChildPrevious = from->u8[0];
         csn.InsertCSNMessage(csn.M, StartChildRingType, 0, 0, 0);
         csn.SendUCPacket(csn.M, csn.ChildSuccessor);
-        csn.SendUCPacket(csn.M, csn.Successor);
+        if (csn.Successor == csn.ClusterHeadID) {
+          break;
+        } else {
+          csn.SendUCPacket(csn.M, csn.Successor);
+        }
       } else {
         csn.Previous = from->u8[0];
-        csn.InsertCSNMessage(csn.M, StartChildRingType, 0, 0, 0);
-        csn.SendUCPacket(csn.M, csn.Successor);
+        StartStructChildCsn(1);
       }
       break;
     case StartChildRingType:
@@ -183,7 +189,7 @@ void CsnUCReceiver(struct unicast_conn *c, const linkaddr_t *from) {
       break;
     case ChildLinkRequestType:
       if (ucLock) {
-        ResponseReject(&csn, from->u8[0]);
+        ResponseReject(&csn, from->u8[0], 1);
       }
       ucLock = 1;
       csn.InsertCSNMessage(csn.M, ChildLinkRequestACKType, 0, 0, 0);
@@ -196,7 +202,11 @@ void CsnUCReceiver(struct unicast_conn *c, const linkaddr_t *from) {
       break;
     case RequestRejectType:
       printf("[CSN:INFO] Rejected request from %d\n", from->u8[0]);
+      RetrySearchBC(&csn, 0);
       break;
+    case ChildRequestRejectType:
+      printf("[CSN:INFO] Rejected child link request from %d\n", from->u8[0]);
+      RetrySearchBC(&csn, 1);
     default:
       break;
   }
@@ -208,7 +218,7 @@ void CsnBCReceiver(struct broadcast_conn *c, const linkaddr_t *from) {
     case CreationType:
       if (csn.Level != 0 || ucLock) break;
       csn.InsertCSNMessage(m, CreationType, 0, 0, 0);
-      clock_wait(DELAY_CLOCK + random_rand() % (CLOCK_SECOND * 2));
+      clock_wait(DELAY_CLOCK + random_rand() % (CLOCK_SECOND * RAND_MARGIN));
       csn.SendUCPacket(m, from->u8[0]);
       break;
     default:
@@ -237,9 +247,29 @@ void InsertCSNMessage(CSNMessage *m, int type, int nodeLevel, int clusterHead, i
   m->clusterHead = clusterHead;
   m->progress = progress;
 }
-void ResponseReject(CSN *csn, int id) {
-  csn->InsertCSNMessage(csn->M, RequestRejectType, 0, 0, 0);
+void ResponseReject(CSN *csn, int id, int isChild) {
+  if (isChild) {
+    csn->InsertCSNMessage(csn->M, ChildRequestRejectType, 0, 0, 0);
+  } else {
+    csn->InsertCSNMessage(csn->M, RequestRejectType, 0, 0, 0);
+  }
   csn->SendUCPacket(csn->M, id);
+}
+
+void RetrySearchBC(CSN *csn, int type) {
+  csn->RetryCounter += 1;
+  if (csn->RetryCounter <= RETRY_LIMIT) {
+    switch (type) {
+      case 0:
+        process_start(&csnProcess, (void *)0);
+        break;
+      case 1:
+        process_start(&csnChildProcess, (void *)0);
+        break;
+      default:
+        break;
+    }
+  }
 }
 
 int orgPow(int base, int exponent) {
