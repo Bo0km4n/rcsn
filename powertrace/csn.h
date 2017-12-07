@@ -14,25 +14,37 @@ typedef struct CSN{
   int Successor;
   int Previous;
   int Level;
-
+  int ChildSuccessor;
+  int ChildClusterHeadID;
+  int ChildPrevious;
+  int ChildLevel;
   void (*SendCreationMessage) (CSNMessage *m); 
   void (*SendUCPacket) (CSNMessage *m, int id);
   void (*InsertCSNMessage) (CSNMessage *m, int type, int nodeLevel, int clusterHead, int progress);
 } CSN;
 
+extern CSN csn;
 void InsertCSNMessage(CSNMessage *, int, int, int, int);
 void StartStructCsn(void);
+void StartStructChildCsn(int);
 void SendCreationMessage(CSNMessage *);
 void SendUCPacket(CSNMessage *, int);
 void SendLinkRequest(CSNMessage *, int);
 void CsnUCReceiver(struct unicast_conn *, const linkaddr_t *);
 void CsnBCReceiver(struct broadcast_conn *, const linkaddr_t *);
 void CsnInit(void);
+void ResponseReject(CSN *, int);
+int orgPow(int, int);
 
 enum MessageTypes {
   CreationType,
   LinkRequestType,
   LinkRequestACKType,
-  LinkType
+  LinkType,
+  FinishNotifyType,
+  StartChildRingType,
+  ChildLinkRequestType,
+  ChildLinkRequestACKType,
+  RequestRejectType
 };
 #endif
