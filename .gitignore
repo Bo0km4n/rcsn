@@ -6,5 +6,6 @@
 powertrace/*.a
 powertrace/*.map
 powertrace/*.z1
+powertrace/symbols.*
 powertrace/obj_native/
 powertrace/obj_z1/
