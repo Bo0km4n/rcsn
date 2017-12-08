@@ -4,5 +4,6 @@
 #define CSN_UC_PORT 146
 #define CSN_BC_PORT 129
 #define DHT_UC_PORT 147
+#define MULTIHOP_PORT 135
 #endif
 

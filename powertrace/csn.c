@@ -185,6 +185,10 @@ void CsnUCReceiver(struct unicast_conn *c, const linkaddr_t *from) {
       break;
     case StartChildRingType:
       printf("[CSN:INFO] received start child ring notice from %d\n", from->u8[0]);
+      if ((MAX_NODE / orgPow(2, csn.Level - 1)) <= 2) {
+        printf("[CSN:INFO] Reached bottom layer\n");
+        break;
+      }
       StartStructChildCsn(0);
       break;
     case ChildLinkRequestType:

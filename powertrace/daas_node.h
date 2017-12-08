@@ -1,7 +1,7 @@
 #ifndef _DAAS_NODE_H_
 #define _DAAS_NODE_H_
 #include "./lib/l_bit.h"
-#define MAX_NODE 4
+#define MAX_NODE 12
 #define ALL_HEAD_ID 1
 #define DELAY_CLOCK 2
 #define RAND_MARGIN 10
@@ -13,5 +13,12 @@ typedef struct DaasDHT{
 typedef struct DaasContext {
   DaasDHT DHT;
 } DaasContext;
+struct Neighbor {
+  struct Neighbor *next;
+  linkaddr_t addr;
+  struct ctimer ctimer;
+};
+
 extern int isEndStructRing;
+extern struct multihop_conn multihop;
 #endif

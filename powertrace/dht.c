@@ -35,6 +35,10 @@ void DHTUCReceiver(struct unicast_conn *c, const linkaddr_t *from) {
       dht.DHTSendUCPacket(dht.M, csn.Successor);
       break; 
     case IncrementProgress:
+      if (m->Publisher == csn.ID) {
+        printf("[DHT:DEBUG] progress %d\n", m->Progress);
+        break;
+      }
       dht.InsertDHTMessage(dht.M, IncrementProgress, m->Publisher, m->Progress + 1);
       dht.DHTSendUCPacket(dht.M, csn.Successor);
       break;
