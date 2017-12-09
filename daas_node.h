@@ -1,7 +1,7 @@
 #ifndef _DAAS_NODE_H_
 #define _DAAS_NODE_H_
 #include "./lib/l_bit.h"
-#define MAX_NODE 12
+#define MAX_NODE 4
 #define ALL_HEAD_ID 1
 #define DELAY_CLOCK 2
 #define RAND_MARGIN 10

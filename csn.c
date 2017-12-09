@@ -33,6 +33,7 @@ void init(void) {
   csn.ChildPrevious = 0;
   csn.ChildLevel = 0;
   csn.RetryCounter = 0;
+  csn.IsRingTail = 0;
   csn.M = (CSNMessage *)malloc(sizeof(CSNMessage));
   csn.ClusterHeadID = 0;
   csn.SendCreationMessage = SendCreationMessage;
@@ -73,6 +74,7 @@ PROCESS_THREAD(csnProcess, ev, data)
 
   if (successorRSSI == RSSI) {
     printf("[CSN:INFO] nothing neighbor node\n");
+    csn.IsRingTail = 1;
     csn.InsertCSNMessage(csn.M, FinishNotifyType, 0, 0, 0);
     csn.SendUCPacket(csn.M, csn.ClusterHeadID);
   } else {
@@ -162,6 +164,8 @@ void CsnUCReceiver(struct unicast_conn *c, const linkaddr_t *from) {
       if (progress < currentLevelMaxNode) {
         process_start(&csnProcess, (void *)0);
       } else {
+        // リング構築終了メッセージをクラスタヘッドに送信
+        csn.IsRingTail = 1;
         csn.Successor = csn.ClusterHeadID;
         csn.InsertCSNMessage(csn.M, FinishNotifyType, csn.Level, csn.ClusterHeadID, 0);
         csn.SendUCPacket(csn.M, csn.ClusterHeadID);
@@ -235,15 +239,20 @@ void CsnInit(void) {
   broadcast_open(&ringBC, CSN_BC_PORT, &ringBCCallBacks);
 }
 void SendCreationMessage(CSNMessage *m) {
-  packetbuf_copyfrom(m, 100);
+  packetbuf_copyfrom(m, 64);
   broadcast_send(&ringBC);
 }
 void SendUCPacket(CSNMessage *m, int id) {
   linkaddr_t toAddr;
   toAddr.u8[0] = id;
   toAddr.u8[1] = 0;
-  packetbuf_copyfrom(m, 100);
-  unicast_send(&ringUC, &toAddr);
+  packetbuf_copyfrom(m, 64);
+
+  if (csn.IsRingTail && id == csn.Successor) {
+    multihop_send(csn.Multihop, &toAddr);
+  } else {
+    unicast_send(&ringUC, &toAddr);
+  }
 }
 void InsertCSNMessage(CSNMessage *m, int type, int nodeLevel, int clusterHead, int progress) {
   m->type = type;
@@ -283,6 +292,6 @@ int orgPow(int base, int exponent) {
     answer = answer * base;
     i--;
   }
-
   return answer;
 }
+

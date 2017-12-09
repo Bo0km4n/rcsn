@@ -11,6 +11,7 @@
 #include "lib/memb.h"
 
 int isEndStructRing = 0;
+int i = 0;
 static struct etimer et;
 #define NEIGHBOR_TIMEOUT 60 * CLOCK_SECOND
 #define MAX_NEIGHBORS 16
@@ -36,18 +37,40 @@ static void receivedAnnouncement(struct announcement *a, const linkaddr_t *from,
     //ctimer_set(&e->ctimer, NEIGHBOR_TIMEOUT, remove_neighbor, e);
   }
 }
-static struct announcement announcement;
-
 static void mhRecv(struct multihop_conn *c, const linkaddr_t *sender, const linkaddr_t *prevhop, uint8_t hops) {
-  printf("multihop message received '%s'\n", (char *)packetbuf_dataptr());
+  CSNMessage *m = (CSNMessage *)packetbuf_dataptr();
+
+  switch (m->type) {
+    case FinishNotifyType:
+      printf("[CSN:INFO] Received multi hop finish notice from %d\n", sender->u8[0]);
+      if (csn.Level < m->level) {
+        csn.ChildPrevious = sender->u8[0];
+        csn.InsertCSNMessage(csn.M, StartChildRingType, 0, 0, 0);
+        csn.SendUCPacket(csn.M, csn.ChildSuccessor);
+        if (csn.Successor == csn.ClusterHeadID) {
+          break;
+        } else {
+          csn.SendUCPacket(csn.M, csn.Successor);
+        }
+      } else {
+        csn.Previous = sender->u8[0];
+        StartStructChildCsn(1);
+      }
+      break;
+    default:
+      break;
+  }
 }
 static linkaddr_t * mhForward(struct multihop_conn *c, const linkaddr_t *originator, const linkaddr_t *dest, const linkaddr_t *prevhop, uint8_t hops) {
   int num, i;
   struct Neighbor *n;
-
+  printf("[MULTI_HOP:INFO] Received forward packet from %d\n", prevhop->u8[0]);
   if(list_length(neighbor_table) > 0) {
     for (n = list_head(neighbor_table); n != NULL; n = n->next) {
-      if (n->addr.u8[0] == dest->u8[0] && n->addr.u8[1] == dest->u8[1]) return &n->addr;
+      if (n->addr.u8[0] == dest->u8[0] && n->addr.u8[1] == dest->u8[1]) {
+        printf("[MULTI_HOP:INFO] find dest %d.%d\n", dest->u8[0], dest->u8[1]);
+        return &n->addr; 
+      }
     }
     num = random_rand() % list_length(neighbor_table);
     i = 0;
@@ -67,7 +90,7 @@ static linkaddr_t * mhForward(struct multihop_conn *c, const linkaddr_t *origina
 	 linkaddr_node_addr.u8[0], linkaddr_node_addr.u8[1]);
   return NULL;
 }
-
+static struct announcement announcement;
 static const struct multihop_callbacks multihopCall = {mhRecv, mhForward};
 struct multihop_conn multihop;
 
@@ -95,7 +118,18 @@ PROCESS_THREAD(main_process, ev, data)
   /* Set a dummy value to start sending out announcments. */
   announcement_set_value(&announcement, 0);
 
-
+  struct Neighbor *n;  
+  csn.Multihop = &multihop;
+  for (i=0;i<5;i++) {
+    etimer_set(&et, CLOCK_SECOND * 5 + random_rand() % (CLOCK_SECOND * 5));
+    PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
+    for(n = list_head(neighbor_table); n != NULL; n = n->next) {
+      if(n != NULL) {
+        printf("[Table]: %d.%d\n", n->addr.u8[0], n->addr.u8[1]);
+      }
+    }
+  }
+  
   if(node_id == ALL_HEAD_ID) {
     etimer_set(&et, CLOCK_SECOND * 10 + random_rand() % (CLOCK_SECOND * 10));
     PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
@@ -105,6 +139,6 @@ PROCESS_THREAD(main_process, ev, data)
     CsnInit();
     DHTInit();
   }
- 
-  PROCESS_END();
+  
+   PROCESS_END();
 }

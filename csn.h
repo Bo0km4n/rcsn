@@ -19,6 +19,8 @@ typedef struct CSN{
   int ChildPrevious;
   int ChildLevel;
   int RetryCounter;
+  int IsRingTail;
+  struct multihop_conn *Multihop;
   void (*SendCreationMessage) (CSNMessage *m); 
   void (*SendUCPacket) (CSNMessage *m, int id);
   void (*InsertCSNMessage) (CSNMessage *m, int type, int nodeLevel, int clusterHead, int progress);
