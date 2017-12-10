@@ -7,3 +7,4 @@ symbols.*
 *.swp
 obj_native/
 obj_z1/
+.vscode/

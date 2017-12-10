@@ -40,6 +40,7 @@ void RetrySearchBC(CSN *, int);
 void ResponseReject(CSN *, int, int);
 int orgPow(int, int);
 
+
 enum CSNMessageTypes {
   CreationType,
   LinkRequestType,

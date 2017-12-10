@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define DEFAULT_HASH_SIZE 4
+#define DEFAULT_HASH_SIZE 20
 
 typedef struct sha1_hash{
   uint8_t hash[DEFAULT_HASH_SIZE];

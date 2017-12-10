@@ -22,7 +22,7 @@ MEMB(neighbor_mem, struct Neighbor, MAX_NEIGHBORS);
 static void receivedAnnouncement(struct announcement *a, const linkaddr_t *from, uint16_t id, uint16_t value) {
   struct Neighbor *e;
 
-    //printf("Got announcement from %d.%d, id %d, value %d\n",
+    // printf("Got announcement from %d.%d, id %d, value %d\n",
       //from->u8[0], from->u8[1], id, value);
 
   for(e = list_head(neighbor_table); e != NULL; e = e->next) {
@@ -38,39 +38,7 @@ static void receivedAnnouncement(struct announcement *a, const linkaddr_t *from,
     //ctimer_set(&e->ctimer, NEIGHBOR_TIMEOUT, remove_neighbor, e);
   }
 }
-static void mhRecv(struct multihop_conn *c, const linkaddr_t *sender, const linkaddr_t *prevhop, uint8_t hops) {
-  CSNMessage *m = (CSNMessage *)packetbuf_dataptr();
 
-  switch (m->type) {
-    case FinishNotifyType:
-      printf("[CSN:INFO] Received multi hop finish notice from %d\n", sender->u8[0]);
-      if (csn.Level < m->level) {
-        csn.ChildPrevious = sender->u8[0];
-        csn.InsertCSNMessage(csn.M, StartChildRingType, 0, 0, 0);
-        csn.SendUCPacket(csn.M, csn.ChildSuccessor);
-        if (csn.Successor == csn.ClusterHeadID) {
-          break;
-        } else {
-          csn.SendUCPacket(csn.M, csn.Successor);
-        }
-      } else {
-        csn.Previous = sender->u8[0];
-        StartStructChildCsn(1);
-      }
-      break;
-    default:
-      break;
-  }
-}
-static void dhtMhRecv(struct multihop_conn *c, const linkaddr_t *sender, const linkaddr_t *prevhop, uint8_t hops) {
-  DHTMessage *m = (DHTMessage *)packetbuf_dataptr();
-  switch (m->Type) {
-    case IncrementProgress:
-      break;
-    default:
-      break;
-  }
-}
 static linkaddr_t * mhForward(struct multihop_conn *c, const linkaddr_t *originator, const linkaddr_t *dest, const linkaddr_t *prevhop, uint8_t hops) {
   int num, i;
   struct Neighbor *n;
@@ -100,6 +68,53 @@ static linkaddr_t * mhForward(struct multihop_conn *c, const linkaddr_t *origina
 	 linkaddr_node_addr.u8[0], linkaddr_node_addr.u8[1]);
   return NULL;
 }
+
+static void mhRecv(struct multihop_conn *c, const linkaddr_t *sender, const linkaddr_t *prevhop, uint8_t hops) {
+  CSNMessage *m = (CSNMessage *)packetbuf_dataptr();
+
+  switch (m->type) {
+    case FinishNotifyType:
+      printf("[CSN:INFO] Received multi hop finish notice from %d\n", sender->u8[0]);
+      if (csn.Level < m->level) {
+        csn.ChildPrevious = sender->u8[0];
+        csn.InsertCSNMessage(csn.M, StartChildRingType, 0, 0, 0);
+        csn.SendUCPacket(csn.M, csn.ChildSuccessor);
+        if (csn.Successor == csn.ClusterHeadID) {
+          break;
+        } else {
+          csn.SendUCPacket(csn.M, csn.Successor);
+        }
+      } else {
+        csn.Previous = sender->u8[0];
+        StartStructChildCsn(1);
+      }
+      break;
+    default:
+      break;
+  }
+}
+static void dhtMhRecv(struct multihop_conn *c, const linkaddr_t *sender, const linkaddr_t *prevhop, uint8_t hops) {
+  DHTMessage *m = (DHTMessage *)packetbuf_dataptr();
+  switch (m->Type) {
+    case IncrementProgress:    
+      if (csn.Level == m->Level) {
+        printf("[DHT:INFO] Received progress notice : %d from %d\n", m->Progress, sender->u8[0]);  
+        dht.RingNodeNum = m->Progress;
+
+        // ID self allocate logic
+        dht.SelfAllocate(&dht);
+      } else {
+        printf("[DHT:INFO] Received child progress notice : %d from %d\n", m->Progress, sender->u8[0]);  
+        dht.ChildRingNodeNum = m->Progress;
+
+        // ChildID allocate logic
+      }
+      break;
+    default:
+      break;
+  }
+}
+
 static struct announcement announcement;
 static const struct multihop_callbacks multihopCall = {mhRecv, mhForward};
 static const struct multihop_callbacks dhtMultihopCall = {dhtMhRecv, mhForward};

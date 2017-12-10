@@ -136,12 +136,11 @@ int sha1Comp(sha1_hash_t *a, sha1_hash_t *b) {
 void sha1Mul(sha1_hash_t *a, sha1_hash_t *b, sha1_hash_t *c) {
   int i;
   int j;
-  unsigned short aHash[DEFAULT_HASH_SIZE], bHash[DEFAULT_HASH_SIZE], cHash[DEFAULT_HASH_SIZE];
+  unsigned short aHash[DEFAULT_HASH_SIZE], bHash[DEFAULT_HASH_SIZE];
   
   for(i=0;i<DEFAULT_HASH_SIZE;i++) {
     aHash[i] = a->hash[i];
     bHash[i] = b->hash[i];
-    cHash[i] = c->hash[i];
   }
 
   for(i=0;i<DEFAULT_HASH_SIZE*8;i++) {
@@ -191,7 +190,7 @@ int divComp(unsigned short *a, unsigned short *b) {
  * a = 余り
  */
 void sha1Div(sha1_hash_t *a, sha1_hash_t *b, sha1_hash_t *c) {
-  int i, j;
+  int i;
   unsigned short aHash[DEFAULT_HASH_SIZE], bHash[DEFAULT_HASH_SIZE], cHash[DEFAULT_HASH_SIZE];
   unsigned short buf1[DEFAULT_HASH_SIZE], buf2[DEFAULT_HASH_SIZE];
   
