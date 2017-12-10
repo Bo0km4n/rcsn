@@ -21,4 +21,5 @@ struct Neighbor {
 
 extern int isEndStructRing;
 extern struct multihop_conn multihop;
+extern struct multihop_conn dhtMultihop;
 #endif

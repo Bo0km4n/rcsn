@@ -9,6 +9,7 @@
 #include "sys/node-id.h"
 #include "lib/list.h"
 #include "lib/memb.h"
+#include "dev/button-sensor.h"
 
 int isEndStructRing = 0;
 int i = 0;
@@ -61,6 +62,15 @@ static void mhRecv(struct multihop_conn *c, const linkaddr_t *sender, const link
       break;
   }
 }
+static void dhtMhRecv(struct multihop_conn *c, const linkaddr_t *sender, const linkaddr_t *prevhop, uint8_t hops) {
+  DHTMessage *m = (DHTMessage *)packetbuf_dataptr();
+  switch (m->Type) {
+    case IncrementProgress:
+      break;
+    default:
+      break;
+  }
+}
 static linkaddr_t * mhForward(struct multihop_conn *c, const linkaddr_t *originator, const linkaddr_t *dest, const linkaddr_t *prevhop, uint8_t hops) {
   int num, i;
   struct Neighbor *n;
@@ -92,7 +102,9 @@ static linkaddr_t * mhForward(struct multihop_conn *c, const linkaddr_t *origina
 }
 static struct announcement announcement;
 static const struct multihop_callbacks multihopCall = {mhRecv, mhForward};
+static const struct multihop_callbacks dhtMultihopCall = {dhtMhRecv, mhForward};
 struct multihop_conn multihop;
+struct multihop_conn dhtMultihop;
 
 
 PROCESS(main_process, "daas main process");
@@ -101,6 +113,8 @@ PROCESS_THREAD(main_process, ev, data)
 {
   PROCESS_BEGIN();
 
+  SENSORS_ACTIVATE(button_sensor);
+
   memb_init(&neighbor_mem);
 
   /* Initialize the list used for the neighbor table. */
@@ -108,6 +122,7 @@ PROCESS_THREAD(main_process, ev, data)
 
   /* Open a multihop connection on Rime channel CHANNEL. */
   multihop_open(&multihop, MULTIHOP_PORT, &multihopCall);
+  multihop_open(&dhtMultihop, MULTIHOP_DHT_PORT, &dhtMultihopCall);
 
   /* Register an announcement with the same announcement ID as the
      Rime channel we use to open the multihop connection above. */
@@ -120,6 +135,7 @@ PROCESS_THREAD(main_process, ev, data)
 
   struct Neighbor *n;  
   csn.Multihop = &multihop;
+  dht.Multihop = &dhtMultihop;
   for (i=0;i<5;i++) {
     etimer_set(&et, CLOCK_SECOND * 5 + random_rand() % (CLOCK_SECOND * 5));
     PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
@@ -140,5 +156,9 @@ PROCESS_THREAD(main_process, ev, data)
     DHTInit();
   }
   
+  PROCESS_WAIT_EVENT_UNTIL(ev == sensors_event &&
+			    data == &button_sensor);
+  StartHashAllocation();
+
    PROCESS_END();
 }

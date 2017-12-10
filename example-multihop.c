@@ -232,7 +232,6 @@ PROCESS_THREAD(example_multihop_process, ev, data)
 
   /* Loop forever, send a packet when the button is pressed. */
   struct example_neighbor *n;
-
   while(1) {
     linkaddr_t to;
     /* Wait until we get a sensor event with the button sensor as data. */

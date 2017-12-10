@@ -25,20 +25,25 @@ void DHTInit(void) {
   dht.InsertDHTMessage = InsertDHTMessage;
   dht.DHTSendUCPacket = DHTSendUCPacket;
 }
+/*---------------------------------------------------------------------------*/
+PROCESS(dhtProcess, "hash id allocate process");
+PROCESS_THREAD(dhtProcess, ev, data) {
+  PROCESS_BEGIN();
+  printf("[DHT:INFO] start hash allocate process\n");
+  CheckRingNum(*csn);
+  //CheckChildRingNum(*csn);
+  PROCESS_END();
+}
+/*---------------------------------------------------------------------------*/
 
+void StartHashAllocation(void) {
+  process_start(&dhtProcess, (void *)1);
+}
 void DHTUCReceiver(struct unicast_conn *c, const linkaddr_t *from) {
   DHTMessage *m = (DHTMessage *)packetbuf_dataptr();
 
   switch(m->Type) {
-    case StartSearchRingNum:
-      dht.InsertDHTMessage(dht.M, IncrementProgress, csn.ID, 1); 
-      dht.DHTSendUCPacket(dht.M, csn.Successor);
-      break; 
     case IncrementProgress:
-      if (m->Publisher == csn.ID) {
-        printf("[DHT:DEBUG] progress %d\n", m->Progress);
-        break;
-      }
       dht.InsertDHTMessage(dht.M, IncrementProgress, m->Publisher, m->Progress + 1);
       dht.DHTSendUCPacket(dht.M, csn.Successor);
       break;
@@ -57,5 +62,19 @@ void DHTSendUCPacket(DHTMessage *m, int id) {
   toAddr.u8[0] = id;
   toAddr.u8[1] = 0;
   packetbuf_copyfrom(m, 100);
-  unicast_send(&dhtUC, &toAddr);
+
+  if (csn.IsRingTail && id == csn.Successor) {
+    multihop_send(dht.Multihop, &toAddr);
+  } else {
+    unicast_send(&dhtUC, &toAddr);
+  }
+}
+
+void CheckRingNum(CSN *csn) {
+  dht.InsertDHTMessage(dht.M, IncrementProgress, csn.ID, 1);
+  dht.DHTSendUCPacket(dht.M, csn.Successor);
+  return;
+}
+void CheckChildRingNum(CSN *csn) {
+
 }
