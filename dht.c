@@ -30,6 +30,8 @@ void DHTInit(void) {
   dht.InsertDHTMessage = InsertDHTMessage;
   dht.DHTSendUCPacket = DHTSendUCPacket;
   dht.SelfAllocate = SelfAllocate;
+  dht.AllocateHashToSuccessor = AllocateHashToSuccessor;
+  dht.AllocateHashByPrev = AllocateHashByPrev;
 }
 /*---------------------------------------------------------------------------*/
 PROCESS(dhtProcess, "hash id allocate process");
@@ -53,6 +55,12 @@ void DHTUCReceiver(struct unicast_conn *c, const linkaddr_t *from) {
       dht.InsertDHTMessage(dht.M, IncrementProgress, csn.Level, m->Publisher, m->Progress + 1);
       dht.DHTSendUCPacket(dht.M, csn.Successor);
       break;
+    case AllocateHash:
+      printf("[DHT:INFO] Received allocate hash order from %d\n", from->u8[0]);
+      if (m->Level == csn.Level) {
+        dht.AllocateHashByPrev(&dht, &m->Unit, &m->PrevID);
+      } 
+      break;
     default:
       break;
   }
@@ -68,7 +76,7 @@ void DHTSendUCPacket(DHTMessage *m, int id) {
   linkaddr_t toAddr;
   toAddr.u8[0] = id;
   toAddr.u8[1] = 0;
-  packetbuf_copyfrom(m, 64);
+  packetbuf_copyfrom(m, 80);
 
   clock_wait(DELAY_CLOCK + random_rand() % (CLOCK_SECOND * RAND_MARGIN));
   if (csn.IsRingTail && id == csn.Successor) {
@@ -102,6 +110,47 @@ void SelfAllocate(DHT *dht) {
   PrintHash(dht->Unit);
   return;
 }
+void AllocateHashToSuccessor(DHT *dht) {
+  init_min_hash(&dht->M->Unit);
+  init_min_hash(&dht->M->PrevID); 
+  DhtCopy(dht->Unit, &dht->M->Unit);
+  DhtCopy(dht->MaxID, &dht->M->PrevID);
+  dht->InsertDHTMessage(dht->M, AllocateHash, csn.Level, csn.ID, 1);
+  dht->DHTSendUCPacket(dht->M, csn.Successor);
+  return;
+}
+void AllocateHashByPrev(DHT *dht, sha1_hash_t *unit, sha1_hash_t *prev) {
+  sha1_hash_t *buf1 = (sha1_hash_t *)malloc(sizeof(sha1_hash_t));
+  sha1_hash_t *buf2 = (sha1_hash_t *)malloc(sizeof(sha1_hash_t));
+
+  // increment
+  incrementHash(prev);
+  // copy min id
+  DhtCopy(prev, dht->MinID);
+  DhtCopy(prev, buf1);
+  // unit copy
+  DhtCopy(unit, dht->Unit);
+  DhtCopy(unit, buf2);
+  // max id = min id + unit
+  sha1Add(buf1, buf2, dht->MaxID);
+
+  free(buf1);
+  free(buf2);
+  printf("[DHT:DEBUG] ===== hash info max, min, unit =====\n");
+  PrintHash(dht->MaxID);
+  PrintHash(dht->MinID);
+  PrintHash(dht->Unit);
+  printf("[DHT:DEBUG] ===== ======================== =====\n");
+  
+
+  // send hash allocate order to successor
+  DhtCopy(dht->Unit, &dht->M->Unit);
+  DhtCopy(dht->MaxID, &dht->M->PrevID);
+  dht->InsertDHTMessage(dht->M, AllocateHash, csn.Level, csn.ID, 1);
+  dht->DHTSendUCPacket(dht->M, csn.Successor);
+  return;
+
+}
 void DhtCopy(sha1_hash_t *src, sha1_hash_t *dst) {
   int i;
   for (i=0;i<DEFAULT_HASH_SIZE;i++) {
@@ -121,4 +170,22 @@ void PrintHash(sha1_hash_t *h) {
     printf("%02x ", h->hash[i]);
   }
   printf("\n");
+}
+void stdHash(sha1_hash_t *h) {
+  int i;
+  h->hash[0] = 0x01;
+  for (i=1;i<DEFAULT_HASH_SIZE;i++) {
+    h->hash[i] = 0x00;
+  }
+}
+void incrementHash(sha1_hash_t *h) {
+  sha1_hash_t *vec = (sha1_hash_t *)malloc(sizeof(sha1_hash_t));
+  sha1_hash_t *result = (sha1_hash_t *)malloc(sizeof(sha1_hash_t));
+  stdHash(vec);
+  sha1Add(h, vec, result);
+
+  DhtCopy(result, h);
+  free(vec);
+  free(result);
+  return;
 }

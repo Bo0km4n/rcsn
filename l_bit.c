@@ -15,7 +15,7 @@ void init_max_hash(sha1_hash_t *hash) {
 void init_min_hash(sha1_hash_t *hash) {
   int i;
   for(i=0;i<DEFAULT_HASH_SIZE;i++){
-    hash->hash[i] = hash->hash[i] & 0x00;
+    hash->hash[i] = 0x00;
   }
 }
 

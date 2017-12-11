@@ -103,12 +103,16 @@ static void dhtMhRecv(struct multihop_conn *c, const linkaddr_t *sender, const l
 
         // ID self allocate logic
         dht.SelfAllocate(&dht);
+        dht.AllocateHashToSuccessor(&dht);
       } else {
         printf("[DHT:INFO] Received child progress notice : %d from %d\n", m->Progress, sender->u8[0]);  
         dht.ChildRingNodeNum = m->Progress;
 
         // ChildID allocate logic
       }
+      break;
+    case AllocateHash:
+      printf("[DHT:INFO] Received allocate hash order from ring tail: %d\n", sender->u8[0]);
       break;
     default:
       break;
