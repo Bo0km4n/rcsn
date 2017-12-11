@@ -78,7 +78,11 @@ void DHTSendUCPacket(DHTMessage *m, int id) {
   toAddr.u8[1] = 0;
   packetbuf_copyfrom(m, 80);
 
-  clock_wait(DELAY_CLOCK + random_rand() % (CLOCK_SECOND * RAND_MARGIN));
+  int delay = 0;
+  if (csn.ID <= 10) delay = csn.ID;
+  if (csn.ID >= 10 && csn.ID < 100) delay = csn.ID % 10;
+  if (csn.ID >= 100) delay = csn.ID % 100;
+  clock_wait(DELAY_CLOCK + random_rand() % delay);
   if (csn.IsRingTail && id == csn.Successor) {
     multihop_send(dht.Multihop, &toAddr);
   } else {

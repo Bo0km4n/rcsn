@@ -107,6 +107,10 @@ PROCESS_THREAD(csnChildProcess, ev, data)
 
   if (successorRSSI == RSSI) {
     printf("[CSN:INFO] nothing child node\n");
+    if (csn.Successor != csn.ClusterHeadID) {
+      csn.InsertCSNMessage(csn.M, StartChildRingType, 0, 0, 0);
+      csn.SendUCPacket(csn.M, csn.Successor);
+    }
   } else {
     csn.InsertCSNMessage(csn.M, ChildLinkRequestType, 0, 0, 0);
     csn.SendUCPacket(csn.M, neighborID);
@@ -226,7 +230,6 @@ void CsnBCReceiver(struct broadcast_conn *c, const linkaddr_t *from) {
     case CreationType:
       if (csn.Level != 0 || ucLock) break;
       csn.InsertCSNMessage(m, CreationType, 0, 0, 0);
-      clock_wait(DELAY_CLOCK + random_rand() % (CLOCK_SECOND * RAND_MARGIN));
       csn.SendUCPacket(m, from->u8[0]);
       break;
     default:
@@ -248,6 +251,11 @@ void SendUCPacket(CSNMessage *m, int id) {
   toAddr.u8[1] = 0;
   packetbuf_copyfrom(m, 64);
 
+  int delay = 0;
+  if (csn.ID <= 10) delay = csn.ID;
+  if (csn.ID >= 10 && csn.ID < 100) delay = csn.ID % 10;
+  if (csn.ID >= 100) delay = csn.ID % 100;
+  clock_wait(DELAY_CLOCK + random_rand() % delay);
   if (csn.IsRingTail && id == csn.Successor) {
     multihop_send(csn.Multihop, &toAddr);
   } else {
