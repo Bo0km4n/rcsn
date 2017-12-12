@@ -35,6 +35,7 @@ void StartHashAllocation(void);
 void DHTSendUCPacket(DHTMessage *, int);
 void AllocateHashToSuccessor(DHT *dht);
 void AllocateHashByPrev(DHT *, sha1_hash_t *, sha1_hash_t *);
+void AllocateChildHash(DHT *);
 enum DHTMessageTypes {
   StartSearchRingNum,
   IncrementProgress,
@@ -48,5 +49,6 @@ void DhtCopy(sha1_hash_t *, sha1_hash_t *);
 void PrintHash(sha1_hash_t *);
 void stdHash(sha1_hash_t *);
 void incrementHash(sha1_hash_t *);
+void PrintDHT(DHT *);
 extern DHT dht;
 #endif

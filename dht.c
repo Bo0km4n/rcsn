@@ -58,9 +58,7 @@ void DHTUCReceiver(struct unicast_conn *c, const linkaddr_t *from) {
       break;
     case AllocateHash:
       printf("[DHT:INFO] Received allocate hash order from %d\n", from->u8[0]);
-      if (m->Level == csn.Level) {
-        dht.AllocateHashByPrev(&dht, &m->Unit, &m->PrevID);
-      } 
+      dht.AllocateHashByPrev(&dht, &m->Unit, &m->PrevID);
       break;
     default:
       break;
@@ -141,20 +139,48 @@ void AllocateHashByPrev(DHT *dht, sha1_hash_t *unit, sha1_hash_t *prev) {
 
   free(buf1);
   free(buf2);
-  printf("[DHT:DEBUG] ===== hash info max, min, unit =====\n");
-  PrintHash(dht->MaxID);
-  PrintHash(dht->MinID);
-  PrintHash(dht->Unit);
-  printf("[DHT:DEBUG] ===== ======================== =====\n");
-  
-
+  if (!csn.IsBot) {
+    AllocateChildHash(dht);
+  }
+  PrintDHT(dht);
   // send hash allocate order to successor
-  DhtCopy(dht->Unit, &dht->M->Unit);
-  DhtCopy(dht->MaxID, &dht->M->PrevID);
-  dht->InsertDHTMessage(dht->M, AllocateHash, csn.Level, csn.ID, 1);
-  dht->DHTSendUCPacket(dht->M, csn.Successor);
+  if (!csn.IsBot) {
+    DhtCopy(dht->Unit, &dht->M->Unit);
+    DhtCopy(dht->MaxID, &dht->M->PrevID);
+    dht->InsertDHTMessage(dht->M, AllocateHash, csn.Level, csn.ID, 1);
+    dht->DHTSendUCPacket(dht->M, csn.Successor);
+
+    // send hash allocate order to child successor
+    DhtCopy(dht->ChildUnit, &dht->M->Unit);
+    DhtCopy(dht->ChildMaxID, &dht->M->PrevID);
+    dht->InsertDHTMessage(dht->M, AllocateHash, csn.Level, csn.ID, 1);
+    dht->DHTSendUCPacket(dht->M, csn.ChildSuccessor);
+  }
   return;
 
+}
+void AllocateChildHash(DHT *dht) {
+  sha1_hash_t *buf1 = (sha1_hash_t *)malloc(sizeof(sha1_hash_t));
+  sha1_hash_t *buf2 = (sha1_hash_t *)malloc(sizeof(sha1_hash_t));
+  sha1_hash_t *nodeNum = (sha1_hash_t *)malloc(sizeof(sha1_hash_t));
+
+  // copy buf = unit
+  DhtCopy(dht->Unit, buf1);
+  // child unit = buf1 / csn.child node num
+  ConvertHash(dht->ChildRingNodeNum, nodeNum);
+  sha1Div(buf1, nodeNum, dht->ChildUnit);
+  // copy child min id = min id
+  DhtCopy(dht->MinID, dht->ChildMinID);
+  // copy buf2 = child min id
+  DhtCopy(dht->ChildMinID, buf2);
+  DhtCopy(dht->ChildUnit, buf1);
+  // child max id = buf2 + child unit
+  sha1Add(buf1, buf2, dht->ChildMaxID);
+
+  free(buf1);
+  free(buf2);
+  free(nodeNum);  
+  return;
 }
 void DhtCopy(sha1_hash_t *src, sha1_hash_t *dst) {
   int i;
@@ -192,5 +218,17 @@ void incrementHash(sha1_hash_t *h) {
   DhtCopy(result, h);
   free(vec);
   free(result);
+  return;
+}
+
+void PrintDHT(DHT *dht) {
+  printf("[DHT:DEBUG] ===== hash info max, min, unit, child unit, child max, child min =====\n");
+  PrintHash(dht->MaxID);
+  PrintHash(dht->MinID);
+  PrintHash(dht->Unit);
+  PrintHash(dht->ChildUnit);
+  PrintHash(dht->ChildMaxID);
+  PrintHash(dht->ChildMinID);
+  printf("[DHT:DEBUG] ===== ========================================================== =====\n");
   return;
 }
