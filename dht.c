@@ -38,8 +38,9 @@ PROCESS(dhtProcess, "hash id allocate process");
 PROCESS_THREAD(dhtProcess, ev, data) {
   PROCESS_BEGIN();
   printf("[DHT:INFO] start hash allocate process\n");
-  if(csn.ID == ALL_HEAD_ID) CheckRingNum(&csn);
-  CheckChildRingNum(&csn);
+  // ID self allocate logic
+  dht.SelfAllocate(&dht);
+  dht.AllocateHashToSuccessor(&dht);
   PROCESS_END();
 }
 /*---------------------------------------------------------------------------*/

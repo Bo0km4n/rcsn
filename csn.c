@@ -171,7 +171,7 @@ void CsnUCReceiver(struct unicast_conn *c, const linkaddr_t *from) {
         // リング構築終了メッセージをクラスタヘッドに送信
         csn.IsRingTail = 1;
         csn.Successor = csn.ClusterHeadID;
-        csn.InsertCSNMessage(csn.M, FinishNotifyType, csn.Level, csn.ClusterHeadID, 0);
+        csn.InsertCSNMessage(csn.M, FinishNotifyType, csn.Level, csn.ClusterHeadID, progress);
         csn.SendUCPacket(csn.M, csn.ClusterHeadID);
       }
       break;

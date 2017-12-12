@@ -76,6 +76,7 @@ static void mhRecv(struct multihop_conn *c, const linkaddr_t *sender, const link
     case FinishNotifyType:
       printf("[CSN:INFO] Received multi hop finish notice from %d\n", sender->u8[0]);
       if (csn.Level < m->level) {
+        dht.ChildRingNodeNum = m->progress;
         csn.ChildPrevious = sender->u8[0];
         csn.InsertCSNMessage(csn.M, StartChildRingType, 0, 0, 0);
         csn.SendUCPacket(csn.M, csn.ChildSuccessor);
@@ -85,6 +86,7 @@ static void mhRecv(struct multihop_conn *c, const linkaddr_t *sender, const link
           csn.SendUCPacket(csn.M, csn.Successor);
         }
       } else {
+        dht.RingNodeNum = m->progress;
         csn.Previous = sender->u8[0];
         StartStructChildCsn(1);
       }
@@ -96,24 +98,23 @@ static void mhRecv(struct multihop_conn *c, const linkaddr_t *sender, const link
 static void dhtMhRecv(struct multihop_conn *c, const linkaddr_t *sender, const linkaddr_t *prevhop, uint8_t hops) {
   DHTMessage *m = (DHTMessage *)packetbuf_dataptr();
   switch (m->Type) {
-    case IncrementProgress:    
-      if (csn.Level == m->Level) {
-        printf("[DHT:INFO] Received progress notice : %d from %d\n", m->Progress, sender->u8[0]);  
-        dht.RingNodeNum = m->Progress;
-
-        // ID self allocate logic
-        dht.SelfAllocate(&dht);
-        dht.AllocateHashToSuccessor(&dht);
-      } else {
-        printf("[DHT:INFO] Received child progress notice : %d from %d\n", m->Progress, sender->u8[0]);  
-        dht.ChildRingNodeNum = m->Progress;
-
-        // ChildID allocate logic
-      }
-      break;
     case AllocateHash:
+    {
+      sha1_hash_t *buf = (sha1_hash_t *)malloc(sizeof(sha1_hash_t));
       printf("[DHT:INFO] Received allocate hash order from ring tail: %d\n", sender->u8[0]);
+      if (csn.ID == ALL_HEAD_ID) {
+        DhtCopy(&m->PrevID, buf);
+        incrementHash(buf);
+        DhtCopy(buf, dht.MinID);
+        printf("[DHT:DEBUG] ===== hash info max, min, unit =====\n");
+        PrintHash(dht.MaxID);
+        PrintHash(dht.MinID);
+        PrintHash(dht.Unit);
+        printf("[DHT:DEBUG] ===== ======================== =====\n");
+      }
+      free(buf);
       break;
+    }
     default:
       break;
   }
