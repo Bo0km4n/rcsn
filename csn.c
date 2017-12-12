@@ -34,6 +34,7 @@ void init(void) {
   csn.ChildLevel = 0;
   csn.RetryCounter = 0;
   csn.IsRingTail = 0;
+  csn.IsBot = 0;
   csn.M = (CSNMessage *)malloc(sizeof(CSNMessage));
   csn.ClusterHeadID = 0;
   csn.SendCreationMessage = SendCreationMessage;
@@ -194,6 +195,7 @@ void CsnUCReceiver(struct unicast_conn *c, const linkaddr_t *from) {
     case StartChildRingType:
       printf("[CSN:INFO] received start child ring notice from %d\n", from->u8[0]);
       if ((MAX_NODE / orgPow(2, csn.Level - 1)) <= 2) {
+        csn.IsBot = 1;
         printf("[CSN:INFO] Reached bottom layer\n");
         break;
       }

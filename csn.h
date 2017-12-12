@@ -20,6 +20,7 @@ typedef struct CSN{
   int ChildLevel;
   int RetryCounter;
   int IsRingTail;
+  int IsBot;
   struct multihop_conn *Multihop;
   void (*SendCreationMessage) (CSNMessage *m); 
   void (*SendUCPacket) (CSNMessage *m, int id);
