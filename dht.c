@@ -37,7 +37,7 @@ void DHTInit(void) {
 PROCESS(dhtProcess, "hash id allocate process");
 PROCESS_THREAD(dhtProcess, ev, data) {
   PROCESS_BEGIN();
-  printf("[DHT:INFO] start hash allocate process\n");
+  printf("[DHT:DEBUG] start hash allocate process\n");
   // ID self allocate logic
   dht.SelfAllocate(&dht);
   dht.AllocateHashToSuccessor(&dht);
@@ -57,7 +57,7 @@ void DHTUCReceiver(struct unicast_conn *c, const linkaddr_t *from) {
       dht.DHTSendUCPacket(dht.M, csn.Successor);
       break;
     case AllocateHash:
-      printf("[DHT:INFO] Received allocate hash order from %d\n", from->u8[0]);
+      printf("[DHT:DEBUG] Received allocate hash order from %d\n", from->u8[0]);
       dht.AllocateHashByPrev(&dht, &m->Unit, &m->PrevID);
       break;
     default:

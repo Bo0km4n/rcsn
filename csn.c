@@ -40,7 +40,7 @@ void init(void) {
   csn.SendCreationMessage = SendCreationMessage;
   csn.SendUCPacket = SendUCPacket;
   csn.InsertCSNMessage = InsertCSNMessage;
-  printf("[CSN:INFO] csn info initilized\n");
+  printf("[CSN:DEBUG] csn info initilized\n");
   isInitialized = 1;
 }
 /*---------------------------------------------------------------------------*/
@@ -74,7 +74,7 @@ PROCESS_THREAD(csnProcess, ev, data)
   PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
 
   if (successorRSSI == RSSI) {
-    printf("[CSN:INFO] nothing neighbor node\n");
+    printf("[CSN:DEBUG] nothing neighbor node\n");
     csn.IsRingTail = 1;
     csn.InsertCSNMessage(csn.M, FinishNotifyType, 0, 0, 0);
     csn.SendUCPacket(csn.M, csn.ClusterHeadID);
@@ -93,7 +93,7 @@ PROCESS(csnChildProcess, "csn struct child ring process");
 PROCESS_THREAD(csnChildProcess, ev, data)
 {
   PROCESS_BEGIN();
-  printf("[CSN:INFO] start child process\n");
+  printf("[CSN:DEBUG] start child process\n");
   progress = 1;
   successorRSSI = RSSI;
   csn.ChildLevel = csn.Level + 1;
@@ -107,7 +107,7 @@ PROCESS_THREAD(csnChildProcess, ev, data)
   PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
 
   if (successorRSSI == RSSI) {
-    printf("[CSN:INFO] nothing child node\n");
+    printf("[CSN:DEBUG] nothing child node\n");
     if (csn.Successor != csn.ClusterHeadID) {
       csn.InsertCSNMessage(csn.M, StartChildRingType, 0, 0, 0);
       csn.SendUCPacket(csn.M, csn.Successor);
@@ -141,7 +141,7 @@ void CsnUCReceiver(struct unicast_conn *c, const linkaddr_t *from) {
       if (rss > successorRSSI && (csn.Previous != from->u8[0])) {
         successorRSSI = rss;
         neighborID = from->u8[0];
-        printf("[CSN:INFO] RSSI of of last received packet = %d from %d\n", rss, from->u8[0]);
+        printf("[CSN:DEBUG] RSSI of of last received packet = %d from %d\n", rss, from->u8[0]);
       }
       break;
     case LinkRequestType:
@@ -164,7 +164,7 @@ void CsnUCReceiver(struct unicast_conn *c, const linkaddr_t *from) {
       csn.ClusterHeadID = m->clusterHead;
       progress = m->progress;
       currentLevelMaxNode = MAX_NODE / orgPow(2, csn.Level - 1);
-      printf("[CSN:INFO] Linked from %d level: %d\n", from->u8[0], csn.Level);
+      printf("[CSN:DEBUG] Linked from %d level: %d\n", from->u8[0], csn.Level);
       
       if (progress < currentLevelMaxNode) {
         process_start(&csnProcess, (void *)0);
@@ -177,7 +177,7 @@ void CsnUCReceiver(struct unicast_conn *c, const linkaddr_t *from) {
       }
       break;
     case FinishNotifyType:
-      printf("[CSN:INFO] received finish notice from %d level: %d\n", from->u8[0], m->level);
+      printf("[CSN:DEBUG] received finish notice from %d level: %d\n", from->u8[0], m->level);
       if (csn.Level < m->level) {
         csn.ChildPrevious = from->u8[0];
         csn.InsertCSNMessage(csn.M, StartChildRingType, 0, 0, 0);
@@ -193,10 +193,10 @@ void CsnUCReceiver(struct unicast_conn *c, const linkaddr_t *from) {
       }
       break;
     case StartChildRingType:
-      printf("[CSN:INFO] received start child ring notice from %d\n", from->u8[0]);
+      printf("[CSN:DEBUG] received start child ring notice from %d\n", from->u8[0]);
       if ((MAX_NODE / orgPow(2, csn.Level - 1)) <= 2) {
         csn.IsBot = 1;
-        printf("[CSN:INFO] Reached bottom layer\n");
+        printf("[CSN:DEBUG] Reached bottom layer\n");
         break;
       }
       StartStructChildCsn(0);
@@ -215,11 +215,11 @@ void CsnUCReceiver(struct unicast_conn *c, const linkaddr_t *from) {
       csn.ChildSuccessor = from->u8[0];
       break;
     case RequestRejectType:
-      printf("[CSN:INFO] Rejected request from %d\n", from->u8[0]);
+      printf("[CSN:DEBUG] Rejected request from %d\n", from->u8[0]);
       RetrySearchBC(&csn, 0);
       break;
     case ChildRequestRejectType:
-      printf("[CSN:INFO] Rejected child link request from %d\n", from->u8[0]);
+      printf("[CSN:DEBUG] Rejected child link request from %d\n", from->u8[0]);
       RetrySearchBC(&csn, 1);
     default:
       break;

@@ -42,11 +42,11 @@ static void receivedAnnouncement(struct announcement *a, const linkaddr_t *from,
 static linkaddr_t * mhForward(struct multihop_conn *c, const linkaddr_t *originator, const linkaddr_t *dest, const linkaddr_t *prevhop, uint8_t hops) {
   int num, i;
   struct Neighbor *n;
-  printf("[MULTI_HOP:INFO] Received forward packet from %d\n", prevhop->u8[0]);
+  printf("[MULTI_HOP:DEBUG] Received forward packet from %d\n", prevhop->u8[0]);
   if(list_length(neighbor_table) > 0) {
     for (n = list_head(neighbor_table); n != NULL; n = n->next) {
       if (n->addr.u8[0] == dest->u8[0] && n->addr.u8[1] == dest->u8[1]) {
-        printf("[MULTI_HOP:INFO] find dest %d.%d\n", dest->u8[0], dest->u8[1]);
+        printf("[MULTI_HOP:DEBUG] find dest %d.%d\n", dest->u8[0], dest->u8[1]);
         return &n->addr; 
       }
     }
@@ -56,7 +56,7 @@ static linkaddr_t * mhForward(struct multihop_conn *c, const linkaddr_t *origina
       ++i;
     }
     if(n != NULL) {
-      printf("[MULTI_HOP:INFO] %d.%d: Forwarding packet to %d.%d (%d in list), hops %d\n",
+      printf("[MULTI_HOP:DEBUG] %d.%d: Forwarding packet to %d.%d (%d in list), hops %d\n",
 	     linkaddr_node_addr.u8[0], linkaddr_node_addr.u8[1],
 	     n->addr.u8[0], n->addr.u8[1], num,
 	     packetbuf_attr(PACKETBUF_ATTR_HOPS));
@@ -64,7 +64,7 @@ static linkaddr_t * mhForward(struct multihop_conn *c, const linkaddr_t *origina
       return &n->addr;
     }
   }
-  printf("[MULTI_HOP:INFO] %d.%d: did not find a neighbor to foward to\n",
+  printf("[MULTI_HOP:DEBUG] %d.%d: did not find a neighbor to foward to\n",
 	 linkaddr_node_addr.u8[0], linkaddr_node_addr.u8[1]);
   return NULL;
 }
@@ -74,7 +74,7 @@ static void mhRecv(struct multihop_conn *c, const linkaddr_t *sender, const link
 
   switch (m->type) {
     case FinishNotifyType:
-      printf("[CSN:INFO] Received multi hop finish notice from %d\n", sender->u8[0]);
+      printf("[CSN:DEBUG] Received multi hop finish notice from %d\n", sender->u8[0]);
       if (csn.Level < m->level) {
         dht.ChildRingNodeNum = m->progress;
         csn.ChildPrevious = sender->u8[0];
@@ -101,7 +101,7 @@ static void dhtMhRecv(struct multihop_conn *c, const linkaddr_t *sender, const l
     case AllocateHash:
     {
       sha1_hash_t *buf = (sha1_hash_t *)malloc(sizeof(sha1_hash_t));
-      printf("[DHT:INFO] Received allocate hash order from ring tail: %d\n", sender->u8[0]);
+      printf("[DHT:DEBUG] Received allocate hash order from ring tail: %d\n", sender->u8[0]);
       // exec only all cluster head
       if (csn.ID == ALL_HEAD_ID) {
         DhtCopy(&m->PrevID, buf);
@@ -135,7 +135,6 @@ AUTOSTART_PROCESSES(&main_process);
 PROCESS_THREAD(main_process, ev, data)
 {
   PROCESS_BEGIN();
-
   SENSORS_ACTIVATE(button_sensor);
 
   memb_init(&neighbor_mem);
