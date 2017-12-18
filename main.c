@@ -7,6 +7,7 @@
 #include "config.h"
 #include <stdio.h>
 #include "sys/node-id.h"
+#include "white_list_mote.h"
 #include "lib/list.h"
 #include "lib/memb.h"
 #include "dev/button-sensor.h"
@@ -123,11 +124,23 @@ static void dhtMhRecv(struct multihop_conn *c, const linkaddr_t *sender, const l
   }
 }
 
+static void wlMhRecv(struct multihop_conn *c, const linkaddr_t *sender, const linkaddr_t *prevhop, uint8_t hops) {
+  WhiteListMessage *m = (WhiteListMessage *)packetbuf_dataptr();
+  switch (m->Type) {
+    case Publish:
+    break;
+    default:
+    break;
+  }
+}
+
 static struct announcement announcement;
 static const struct multihop_callbacks multihopCall = {mhRecv, mhForward};
 static const struct multihop_callbacks dhtMultihopCall = {dhtMhRecv, mhForward};
+static const struct multihop_callbacks wlMultihopCall = {wlMhRecv, mhForward};
 struct multihop_conn multihop;
 struct multihop_conn dhtMultihop;
+struct multihop_conn wlMultihop;
 
 
 PROCESS(main_process, "daas main process");
@@ -158,6 +171,7 @@ PROCESS_THREAD(main_process, ev, data)
   struct Neighbor *n;  
   csn.Multihop = &multihop;
   dht.Multihop = &dhtMultihop;
+  whiteListMote.Multihop = &wlMultihop;
   for (i=0;i<5;i++) {
     etimer_set(&et, CLOCK_SECOND * 5 + random_rand() % (CLOCK_SECOND * 5));
     PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
@@ -169,13 +183,13 @@ PROCESS_THREAD(main_process, ev, data)
   }
   
   if(node_id == ALL_HEAD_ID) {
-    etimer_set(&et, CLOCK_SECOND * 10 + random_rand() % (CLOCK_SECOND * 10));
-    PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
     StartStructCsn();
     DHTInit();
+    WhiteListMoteInit();
   } else {
     CsnInit();
     DHTInit();
+    WhiteListMoteInit();
   }
   
   PROCESS_WAIT_EVENT_UNTIL(ev == sensors_event &&
