@@ -63,8 +63,38 @@ void InsertWLMessage(WhiteListMessage *m, sha1_hash_t *body) {
 void PublishHandle(sha1_hash_t *body) {
     if (csn.IsBot) {
         // 自リングの範囲のみチェック
+        if (sha1Comp(dht.MaxID, body)) return;
+        StoreKey(body);
     } else {
         // 自リングの範囲チェック
+        if (sha1Comp(dht.MaxID, body)) {
+            PublishKey(body, csn.Successor);
+            return;
+        }
         // 子リングの範囲チェック
+        if (sha1Comp(dht.ChildMaxID, body)) {
+            PublishKey(body, csn.ChildSuccessor);
+            return;
+        }
+        // ホワイトリストに格納
+        StoreKey(body);
     }
+}
+
+void StoreKey(sha1_hash_t *key) {
+    int i = 0;
+    if (whiteListMote.Cursor >= KEY_LIST_LEN) return;
+    DhtCopy(key, &whiteListMote.Keys[whiteListMote.Cursor]);
+    whiteListMote.Cursor += 1;
+    printf("[WL:DEBUG] stored key || ");
+    for (i=DEFAULT_HASH_SIZE-1;i>=0;i--) {
+        printf("%02x ", key->hash[i]);
+    }
+    printf("\n");
+    return;
+}
+
+void PublishKey(sha1_hash_t *key, int id) {
+    InsertWLMessage(whiteListMote.M, key);
+    WLSendUCPacket(whiteListMote.M, id);
 }

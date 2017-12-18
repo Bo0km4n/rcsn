@@ -128,6 +128,7 @@ static void wlMhRecv(struct multihop_conn *c, const linkaddr_t *sender, const li
   WhiteListMessage *m = (WhiteListMessage *)packetbuf_dataptr();
   switch (m->Type) {
     case Publish:
+    printf("[WL:DEBUG] received multihop white list message\n");
     break;
     default:
     break;

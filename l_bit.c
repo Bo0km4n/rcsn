@@ -123,7 +123,7 @@ int sha1Comp(sha1_hash_t *a, sha1_hash_t *b) {
     aHash[i] = a->hash[i];
     bHash[i] = b->hash[i];
   }
-  for(i=DEFAULT_HASH_SIZE;i>=0;i--){
+  for(i=DEFAULT_HASH_SIZE-1;i>=0;i--){
 		if((aHash[i] & 0xFF) < (bHash[i] & 0xFF)) return 1;
 		if((aHash[i] & 0xFF) > (bHash[i] & 0xFF)) return 0;
 	}
