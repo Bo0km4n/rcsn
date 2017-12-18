@@ -1,6 +1,9 @@
 #ifndef _CSN_H_
 #define _CSN_H_
 
+#include "contiki.h"
+#include "contiki-lib.h"
+#include "net/rime/rime.h"
 typedef struct CSNMessage {
   int type;
   int level;

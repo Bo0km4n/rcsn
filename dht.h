@@ -1,6 +1,10 @@
 #ifndef _DHT_H_
 #define _DHT_H_
 
+#include "l_bit.h"
+#include "contiki.h"
+#include "contiki-lib.h"
+#include "net/rime/rime.h"
 void DHTInit(void);
 void DHTUCReceiver(struct unicast_conn *, const linkaddr_t *);
 

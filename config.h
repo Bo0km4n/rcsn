@@ -6,5 +6,6 @@
 #define DHT_UC_PORT 147
 #define MULTIHOP_PORT 135
 #define MULTIHOP_DHT_PORT 136
+#define WL_UC_PORT 137
 #endif
 
