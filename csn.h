@@ -9,6 +9,8 @@ typedef struct CSNMessage {
   int level;
   int clusterHead; 
   int progress;
+  int Dest;
+  int Pub;
 } CSNMessage;
 typedef struct CSN{
   CSNMessage *M;
@@ -25,6 +27,8 @@ typedef struct CSN{
   int IsRingTail;
   int IsBot;
   int MaxRingNode;
+  int RingNodeNum;
+  int ChildRingNodeNum;
   struct multihop_conn *Multihop;
   void (*SendCreationMessage) (CSNMessage *m); 
   void (*SendUCPacket) (CSNMessage *m, int id);
@@ -56,6 +60,7 @@ enum CSNMessageTypes {
   ChildLinkRequestType,
   ChildLinkRequestACKType,
   RequestRejectType,
-  ChildRequestRejectType
+  ChildRequestRejectType,
+  ToHead
 };
 #endif

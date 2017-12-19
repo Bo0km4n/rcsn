@@ -174,14 +174,21 @@ void CsnUCReceiver(struct unicast_conn *c, const linkaddr_t *from) {
         // リング構築終了メッセージをクラスタヘッドに送信
         csn.IsRingTail = 1;
         csn.Successor = csn.ClusterHeadID;
+        csn.M->Dest = csn.ClusterHeadID;
+        csn.M->Pub = csn.ID;
         csn.InsertCSNMessage(csn.M, FinishNotifyType, csn.Level, csn.ClusterHeadID, progress);
-        csn.SendUCPacket(csn.M, csn.ClusterHeadID);
+        csn.SendUCPacket(csn.M, csn.Previous);
       }
       break;
     case FinishNotifyType:
-      printf("[CSN:DEBUG] received finish notice from %d level: %d\n", from->u8[0], m->level);
+      if (csn.ID != m->Dest) {
+        csn.SendUCPacket(m, csn.Previous);
+        break;
+      }
+      printf("[CSN:DEBUG] Received back hop finish notice from %d\n", from->u8[0]);
       if (csn.Level < m->level) {
-        csn.ChildPrevious = from->u8[0];
+        csn.ChildRingNodeNum = m->progress;
+        csn.ChildPrevious = m->Pub;
         csn.InsertCSNMessage(csn.M, StartChildRingType, 0, 0, 0);
         csn.SendUCPacket(csn.M, csn.ChildSuccessor);
         if (csn.Successor == csn.ClusterHeadID) {
@@ -190,7 +197,8 @@ void CsnUCReceiver(struct unicast_conn *c, const linkaddr_t *from) {
           csn.SendUCPacket(csn.M, csn.Successor);
         }
       } else {
-        csn.Previous = from->u8[0];
+        csn.RingNodeNum = m->progress;
+        csn.Previous = m->Pub;
         StartStructChildCsn(1);
       }
       break;
@@ -223,6 +231,7 @@ void CsnUCReceiver(struct unicast_conn *c, const linkaddr_t *from) {
     case ChildRequestRejectType:
       printf("[CSN:DEBUG] Rejected child link request from %d\n", from->u8[0]);
       RetrySearchBC(&csn, 1);
+      break;
     default:
       break;
   }
@@ -261,7 +270,8 @@ void SendUCPacket(CSNMessage *m, int id) {
   if (csn.ID >= 100) delay = csn.ID % 100;
   clock_wait(DELAY_CLOCK + random_rand() % delay);
   if (csn.IsRingTail && id == csn.Successor) {
-    multihop_send(csn.Multihop, &toAddr);
+    // multihop_send(csn.Multihop, &toAddr);
+    unicast_send(&ringUC, &toAddr);
   } else {
     unicast_send(&ringUC, &toAddr);
   }

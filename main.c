@@ -107,7 +107,7 @@ static void mhRecv(struct multihop_conn *c, const linkaddr_t *sender, const link
     case FinishNotifyType:
       printf("[CSN:DEBUG] Received multi hop finish notice from %d\n", sender->u8[0]);
       if (csn.Level < m->level) {
-        dht.ChildRingNodeNum = m->progress;
+        csn.ChildRingNodeNum = m->progress;
         csn.ChildPrevious = sender->u8[0];
         csn.InsertCSNMessage(csn.M, StartChildRingType, 0, 0, 0);
         csn.SendUCPacket(csn.M, csn.ChildSuccessor);
@@ -117,7 +117,7 @@ static void mhRecv(struct multihop_conn *c, const linkaddr_t *sender, const link
           csn.SendUCPacket(csn.M, csn.Successor);
         }
       } else {
-        dht.RingNodeNum = m->progress;
+        csn.RingNodeNum = m->progress;
         csn.Previous = sender->u8[0];
         StartStructChildCsn(1);
       }

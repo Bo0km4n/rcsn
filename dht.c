@@ -18,8 +18,6 @@ DHT dht;
 // static struct etimer et;
 void DHTInit(void) {
   unicast_open(&dhtUC, DHT_UC_PORT, &dhtUCCallBacks);
-  dht.RingNodeNum = 0;
-  dht.ChildRingNodeNum = 0;
   dht.MaxID = (sha1_hash_t *)malloc(sizeof(sha1_hash_t));
   dht.MinID = (sha1_hash_t *)malloc(sizeof(sha1_hash_t));
   dht.ChildMaxID = (sha1_hash_t *)malloc(sizeof(sha1_hash_t));
@@ -106,7 +104,7 @@ void SelfAllocate(DHT *dht) {
   sha1_hash_t *buf = (sha1_hash_t *)malloc(sizeof(sha1_hash_t));
   sha1_hash_t *mod = (sha1_hash_t *)malloc(sizeof(sha1_hash_t));
   DhtCopy(dht->MaxID, buf);
-  ConvertHash(dht->RingNodeNum, mod);
+  ConvertHash(csn.RingNodeNum, mod);
   sha1Div(buf, mod, dht->Unit);
   free(buf);
   free(mod);
@@ -181,7 +179,7 @@ void AllocateChildHash(DHT *dht) {
   // copy buf = unit
   DhtCopy(dht->Unit, buf1);
   // child unit = buf1 / csn.child node num
-  ConvertHash(dht->ChildRingNodeNum, nodeNum);
+  ConvertHash(csn.ChildRingNodeNum, nodeNum);
   sha1Div(buf1, nodeNum, dht->ChildUnit);
   // copy child min id = min id
   DhtCopy(dht->MinID, dht->ChildMinID);
