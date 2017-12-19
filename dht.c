@@ -125,6 +125,7 @@ void AllocateHashToSuccessor(DHT *dht) {
 void AllocateHashByPrev(DHT *dht, sha1_hash_t *unit, sha1_hash_t *prev) {
   sha1_hash_t *buf1 = (sha1_hash_t *)malloc(sizeof(sha1_hash_t));
   sha1_hash_t *buf2 = (sha1_hash_t *)malloc(sizeof(sha1_hash_t));
+  int MaxRingNode = MAX_NODE / orgPow(2, csn.Level - 1);
 
   // increment
   incrementHash(prev);
@@ -155,7 +156,20 @@ void AllocateHashByPrev(DHT *dht, sha1_hash_t *unit, sha1_hash_t *prev) {
     DhtCopy(dht->ChildMaxID, &dht->M->PrevID);
     dht->InsertDHTMessage(dht->M, AllocateHash, csn.Level, csn.ID, 1);
     dht->DHTSendUCPacket(dht->M, csn.ChildSuccessor);
+    return;
   }
+
+  // couldn't find child node. but this node is not original bot node.
+  // then, send hash allocate order to successor.
+  // This time, this doesn't send it to child successor.
+  if (csn.IsBot && (MaxRingNode > 2)) {
+    DhtCopy(dht->Unit, &dht->M->Unit);
+    DhtCopy(dht->MaxID, &dht->M->PrevID);
+    dht->InsertDHTMessage(dht->M, AllocateHash, csn.Level, csn.ID, 1);
+    dht->DHTSendUCPacket(dht->M, csn.Successor);
+    return;
+  }
+
   return;
 
 }

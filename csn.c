@@ -40,6 +40,7 @@ void init(void) {
   csn.SendCreationMessage = SendCreationMessage;
   csn.SendUCPacket = SendUCPacket;
   csn.InsertCSNMessage = InsertCSNMessage;
+  csn.MaxRingNode = 0;
   printf("[CSN:DEBUG] csn info initilized\n");
   isInitialized = 1;
 }
@@ -70,7 +71,7 @@ PROCESS_THREAD(csnProcess, ev, data)
     csn.SendCreationMessage(csn.M);
   }
   
-  etimer_set(&et, CLOCK_SECOND * RAND_MARGIN + random_rand() % (CLOCK_SECOND * RAND_MARGIN));
+  etimer_set(&et, CLOCK_SECOND * (RAND_MARGIN + random_rand() % 10));
   PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
 
   if (successorRSSI == RSSI) {
@@ -108,6 +109,7 @@ PROCESS_THREAD(csnChildProcess, ev, data)
 
   if (successorRSSI == RSSI) {
     printf("[CSN:DEBUG] nothing child node\n");
+    csn.IsBot = 1;
     if (csn.Successor != csn.ClusterHeadID) {
       csn.InsertCSNMessage(csn.M, StartChildRingType, 0, 0, 0);
       csn.SendUCPacket(csn.M, csn.Successor);
@@ -163,10 +165,10 @@ void CsnUCReceiver(struct unicast_conn *c, const linkaddr_t *from) {
       csn.Level = m->level;
       csn.ClusterHeadID = m->clusterHead;
       progress = m->progress;
-      currentLevelMaxNode = MAX_NODE / orgPow(2, csn.Level - 1);
+      csn.MaxRingNode = MAX_NODE / orgPow(2, csn.Level - 1);
       printf("[CSN:DEBUG] Linked from %d level: %d\n", from->u8[0], csn.Level);
       
-      if (progress < currentLevelMaxNode) {
+      if (progress < csn.MaxRingNode) {
         process_start(&csnProcess, (void *)0);
       } else {
         // リング構築終了メッセージをクラスタヘッドに送信

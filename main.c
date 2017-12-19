@@ -134,12 +134,13 @@ static void dhtMhRecv(struct multihop_conn *c, const linkaddr_t *sender, const l
       sha1_hash_t *buf = (sha1_hash_t *)malloc(sizeof(sha1_hash_t));
       printf("[DHT:DEBUG] Received allocate hash order from ring tail: %d\n", sender->u8[0]);
       // exec only all cluster head
-      if (csn.ID == ALL_HEAD_ID) {
+      if (csn.ID == ALL_HEAD_ID && csn.Level == m->Level) {
         DhtCopy(&m->PrevID, buf);
         incrementHash(buf);
         DhtCopy(buf, dht.MinID);
         AllocateChildHash(&dht);
         // send hash allocate order to child successor
+        if (csn.IsBot) break;
         DhtCopy(dht.ChildUnit, &dht.M->Unit);
         DhtCopy(dht.ChildMaxID, &dht.M->PrevID);
         dht.InsertDHTMessage(dht.M, AllocateHash, csn.Level, csn.ID, 1);

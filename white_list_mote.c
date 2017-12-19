@@ -87,6 +87,8 @@ void SearchUCRecv(struct unicast_conn *uc, const linkaddr_t *from) {
             DhtCopy(&q->Body, &whiteListMote.R->Body);
             whiteListMote.R->Dest = q->Publisher;
             ResultSendMHPacket(whiteListMote.R);
+        } else if (csn.MaxRingNode > 2) {
+            QuerySendUCPacket(q, csn.Successor);
         } else {
             printf("[WL:DEBUG] query error\n");
         }

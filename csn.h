@@ -24,6 +24,7 @@ typedef struct CSN{
   int RetryCounter;
   int IsRingTail;
   int IsBot;
+  int MaxRingNode;
   struct multihop_conn *Multihop;
   void (*SendCreationMessage) (CSNMessage *m); 
   void (*SendUCPacket) (CSNMessage *m, int id);
