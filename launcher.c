@@ -21,7 +21,6 @@ PROCESS_THREAD(launcherProcess, ev, data)
   DHTMessage m;
   m.Type = StartSearchRingNum;
   packetbuf_copyfrom(&m, 100);
-
   unicast_open(&dhtUC, DHT_UC_PORT, &dhtUCCallBacks);
   unicast_send(&dhtUC, &toAddr);
   PROCESS_END();
