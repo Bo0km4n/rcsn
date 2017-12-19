@@ -30,6 +30,7 @@ typedef struct WhiteList {
     Result *R;
     struct multihop_conn *Multihop;
     struct multihop_conn *QMultihop;
+    struct multihop_conn *RMultihop;
     void (*SwitchOn) (void);
     void (*SwitchOff) (void);
 } WhiteListMote;
@@ -58,5 +59,8 @@ void switchOff();
 void HashRandomization(sha1_hash_t *);
 int CheckRange(sha1_hash_t *);
 int CheckChildRange(sha1_hash_t *);
+int ScanWhiteList(sha1_hash_t *);
+int EqualHash(sha1_hash_t *, sha1_hash_t *);
+void ResultSendMHPacket(Result *);
 extern WhiteListMote whiteListMote;
 #endif

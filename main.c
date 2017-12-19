@@ -70,6 +70,36 @@ static linkaddr_t * mhForward(struct multihop_conn *c, const linkaddr_t *origina
   return NULL;
 }
 
+static linkaddr_t * resultMhForward(struct multihop_conn *c, const linkaddr_t *originator, const linkaddr_t *dest, const linkaddr_t *prevhop, uint8_t hops) {
+  int num, i;
+  struct Neighbor *n;
+  printf("[WL:DEBUG] Received forward packet from %d\n", prevhop->u8[0]);
+  if(list_length(neighbor_table) > 0) {
+    for (n = list_head(neighbor_table); n != NULL; n = n->next) {
+      if (n->addr.u8[0] == dest->u8[0] && n->addr.u8[1] == dest->u8[1]) {
+        printf("[WL:DEBUG] find dest %d.%d\n", dest->u8[0], dest->u8[1]);
+        return &n->addr;
+      }
+    }
+    num = random_rand() % list_length(neighbor_table);
+    i = 0;
+    for(n = list_head(neighbor_table); n != NULL && i != num; n = n->next) {
+      ++i;
+    }
+    if(n != NULL) {
+      printf("[WL:DEBUG] %d.%d: Forwarding packet to %d.%d (%d in list), hops %d\n",
+	     linkaddr_node_addr.u8[0], linkaddr_node_addr.u8[1],
+	     n->addr.u8[0], n->addr.u8[1], num,
+	     packetbuf_attr(PACKETBUF_ATTR_HOPS));
+      // returnしたアドレスに次のパケットを送信してる
+      return &n->addr;
+    }
+  }
+  printf("[MULTI_HOP:DEBUG] %d.%d: did not find a neighbor to foward to\n",
+	 linkaddr_node_addr.u8[0], linkaddr_node_addr.u8[1]);
+  return NULL;
+}
+
 static void mhRecv(struct multihop_conn *c, const linkaddr_t *sender, const linkaddr_t *prevhop, uint8_t hops) {
   CSNMessage *m = (CSNMessage *)packetbuf_dataptr();
 
@@ -139,7 +169,10 @@ static void queryMhRecv(struct multihop_conn *c, const linkaddr_t *sender, const
   Query *q = (Query *)packetbuf_dataptr();
     if (CheckRange(&q->Body)) {
         if (CheckChildRange(&q->Body)) {
-            printf("[WL:DEBUG] scanning white list...\n");
+            whiteListMote.R->IsExist = ScanWhiteList(&q->Body);
+            DhtCopy(&q->Body, &whiteListMote.R->Body);
+            whiteListMote.R->Dest = q->Publisher;
+            ResultSendMHPacket(whiteListMote.R);
         } else {
             printf("[WL:DEBUG] send to child \n");
             QuerySendUCPacket(q, csn.ChildSuccessor);
@@ -149,15 +182,23 @@ static void queryMhRecv(struct multihop_conn *c, const linkaddr_t *sender, const
     }
 }
 
+static void resultMhRecv(struct multihop_conn *c, const linkaddr_t *sender, const linkaddr_t *prevhop, uint8_t hops) {
+  Result *r = (Result *)packetbuf_dataptr();
+  printf("[WL:DEBUG] received query result %d\n", r->IsExist);
+}
+
 static struct announcement announcement;
 static const struct multihop_callbacks multihopCall = {mhRecv, mhForward};
 static const struct multihop_callbacks dhtMultihopCall = {dhtMhRecv, mhForward};
 static const struct multihop_callbacks wlMultihopCall = {wlMhRecv, mhForward};
 static const struct multihop_callbacks qMultihopCall = {queryMhRecv, mhForward};
+static const struct multihop_callbacks rMultihopCall = {resultMhRecv, resultMhForward};
+
 struct multihop_conn multihop;
 struct multihop_conn dhtMultihop;
 struct multihop_conn wlMultihop;
 struct multihop_conn qMultihop;
+struct multihop_conn rMultihop;
 
 
 PROCESS(main_process, "daas main process");
@@ -176,6 +217,7 @@ PROCESS_THREAD(main_process, ev, data)
   multihop_open(&multihop, MULTIHOP_PORT, &multihopCall);
   multihop_open(&dhtMultihop, MULTIHOP_DHT_PORT, &dhtMultihopCall);
   multihop_open(&qMultihop, MULTIHOP_QUERY_PORT, &qMultihopCall);
+  multihop_open(&rMultihop, MULTIHOP_RESULT_PORT, &rMultihopCall);
 
   /* Register an announcement with the same announcement ID as the
      Rime channel we use to open the multihop connection above. */
@@ -191,6 +233,7 @@ PROCESS_THREAD(main_process, ev, data)
   dht.Multihop = &dhtMultihop;
   whiteListMote.Multihop = &wlMultihop;
   whiteListMote.QMultihop = &qMultihop;
+  whiteListMote.RMultihop = &rMultihop;
   for (i=0;i<5;i++) {
     etimer_set(&et, CLOCK_SECOND * 5 + random_rand() % (CLOCK_SECOND * 5));
     PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
@@ -214,6 +257,10 @@ PROCESS_THREAD(main_process, ev, data)
   PROCESS_WAIT_EVENT_UNTIL(ev == sensors_event &&
 			    data == &button_sensor);
   StartHashAllocation();
+
+  /*
+  * Your application logic
+  */
 
    PROCESS_END();
 }

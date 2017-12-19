@@ -10,5 +10,6 @@
 #define WL_BC_PORT 138
 #define WL_SEARCH_PORT 139
 #define MULTIHOP_QUERY_PORT 140
+#define MULTIHOP_RESULT_PORT 141
 #endif
 

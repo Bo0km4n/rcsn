@@ -28,8 +28,8 @@ PROCESS_THREAD(randomHashSearchProcess, ev, data)
 {
   PROCESS_BEGIN();
   printf("[WL:DEBUG] start random search hash process\n");
-  while(1) {
-      if (csn.ID != ALL_HEAD_ID) break; // for debug
+  while(whiteListMote.Switch) {
+      // if (csn.ID != ALL_HEAD_ID) break; // for debug
       etimer_set(&et, CLOCK_SECOND * (10 + (random_rand() % 60)));
       PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
       HashRandomization(&whiteListMote.Q->Body);
@@ -81,18 +81,22 @@ void WhiteListBCRecv(struct broadcast_conn *bc, const linkaddr_t *from) {
 }
 void SearchUCRecv(struct unicast_conn *uc, const linkaddr_t *from) {
     Query *q = (Query *)packetbuf_dataptr();
-    printf("[WL:DEBUG] received query\n");
-    PrintHash(&q->Body);
     if (csn.IsBot) {
         if (CheckRange(&q->Body)) {
-            printf("[WL:DEBUG] scanning white list...\n");
+            whiteListMote.R->IsExist = ScanWhiteList(&q->Body);
+            DhtCopy(&q->Body, &whiteListMote.R->Body);
+            whiteListMote.R->Dest = q->Publisher;
+            ResultSendMHPacket(whiteListMote.R);
         } else {
             printf("[WL:DEBUG] query error\n");
         }
     } else {
         if (CheckRange(&q->Body)) {
             if (CheckChildRange(&q->Body)) {
-                printf("[WL:DEBUG] scanning white list...\n");
+                whiteListMote.R->IsExist = ScanWhiteList(&q->Body);
+                DhtCopy(&q->Body, &whiteListMote.R->Body);
+                whiteListMote.R->Dest = q->Publisher;
+                ResultSendMHPacket(whiteListMote.R);
                 return;
             } else {
                 QuerySendUCPacket(q, csn.ChildSuccessor);
@@ -135,6 +139,14 @@ void QuerySendUCPacket(Query *q, int id) {
     } else {
         unicast_send(&searchUC, &to);
     }
+}
+
+void ResultSendMHPacket(Result *r) {
+    linkaddr_t to;
+    to.u8[0] = r->Dest;
+    to.u8[1] = 0;
+    packetbuf_copyfrom(r, 64);
+    multihop_send(whiteListMote.RMultihop, &to);
 }
 
 void InsertWLMessage(WhiteListMessage *m, sha1_hash_t *body) {
@@ -197,24 +209,23 @@ void HashRandomization(sha1_hash_t *h) {
     }
 }
 void QueryPublish(Query *q) {
+    q->Publisher = csn.ID;
     if (csn.IsBot) {
         if (CheckRange(&q->Body)) {
-            printf("[WL:DEBUG] scanning white list...\n");
+            whiteListMote.R->IsExist = ScanWhiteList(&q->Body);
+            printf("[WL:DEBUG] result : %d", whiteListMote.R->IsExist);
         } else {
-            printf("[WL:DEBUG] query error\n");
+            QuerySendUCPacket(q, csn.Successor);
         }
     } else {
         if (CheckRange(&q->Body)) {
             if (CheckChildRange(&q->Body)) {
-                printf("[WL:DEBUG] scanning white list...\n");
-                return;
+                whiteListMote.R->IsExist = ScanWhiteList(&q->Body);
             } else {
                 QuerySendUCPacket(q, csn.ChildSuccessor);
-                return;
             }
         } else {
             QuerySendUCPacket(q, csn.Successor);
-            return;
         }
     }
 }
@@ -229,4 +240,20 @@ int CheckChildRange(sha1_hash_t *key) {
     // ! ChildMinID <= key <= ChildMaxID
     if (!sha1Comp(dht.ChildMaxID, key) && !sha1Comp(key, dht.ChildMinID)) return 1;
     return 0;
+}
+int ScanWhiteList(sha1_hash_t *key) {
+    int i=0;
+    for (i=0;i<KEY_LIST_LEN;i++) {
+        if (EqualHash(key, &whiteListMote.Keys[i])) {
+            return 1;
+        }
+    }
+    return 0;
+}
+int EqualHash(sha1_hash_t *a, sha1_hash_t *b) {
+    int i;
+    for (i=0;i<DEFAULT_HASH_SIZE;i++) {
+        if (a->hash[i] != b->hash[i]) return 0;
+    }
+    return 1;
 }
