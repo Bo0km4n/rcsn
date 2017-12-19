@@ -47,7 +47,7 @@ void WhiteListBCRecv(struct broadcast_conn *, const linkaddr_t *);
 void SearchUCRecv(struct unicast_conn *,const linkaddr_t *);
 void InsertWLMessage(WhiteListMessage *, sha1_hash_t *);
 void WLSendUCPacket(WhiteListMessage *, int);
-void QSendUCPacket(Query *, int);
+void QuerySendUCPacket(Query *, int);
 void QueryPublish(Query *);
 void PublishHandle(sha1_hash_t *);
 void StoreKey(sha1_hash_t *);

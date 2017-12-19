@@ -135,17 +135,17 @@ static void wlMhRecv(struct multihop_conn *c, const linkaddr_t *sender, const li
   }
 }
 
-static void qMhRecv(struct multihop_conn *c, const linkaddr_t *sender, const linkaddr_t *prevhop, uint8_t hops) {
+static void queryMhRecv(struct multihop_conn *c, const linkaddr_t *sender, const linkaddr_t *prevhop, uint8_t hops) {
   Query *q = (Query *)packetbuf_dataptr();
     if (CheckRange(&q->Body)) {
         if (CheckChildRange(&q->Body)) {
             printf("[WL:DEBUG] scanning white list...\n");
         } else {
             printf("[WL:DEBUG] send to child \n");
-            QSendUCPacket(q, csn.ChildSuccessor);
+            QuerySendUCPacket(q, csn.ChildSuccessor);
         }
     } else {
-        QSendUCPacket(q, csn.Successor);
+        QuerySendUCPacket(q, csn.Successor);
     }
 }
 
@@ -153,7 +153,7 @@ static struct announcement announcement;
 static const struct multihop_callbacks multihopCall = {mhRecv, mhForward};
 static const struct multihop_callbacks dhtMultihopCall = {dhtMhRecv, mhForward};
 static const struct multihop_callbacks wlMultihopCall = {wlMhRecv, mhForward};
-static const struct multihop_callbacks qMultihopCall = {qMhRecv, mhForward};
+static const struct multihop_callbacks qMultihopCall = {queryMhRecv, mhForward};
 struct multihop_conn multihop;
 struct multihop_conn dhtMultihop;
 struct multihop_conn wlMultihop;

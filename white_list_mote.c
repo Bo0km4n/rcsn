@@ -95,11 +95,11 @@ void SearchUCRecv(struct unicast_conn *uc, const linkaddr_t *from) {
                 printf("[WL:DEBUG] scanning white list...\n");
                 return;
             } else {
-                QSendUCPacket(q, csn.ChildSuccessor);
+                QuerySendUCPacket(q, csn.ChildSuccessor);
                 return;
             }
         } else {
-            QSendUCPacket(q, csn.Successor);
+            QuerySendUCPacket(q, csn.Successor);
             return;
         }
     }
@@ -120,7 +120,7 @@ void WLSendUCPacket(WhiteListMessage *m, int id) {
         unicast_send(&whiteListUC, &to);
     }
 }
-void QSendUCPacket(Query *q, int id) {
+void QuerySendUCPacket(Query *q, int id) {
     linkaddr_t to;
     to.u8[0] = id;
     to.u8[1] = 0;
@@ -209,11 +209,11 @@ void QueryPublish(Query *q) {
                 printf("[WL:DEBUG] scanning white list...\n");
                 return;
             } else {
-                QSendUCPacket(q, csn.ChildSuccessor);
+                QuerySendUCPacket(q, csn.ChildSuccessor);
                 return;
             }
         } else {
-            QSendUCPacket(q, csn.Successor);
+            QuerySendUCPacket(q, csn.Successor);
             return;
         }
     }
