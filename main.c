@@ -48,7 +48,7 @@ static linkaddr_t * mhForward(struct multihop_conn *c, const linkaddr_t *origina
     for (n = list_head(neighbor_table); n != NULL; n = n->next) {
       if (n->addr.u8[0] == dest->u8[0] && n->addr.u8[1] == dest->u8[1]) {
         printf("[MULTI_HOP:DEBUG] find dest %d.%d\n", dest->u8[0], dest->u8[1]);
-        return &n->addr; 
+        return &n->addr;
       }
     }
     num = random_rand() % list_length(neighbor_table);
@@ -135,13 +135,29 @@ static void wlMhRecv(struct multihop_conn *c, const linkaddr_t *sender, const li
   }
 }
 
+static void qMhRecv(struct multihop_conn *c, const linkaddr_t *sender, const linkaddr_t *prevhop, uint8_t hops) {
+  Query *q = (Query *)packetbuf_dataptr();
+    if (CheckRange(&q->Body)) {
+        if (CheckChildRange(&q->Body)) {
+            printf("[WL:DEBUG] scanning white list...\n");
+        } else {
+            printf("[WL:DEBUG] send to child \n");
+            QSendUCPacket(q, csn.ChildSuccessor);
+        }
+    } else {
+        QSendUCPacket(q, csn.Successor);
+    }
+}
+
 static struct announcement announcement;
 static const struct multihop_callbacks multihopCall = {mhRecv, mhForward};
 static const struct multihop_callbacks dhtMultihopCall = {dhtMhRecv, mhForward};
 static const struct multihop_callbacks wlMultihopCall = {wlMhRecv, mhForward};
+static const struct multihop_callbacks qMultihopCall = {qMhRecv, mhForward};
 struct multihop_conn multihop;
 struct multihop_conn dhtMultihop;
 struct multihop_conn wlMultihop;
+struct multihop_conn qMultihop;
 
 
 PROCESS(main_process, "daas main process");
@@ -159,6 +175,7 @@ PROCESS_THREAD(main_process, ev, data)
   /* Open a multihop connection on Rime channel CHANNEL. */
   multihop_open(&multihop, MULTIHOP_PORT, &multihopCall);
   multihop_open(&dhtMultihop, MULTIHOP_DHT_PORT, &dhtMultihopCall);
+  multihop_open(&qMultihop, MULTIHOP_QUERY_PORT, &qMultihopCall);
 
   /* Register an announcement with the same announcement ID as the
      Rime channel we use to open the multihop connection above. */
@@ -173,6 +190,7 @@ PROCESS_THREAD(main_process, ev, data)
   csn.Multihop = &multihop;
   dht.Multihop = &dhtMultihop;
   whiteListMote.Multihop = &wlMultihop;
+  whiteListMote.QMultihop = &qMultihop;
   for (i=0;i<5;i++) {
     etimer_set(&et, CLOCK_SECOND * 5 + random_rand() % (CLOCK_SECOND * 5));
     PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));

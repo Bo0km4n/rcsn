@@ -7,5 +7,8 @@
 #define MULTIHOP_PORT 135
 #define MULTIHOP_DHT_PORT 136
 #define WL_UC_PORT 137
+#define WL_BC_PORT 138
+#define WL_SEARCH_PORT 139
+#define MULTIHOP_QUERY_PORT 140
 #endif
 

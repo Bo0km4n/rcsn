@@ -13,12 +13,44 @@
 #include "dev/button-sensor.h"
 
 static struct unicast_conn whiteListUC;
+static struct unicast_conn searchUC;
 static struct unicast_callbacks whiteListUCCallBacks = {WhiteListUCRecv};
+static struct unicast_callbacks searchUCCallBacks = {SearchUCRecv};
+static struct broadcast_conn whiteListBC;
+static struct broadcast_callbacks whiteListBCCallBacks = {WhiteListBCRecv};
+static struct etimer et;
 WhiteListMote whiteListMote;
+
+/*---------------------------------------------------------------------------*/
+/* random search hash id  */
+PROCESS(randomHashSearchProcess, "random search hash id process");
+PROCESS_THREAD(randomHashSearchProcess, ev, data)
+{
+  PROCESS_BEGIN();
+  printf("[WL:DEBUG] start random search hash process\n");
+  while(1) {
+      if (csn.ID != ALL_HEAD_ID) break; // for debug
+      etimer_set(&et, CLOCK_SECOND * (10 + (random_rand() % 60)));
+      PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
+      HashRandomization(&whiteListMote.Q->Body);
+      PrintHash(&whiteListMote.Q->Body);
+      QueryPublish(whiteListMote.Q);
+  }
+  PROCESS_END();
+}
+/*---------------------------------------------------------------------------*/
+
 void WhiteListMoteInit() {
     unicast_open(&whiteListUC, WL_UC_PORT, &whiteListUCCallBacks);
+    unicast_open(&searchUC, WL_SEARCH_PORT, &searchUCCallBacks);
+    broadcast_open(&whiteListBC, WL_BC_PORT, &whiteListBCCallBacks);
     whiteListMote.Cursor = 0;
+    whiteListMote.Switch = 0;
     whiteListMote.M = (WhiteListMessage *)malloc(sizeof(WhiteListMessage));
+    whiteListMote.Q = (Query *)malloc(sizeof(Query));
+    whiteListMote.R = (Result *)malloc(sizeof(Result));
+    whiteListMote.SwitchOn = switchOn;
+    whiteListMote.SwitchOff = switchOff;
     printf("[WL:DEBUG] white list initilized\n");
     return;
 }
@@ -39,6 +71,39 @@ void WhiteListUCRecv(struct unicast_conn *uc, const linkaddr_t *from) {
         break;
     }
 }
+void WhiteListBCRecv(struct broadcast_conn *bc, const linkaddr_t *from) {
+    printf("[WL:DEBUG] received switch on message\n");
+    if (!whiteListMote.Switch) {
+        whiteListMote.SwitchOn();
+        broadcast_send(bc);
+        StartRandomSearch();
+    }
+}
+void SearchUCRecv(struct unicast_conn *uc, const linkaddr_t *from) {
+    Query *q = (Query *)packetbuf_dataptr();
+    printf("[WL:DEBUG] received query\n");
+    PrintHash(&q->Body);
+    if (csn.IsBot) {
+        if (CheckRange(&q->Body)) {
+            printf("[WL:DEBUG] scanning white list...\n");
+        } else {
+            printf("[WL:DEBUG] query error\n");
+        }
+    } else {
+        if (CheckRange(&q->Body)) {
+            if (CheckChildRange(&q->Body)) {
+                printf("[WL:DEBUG] scanning white list...\n");
+                return;
+            } else {
+                QSendUCPacket(q, csn.ChildSuccessor);
+                return;
+            }
+        } else {
+            QSendUCPacket(q, csn.Successor);
+            return;
+        }
+    }
+}
 void WLSendUCPacket(WhiteListMessage *m, int id) {
     linkaddr_t to;
     to.u8[0] = id;
@@ -53,6 +118,22 @@ void WLSendUCPacket(WhiteListMessage *m, int id) {
         multihop_send(whiteListMote.Multihop, &to);
     } else {
         unicast_send(&whiteListUC, &to);
+    }
+}
+void QSendUCPacket(Query *q, int id) {
+    linkaddr_t to;
+    to.u8[0] = id;
+    to.u8[1] = 0;
+    packetbuf_copyfrom(q, 64);
+    int delay = 0;
+    if (csn.ID <= 10) delay = csn.ID;
+    if (csn.ID >= 10 && csn.ID < 100) delay = csn.ID % 10;
+    if (csn.ID >= 100) delay = csn.ID % 100;
+    clock_wait(DELAY_CLOCK + random_rand() % delay);
+    if (csn.IsRingTail && id == csn.Successor) {
+        multihop_send(whiteListMote.QMultihop, &to);
+    } else {
+        unicast_send(&searchUC, &to);
     }
 }
 
@@ -97,4 +178,55 @@ void StoreKey(sha1_hash_t *key) {
 void PublishKey(sha1_hash_t *key, int id) {
     InsertWLMessage(whiteListMote.M, key);
     WLSendUCPacket(whiteListMote.M, id);
+}
+
+void StartRandomSearch() {
+    process_start(&randomHashSearchProcess, (void *)0);
+}
+
+void switchOn() {
+    whiteListMote.Switch = 1;
+}
+void switchOff() {
+    whiteListMote.Switch = 0;
+}
+void HashRandomization(sha1_hash_t *h) {
+    int i=0;
+    for(i=0;i<DEFAULT_HASH_SIZE;i++) {
+        h->hash[i] = (uint8_t)(random_rand() % 255);
+    }
+}
+void QueryPublish(Query *q) {
+    if (csn.IsBot) {
+        if (CheckRange(&q->Body)) {
+            printf("[WL:DEBUG] scanning white list...\n");
+        } else {
+            printf("[WL:DEBUG] query error\n");
+        }
+    } else {
+        if (CheckRange(&q->Body)) {
+            if (CheckChildRange(&q->Body)) {
+                printf("[WL:DEBUG] scanning white list...\n");
+                return;
+            } else {
+                QSendUCPacket(q, csn.ChildSuccessor);
+                return;
+            }
+        } else {
+            QSendUCPacket(q, csn.Successor);
+            return;
+        }
+    }
+}
+int CheckRange(sha1_hash_t *key) {
+    // 自分のリングの範囲内でない return 0
+    // ! MinID <= key <= MaxID
+    if (!sha1Comp(dht.MaxID, key) && !sha1Comp(key, dht.MinID)) return 1;
+    return 0;
+}
+int CheckChildRange(sha1_hash_t *key) {
+    // 子供のリングの範囲内でない場合 return 0
+    // ! ChildMinID <= key <= ChildMaxID
+    if (!sha1Comp(dht.ChildMaxID, key) && !sha1Comp(key, dht.ChildMinID)) return 1;
+    return 0;
 }

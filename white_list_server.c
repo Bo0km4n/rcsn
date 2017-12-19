@@ -16,7 +16,9 @@ static struct etimer et;
 int i = 0;
 sha1_hash_t whiteList[WHITE_LIST_LEN];
 static struct unicast_conn whiteListServerUC;
+static struct broadcast_conn whiteListServerBC;
 static struct unicast_callbacks whiteListServerCallBacks = {WhiteListServerRecv};
+static struct broadcast_callbacks whiteListServerBCCallBacks = {WhiteListServerBCRecv};
 WhiteListMessage *wlm;
 PROCESS(whiteListProcess, "white list server process");
 AUTOSTART_PROCESSES(&whiteListProcess);
@@ -25,6 +27,7 @@ PROCESS_THREAD(whiteListProcess, ev, data)
   PROCESS_BEGIN();
   SENSORS_ACTIVATE(button_sensor);
   unicast_open(&whiteListServerUC, WL_UC_PORT, &whiteListServerCallBacks);
+  broadcast_open(&whiteListServerBC, WL_BC_PORT, &whiteListServerBCCallBacks);
   WhiteListInit(whiteList);
   PROCESS_WAIT_EVENT_UNTIL(ev == sensors_event && data == &button_sensor);
   printf("[WL:DEBUG] starting white list server...\n");
@@ -34,6 +37,13 @@ PROCESS_THREAD(whiteListProcess, ev, data)
       etimer_set(&et, CLOCK_SECOND * 10);
       PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
   }
+  printf("[WL:DEBUG] finish first publish\n");
+  // wait 30 seconds
+  etimer_set(&et, CLOCK_SECOND * 30);
+  PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
+
+  // broad cast random search signal
+  broadcast_send(&whiteListServerBC);
   PROCESS_END();
 }
 
@@ -80,5 +90,9 @@ void debugServerWL(sha1_hash_t *list) {
 // WhiteListServerRecv 受信時ハンドラ
 void WhiteListServerRecv(struct unicast_conn *uc, const linkaddr_t *from) {
     printf("[WL:DEBUG] received wl message from %d\n", from->u8[0]);
+    return;
+}
+
+void WhiteListServerBCRecv(struct broadcast_conn *bc, const linkaddr_t *from) {
     return;
 }
