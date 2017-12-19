@@ -58,6 +58,31 @@ void DHTUCReceiver(struct unicast_conn *c, const linkaddr_t *from) {
       printf("[DHT:DEBUG] Received allocate hash order from %d\n", from->u8[0]);
       dht.AllocateHashByPrev(&dht, &m->Unit, &m->PrevID);
       break;
+    case BackToHead:
+    {
+      if (csn.ID != m->Dest) {
+        dht.DHTSendUCPacket(m, csn.Previous);
+        break;
+      }
+      sha1_hash_t *buf = (sha1_hash_t *)malloc(sizeof(sha1_hash_t));
+      printf("[DHT:DEBUG] Received allocate hash order from ring tail: %d\n", m->Pub);
+      // exec only all cluster head
+      if (csn.ID == ALL_HEAD_ID && csn.Level == m->Level) {
+        DhtCopy(&m->PrevID, buf);
+        incrementHash(buf);
+        DhtCopy(buf, dht.MinID);
+        AllocateChildHash(&dht);
+        // send hash allocate order to child successor
+        if (csn.IsBot) break;
+        DhtCopy(dht.ChildUnit, &dht.M->Unit);
+        DhtCopy(dht.ChildMaxID, &dht.M->PrevID);
+        dht.InsertDHTMessage(dht.M, AllocateHash, csn.Level, csn.ID, 1);
+        dht.DHTSendUCPacket(dht.M, csn.ChildSuccessor);
+        PrintDHT(&dht);
+      }
+      free(buf);
+      break;
+    }
     default:
       break;
   }
@@ -81,7 +106,14 @@ void DHTSendUCPacket(DHTMessage *m, int id) {
   if (csn.ID >= 100) delay = csn.ID % 100;
   clock_wait(DELAY_CLOCK + random_rand() % delay);
   if (csn.IsRingTail && id == csn.Successor) {
-    multihop_send(dht.Multihop, &toAddr);
+    // multihop_send(dht.Multihop, &toAddr);
+    // メッセージを書き換える
+    m->Type = BackToHead;
+    m->Dest = id;
+    m->Pub = csn.ID;
+    toAddr.u8[0] = csn.Previous;
+    packetbuf_copyfrom(m, 64);
+    unicast_send(&dhtUC, &toAddr);
   } else {
     unicast_send(&dhtUC, &toAddr);
   }

@@ -29,7 +29,6 @@ typedef struct CSN{
   int MaxRingNode;
   int RingNodeNum;
   int ChildRingNodeNum;
-  struct multihop_conn *Multihop;
   void (*SendCreationMessage) (CSNMessage *m); 
   void (*SendUCPacket) (CSNMessage *m, int id);
   void (*InsertCSNMessage) (CSNMessage *m, int type, int nodeLevel, int clusterHead, int progress);

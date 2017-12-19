@@ -13,6 +13,8 @@ typedef struct DHTMessage {
   int Level;
   int Publisher;
   int Progress;
+  int Pub;
+  int Dest;
   sha1_hash_t Unit;
   sha1_hash_t PrevID;
 } DHTMessage;
@@ -26,7 +28,6 @@ typedef struct DHT{
   sha1_hash_t *ChildMinID;
   sha1_hash_t *Unit;
   sha1_hash_t *ChildUnit;
-  struct multihop_conn *Multihop;
   void (*InsertDHTMessage) (DHTMessage *m, int type, int level, int publisher, int progress);
   void (*DHTSendUCPacket) (DHTMessage *m, int id);
   void (*SelfAllocate) (struct DHT *dht);
@@ -43,7 +44,8 @@ void AllocateChildHash(DHT *);
 enum DHTMessageTypes {
   StartSearchRingNum,
   IncrementProgress,
-  AllocateHash
+  AllocateHash,
+  BackToHead
 };
 void CheckRingNum(CSN *);
 void CheckChildRingNum(CSN *);
