@@ -157,22 +157,21 @@ void InsertWLMessage(WhiteListMessage *m, sha1_hash_t *body) {
 
 void PublishHandle(sha1_hash_t *body) {
     if (csn.IsBot) {
-        // 自リングの範囲のみチェック
-        if (sha1Comp(dht.MaxID, body)) return;
-        StoreKey(body);
+        if (CheckRange(body)) {
+            StoreKey(body);
+        } else {
+            printf("Publish query error\n");
+        }
     } else {
-        // 自リングの範囲チェック
-        if (sha1Comp(dht.MaxID, body)) {
+        if (CheckRange(body)) {
+            if (CheckChildRange(body)) {
+                StoreKey(body);
+            } else {
+                PublishKey(body, csn.ChildSuccessor);
+            }
+        } else {
             PublishKey(body, csn.Successor);
-            return;
         }
-        // 子リングの範囲チェック
-        if (sha1Comp(dht.ChildMaxID, body)) {
-            PublishKey(body, csn.ChildSuccessor);
-            return;
-        }
-        // ホワイトリストに格納
-        StoreKey(body);
     }
 }
 
