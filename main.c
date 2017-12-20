@@ -100,61 +100,6 @@ static linkaddr_t * resultMhForward(struct multihop_conn *c, const linkaddr_t *o
   return NULL;
 }
 
-static void mhRecv(struct multihop_conn *c, const linkaddr_t *sender, const linkaddr_t *prevhop, uint8_t hops) {
-  CSNMessage *m = (CSNMessage *)packetbuf_dataptr();
-
-  switch (m->type) {
-    case FinishNotifyType:
-      printf("[CSN:DEBUG] Received multi hop finish notice from %d\n", sender->u8[0]);
-      if (csn.Level < m->level) {
-        dht.ChildRingNodeNum = m->progress;
-        csn.ChildPrevious = sender->u8[0];
-        csn.InsertCSNMessage(csn.M, StartChildRingType, 0, 0, 0);
-        csn.SendUCPacket(csn.M, csn.ChildSuccessor);
-        if (csn.Successor == csn.ClusterHeadID) {
-          break;
-        } else {
-          csn.SendUCPacket(csn.M, csn.Successor);
-        }
-      } else {
-        dht.RingNodeNum = m->progress;
-        csn.Previous = sender->u8[0];
-        StartStructChildCsn(1);
-      }
-      break;
-    default:
-      break;
-  }
-}
-static void dhtMhRecv(struct multihop_conn *c, const linkaddr_t *sender, const linkaddr_t *prevhop, uint8_t hops) {
-  DHTMessage *m = (DHTMessage *)packetbuf_dataptr();
-  switch (m->Type) {
-    case AllocateHash:
-    {
-      sha1_hash_t *buf = (sha1_hash_t *)malloc(sizeof(sha1_hash_t));
-      printf("[DHT:DEBUG] Received allocate hash order from ring tail: %d\n", sender->u8[0]);
-      // exec only all cluster head
-      if (csn.ID == ALL_HEAD_ID && csn.Level == m->Level) {
-        DhtCopy(&m->PrevID, buf);
-        incrementHash(buf);
-        DhtCopy(buf, dht.MinID);
-        AllocateChildHash(&dht);
-        // send hash allocate order to child successor
-        if (csn.IsBot) break;
-        DhtCopy(dht.ChildUnit, &dht.M->Unit);
-        DhtCopy(dht.ChildMaxID, &dht.M->PrevID);
-        dht.InsertDHTMessage(dht.M, AllocateHash, csn.Level, csn.ID, 1);
-        dht.DHTSendUCPacket(dht.M, csn.ChildSuccessor);
-        PrintDHT(&dht);
-      }
-      free(buf);
-      break;
-    }
-    default:
-      break;
-  }
-}
-
 static void wlMhRecv(struct multihop_conn *c, const linkaddr_t *sender, const linkaddr_t *prevhop, uint8_t hops) {
   WhiteListMessage *m = (WhiteListMessage *)packetbuf_dataptr();
   switch (m->Type) {
@@ -189,14 +134,10 @@ static void resultMhRecv(struct multihop_conn *c, const linkaddr_t *sender, cons
 }
 
 static struct announcement announcement;
-static const struct multihop_callbacks multihopCall = {mhRecv, mhForward};
-static const struct multihop_callbacks dhtMultihopCall = {dhtMhRecv, mhForward};
 static const struct multihop_callbacks wlMultihopCall = {wlMhRecv, mhForward};
 static const struct multihop_callbacks qMultihopCall = {queryMhRecv, mhForward};
 static const struct multihop_callbacks rMultihopCall = {resultMhRecv, resultMhForward};
 
-struct multihop_conn multihop;
-struct multihop_conn dhtMultihop;
 struct multihop_conn wlMultihop;
 struct multihop_conn qMultihop;
 struct multihop_conn rMultihop;
@@ -215,8 +156,6 @@ PROCESS_THREAD(main_process, ev, data)
   list_init(neighbor_table);
 
   /* Open a multihop connection on Rime channel CHANNEL. */
-  multihop_open(&multihop, MULTIHOP_PORT, &multihopCall);
-  multihop_open(&dhtMultihop, MULTIHOP_DHT_PORT, &dhtMultihopCall);
   multihop_open(&qMultihop, MULTIHOP_QUERY_PORT, &qMultihopCall);
   multihop_open(&rMultihop, MULTIHOP_RESULT_PORT, &rMultihopCall);
 
@@ -230,8 +169,6 @@ PROCESS_THREAD(main_process, ev, data)
   announcement_set_value(&announcement, 0);
 
   struct Neighbor *n;  
-  csn.Multihop = &multihop;
-  dht.Multihop = &dhtMultihop;
   whiteListMote.Multihop = &wlMultihop;
   whiteListMote.QMultihop = &qMultihop;
   whiteListMote.RMultihop = &rMultihop;

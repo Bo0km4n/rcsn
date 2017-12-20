@@ -1,5 +1,6 @@
 /InstantContiki3.0
 /contiki
+evaluation/
 *.a
 *.map
 *.z1
