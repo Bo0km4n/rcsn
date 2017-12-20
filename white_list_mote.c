@@ -159,8 +159,10 @@ void PublishHandle(sha1_hash_t *body) {
     if (csn.IsBot) {
         if (CheckRange(body)) {
             StoreKey(body);
+        } else if (csn.MaxRingNode > 2) {
+            PublishKey(body, csn.Successor);
         } else {
-            printf("Publish query error\n");
+            printf("[WL:DEBUG] publish query error\n");
         }
     } else {
         if (CheckRange(body)) {
