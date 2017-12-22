@@ -260,3 +260,26 @@ int EqualHash(sha1_hash_t *a, sha1_hash_t *b) {
     }
     return 1;
 }
+int next(int a) {
+    return (a+1) % QUEUE_SIZE;
+} 
+void Enqueue(ResultQueue *rQueue, Result r) {
+    if (next(rQueue->Cursor) == QUEUE_SIZE) {
+        Dequeue(rQueue);
+        rQueue->Data[rQueue->Cursor] = r;
+    } else {
+        rQueue->Data[rQueue->Cursor] = r;
+        rQueue->Cursor = next(rQueue->Cursor);
+    }
+}
+Result Dequeue(ResultQueue *rQueue) {
+    Result r, v;
+    int i = 0;
+    r = rQueue->Data[0];
+    // Shift
+    for (i=1;i<QUEUE_SIZE;i++) {
+        rQueue->Data[i-1] = rQueue->Data[i];
+    }
+    rQueue->Data[QUEUE_SIZE-1] = v;
+    return r;
+}

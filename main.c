@@ -73,7 +73,8 @@ static linkaddr_t * mhForward(struct multihop_conn *c, const linkaddr_t *origina
 static linkaddr_t * resultMhForward(struct multihop_conn *c, const linkaddr_t *originator, const linkaddr_t *dest, const linkaddr_t *prevhop, uint8_t hops) {
   int num, i;
   struct Neighbor *n;
-  printf("[WL:DEBUG] Received forward packet from %d\n", prevhop->u8[0]);
+  Result *r = (Result *)packetbuf_dataptr();
+  PrintHash(&r->Body);
   if(list_length(neighbor_table) > 0) {
     for (n = list_head(neighbor_table); n != NULL; n = n->next) {
       if (n->addr.u8[0] == dest->u8[0] && n->addr.u8[1] == dest->u8[1]) {

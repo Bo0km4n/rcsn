@@ -7,6 +7,7 @@
 #include "white_list.h"
 
 #define KEY_LIST_LEN 16
+#define QUEUE_SIZE 32
 typedef struct WhiteListMessage {
     int Type;
     sha1_hash_t Body;
@@ -20,6 +21,13 @@ typedef struct Result {
     int IsExist;
     sha1_hash_t Body;
 } Result;
+typedef struct ResultQueue {
+    Result Data[QUEUE_SIZE];
+    void (*Enqueue) (struct ResultQueue *, Result *);
+    Result * (*Dequeue) (struct ResultQueue *);
+    int (*Empty) (struct ResultQueue *);
+    int Cursor;
+} ResultQueue;
 
 typedef struct WhiteList {
     int Cursor;
@@ -63,4 +71,7 @@ int ScanWhiteList(sha1_hash_t *);
 int EqualHash(sha1_hash_t *, sha1_hash_t *);
 void ResultSendMHPacket(Result *);
 extern WhiteListMote whiteListMote;
+void Enqueue(ResultQueue *, Result);
+Result Dequeue(ResultQueue *);
+int Empty(ResultQueue *);
 #endif
