@@ -74,7 +74,9 @@ static linkaddr_t * resultMhForward(struct multihop_conn *c, const linkaddr_t *o
   int num, i;
   struct Neighbor *n;
   Result *r = (Result *)packetbuf_dataptr();
-  PrintHash(&r->Body);
+  if (csn.Level == 1) {
+    whiteListMote.ResultQueue->Enqueue(whiteListMote.ResultQueue, r);
+  }
   if(list_length(neighbor_table) > 0) {
     for (n = list_head(neighbor_table); n != NULL; n = n->next) {
       if (n->addr.u8[0] == dest->u8[0] && n->addr.u8[1] == dest->u8[1]) {
@@ -173,7 +175,7 @@ PROCESS_THREAD(main_process, ev, data)
   whiteListMote.Multihop = &wlMultihop;
   whiteListMote.QMultihop = &qMultihop;
   whiteListMote.RMultihop = &rMultihop;
-  for (i=0;i<5;i++) {
+  for (i=0;i<3;i++) {
     etimer_set(&et, CLOCK_SECOND * 5 + random_rand() % (CLOCK_SECOND * 5));
     PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
     for(n = list_head(neighbor_table); n != NULL; n = n->next) {

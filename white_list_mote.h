@@ -24,8 +24,7 @@ typedef struct Result {
 typedef struct ResultQueue {
     Result Data[QUEUE_SIZE];
     void (*Enqueue) (struct ResultQueue *, Result *);
-    Result * (*Dequeue) (struct ResultQueue *);
-    int (*Empty) (struct ResultQueue *);
+    Result (*Dequeue) (struct ResultQueue *);
     int Cursor;
 } ResultQueue;
 
@@ -36,6 +35,7 @@ typedef struct WhiteList {
     WhiteListMessage *M;
     Query *Q;
     Result *R;
+    ResultQueue *ResultQueue;
     struct multihop_conn *Multihop;
     struct multihop_conn *QMultihop;
     struct multihop_conn *RMultihop;
@@ -68,10 +68,11 @@ void HashRandomization(sha1_hash_t *);
 int CheckRange(sha1_hash_t *);
 int CheckChildRange(sha1_hash_t *);
 int ScanWhiteList(sha1_hash_t *);
+int ScanCache(sha1_hash_t *);
 int EqualHash(sha1_hash_t *, sha1_hash_t *);
 void ResultSendMHPacket(Result *);
 extern WhiteListMote whiteListMote;
-void Enqueue(ResultQueue *, Result);
+void Enqueue(ResultQueue *, Result *);
 Result Dequeue(ResultQueue *);
 int Empty(ResultQueue *);
 #endif

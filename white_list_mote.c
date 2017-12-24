@@ -29,7 +29,7 @@ PROCESS_THREAD(randomHashSearchProcess, ev, data)
   PROCESS_BEGIN();
   printf("[WL:DEBUG] start random search hash process\n");
   while(whiteListMote.Switch) {
-      // if (csn.ID != ALL_HEAD_ID) break; // for debug
+      if (csn.ID != ALL_HEAD_ID) break; // for debug
       etimer_set(&et, CLOCK_SECOND * (10 + (random_rand() % 60)));
       PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
       HashRandomization(&whiteListMote.Q->Body);
@@ -49,6 +49,9 @@ void WhiteListMoteInit() {
     whiteListMote.M = (WhiteListMessage *)malloc(sizeof(WhiteListMessage));
     whiteListMote.Q = (Query *)malloc(sizeof(Query));
     whiteListMote.R = (Result *)malloc(sizeof(Result));
+    whiteListMote.ResultQueue = (ResultQueue *)malloc(sizeof(ResultQueue));
+    whiteListMote.ResultQueue->Enqueue = Enqueue;
+    whiteListMote.ResultQueue->Dequeue = Dequeue;
     whiteListMote.SwitchOn = switchOn;
     whiteListMote.SwitchOff = switchOff;
     printf("[WL:DEBUG] white list initilized\n");
@@ -81,6 +84,18 @@ void WhiteListBCRecv(struct broadcast_conn *bc, const linkaddr_t *from) {
 }
 void SearchUCRecv(struct unicast_conn *uc, const linkaddr_t *from) {
     Query *q = (Query *)packetbuf_dataptr();
+
+    if (csn.Level == 1) {
+        int index = ScanCache(&q->Body);
+        if (index > 0) {
+            whiteListMote.R->IsExist = whiteListMote.ResultQueue->Data[index].IsExist;
+            DhtCopy(&whiteListMote.ResultQueue->Data[index].Body, &whiteListMote.R->Body);
+            whiteListMote.R->Dest = q->Publisher;
+            ResultSendMHPacket(whiteListMote.R);
+            return;
+        }
+    }
+
     if (csn.IsBot) {
         if (CheckRange(&q->Body)) {
             whiteListMote.R->IsExist = ScanWhiteList(&q->Body);
@@ -248,10 +263,23 @@ int ScanWhiteList(sha1_hash_t *key) {
     int i=0;
     for (i=0;i<KEY_LIST_LEN;i++) {
         if (EqualHash(key, &whiteListMote.Keys[i])) {
+            printf("[WL:DEBUG] key hit!!\n");
             return 1;
         }
     }
+    printf("[WL:DEBUG] key not hit...\n");
     return 0;
+}
+int ScanCache(sha1_hash_t *key) {
+    int i=0;
+    for (i=0;i<16;i++) {
+        if (EqualHash(key, &whiteListMote.ResultQueue->Data[i].Body)) {
+            printf("[WL:DEBUG] cache hit!!\n");
+            return i;
+        }
+    }
+    printf("[WL:DEBUG] cache not hit...\n");
+    return -1;
 }
 int EqualHash(sha1_hash_t *a, sha1_hash_t *b) {
     int i;
@@ -263,13 +291,27 @@ int EqualHash(sha1_hash_t *a, sha1_hash_t *b) {
 int next(int a) {
     return (a+1) % QUEUE_SIZE;
 } 
-void Enqueue(ResultQueue *rQueue, Result r) {
-    if (next(rQueue->Cursor) == QUEUE_SIZE) {
+void Enqueue(ResultQueue *rQueue, Result *r) {
+    int i = 0;
+
+    if (next(rQueue->Cursor) == QUEUE_SIZE-1) {
         Dequeue(rQueue);
-        rQueue->Data[rQueue->Cursor] = r;
+        rQueue->Data[rQueue->Cursor].IsExist = r->IsExist;
+        DhtCopy(&r->Body, &rQueue->Data[rQueue->Cursor].Body);
+        printf("[WL:DEBUG] cached ");
+        for (i=DEFAULT_HASH_SIZE-1;i>=0;i--) {
+            printf("%02x ", rQueue->Data[rQueue->Cursor].Body.hash[i]);
+        }
+        printf("\n");
     } else {
-        rQueue->Data[rQueue->Cursor] = r;
-        rQueue->Cursor = next(rQueue->Cursor);
+        rQueue->Data[rQueue->Cursor].IsExist = r->IsExist;
+        DhtCopy(&r->Body, &rQueue->Data[rQueue->Cursor].Body);
+        rQueue->Cursor += 1;
+        printf("[WL:DEBUG] cached ");
+        for (i=DEFAULT_HASH_SIZE-1;i>=0;i--) {
+            printf("%02x ", rQueue->Data[rQueue->Cursor-1].Body.hash[i]);
+        }
+        printf("\n");
     }
 }
 Result Dequeue(ResultQueue *rQueue) {
