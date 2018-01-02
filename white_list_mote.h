@@ -81,4 +81,5 @@ void Enqueue(ResultQueue *, Result *);
 Result Dequeue(ResultQueue *);
 int Empty(ResultQueue *);
 void StoreRefferer(Query *, short int);
+void ReplyResult(Query *, Result *);
 #endif

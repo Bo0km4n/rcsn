@@ -84,7 +84,7 @@ void WhiteListBCRecv(struct broadcast_conn *bc, const linkaddr_t *from) {
 }
 void SearchUCRecv(struct unicast_conn *uc, const linkaddr_t *from) {
     Query *q = (Query *)packetbuf_dataptr();
-    if (q->Next != csn.ID) {
+    if (q->Next != csn.ID && q->Next == csn.ClusterHeadID) {
         QuerySendUCPacket(q, csn.Previous);
         return;
     }
@@ -98,14 +98,11 @@ void SearchUCRecv(struct unicast_conn *uc, const linkaddr_t *from) {
             return;
         }
     }
-
     if (csn.IsBot) {
         if (CheckRange(&q->Body)) {
-            whiteListMote.R->IsExist = ScanWhiteList(&q->Body);
-            DhtCopy(&q->Body, &whiteListMote.R->Body);
-            whiteListMote.R->Dest = q->Publisher;
-            ResultSendMHPacket(whiteListMote.R);
+            ReplyResult(q, whiteListMote.R);
         } else if (csn.MaxRingNode > 2) {
+            StoreRefferer(q, csn.ID);
             QuerySendUCPacket(q, csn.Successor);
         } else {
             printf("[WL:DEBUG] query error\n");
@@ -113,16 +110,15 @@ void SearchUCRecv(struct unicast_conn *uc, const linkaddr_t *from) {
     } else {
         if (CheckRange(&q->Body)) {
             if (CheckChildRange(&q->Body)) {
-                whiteListMote.R->IsExist = ScanWhiteList(&q->Body);
-                DhtCopy(&q->Body, &whiteListMote.R->Body);
-                whiteListMote.R->Dest = q->Publisher;
-                ResultSendMHPacket(whiteListMote.R);
+                ReplyResult(q, whiteListMote.R);
                 return;
             } else {
+                StoreRefferer(q, csn.ID);
                 QuerySendUCPacket(q, csn.ChildSuccessor);
                 return;
             }
         } else {
+            StoreRefferer(q, csn.ID);
             QuerySendUCPacket(q, csn.Successor);
             return;
         }
@@ -336,4 +332,10 @@ void StoreRefferer(Query *q, short int p) {
     if (q->ReffererIndex >= ReffererLength - 1) return;
     q->Refferer[q->ReffererIndex] = p;
     q->ReffererIndex += 1;
+}
+void ReplyResult(Query *q, Result *r) {
+    r->IsExist = ScanWhiteList(&q->Body);
+    DhtCopy(&q->Body, &r->Body);
+    r->Dest = q->Publisher;
+    ResultSendMHPacket(r);
 }
