@@ -12,8 +12,6 @@
 #include "contiki-lib.h"
 #include "net/rime/rime.h"
 
-static struct etimer et;
-int i = 0;
 sha1_hash_t whiteList[WHITE_LIST_LEN];
 static struct unicast_conn whiteListServerUC;
 static struct broadcast_conn whiteListServerBC;
@@ -31,18 +29,6 @@ PROCESS_THREAD(whiteListProcess, ev, data)
   WhiteListInit(whiteList);
   PROCESS_WAIT_EVENT_UNTIL(ev == sensors_event && data == &button_sensor);
   printf("[WL:DEBUG] starting white list server...\n");
-  //debugServerWL(whiteList);
-  for(i=0;i<WHITE_LIST_LEN;i++) {
-      Pub(&whiteList[i], ALL_HEAD_ID);
-      etimer_set(&et, CLOCK_SECOND * 10);
-      PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
-  }
-  printf("[WL:DEBUG] finish first publish\n");
-  // wait 30 seconds
-  etimer_set(&et, CLOCK_SECOND * 30);
-  PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
-
-  // broad cast random search signal
   broadcast_send(&whiteListServerBC);
   PROCESS_END();
 }

@@ -13,9 +13,11 @@
 #include "dev/button-sensor.h"
 
 static struct unicast_conn whiteListUC;
+static struct unicast_conn resultUC;
 static struct unicast_conn searchUC;
 static struct unicast_callbacks whiteListUCCallBacks = {WhiteListUCRecv};
 static struct unicast_callbacks searchUCCallBacks = {SearchUCRecv};
+static struct unicast_callbacks resultUCCallBacks = {ResultUCRecv};
 static struct broadcast_conn whiteListBC;
 static struct broadcast_callbacks whiteListBCCallBacks = {WhiteListBCRecv};
 static struct etimer et;
@@ -43,6 +45,7 @@ PROCESS_THREAD(randomHashSearchProcess, ev, data)
 void WhiteListMoteInit() {
     unicast_open(&whiteListUC, WL_UC_PORT, &whiteListUCCallBacks);
     unicast_open(&searchUC, WL_SEARCH_PORT, &searchUCCallBacks);
+    unicast_open(&resultUC, WL_RESULT_PORT, &resultUCCallBacks);
     broadcast_open(&whiteListBC, WL_BC_PORT, &whiteListBCCallBacks);
     whiteListMote.Cursor = 0;
     whiteListMote.Switch = 0;
@@ -84,6 +87,7 @@ void WhiteListBCRecv(struct broadcast_conn *bc, const linkaddr_t *from) {
 }
 void SearchUCRecv(struct unicast_conn *uc, const linkaddr_t *from) {
     Query *q = (Query *)packetbuf_dataptr();
+    int i;
     if (q->Next != csn.ID && q->Next == csn.ClusterHeadID) {
         QuerySendUCPacket(q, csn.Previous);
         return;
@@ -91,6 +95,10 @@ void SearchUCRecv(struct unicast_conn *uc, const linkaddr_t *from) {
     if (csn.Level == 1) {
         int index = ScanCache(&q->Body);
         if (index >= 0) {
+            for (i=0;i<q->ReffererIndex;i++) {
+                whiteListMote.R->Refferer[i] = q->Refferer[i];
+            }
+            whiteListMote.R->ReffererIndex = q->ReffererIndex;
             whiteListMote.R->IsExist = whiteListMote.ResultQueue->Data[index].IsExist;
             DhtCopy(&whiteListMote.ResultQueue->Data[index].Body, &whiteListMote.R->Body);
             whiteListMote.R->Dest = q->Publisher;
@@ -124,6 +132,23 @@ void SearchUCRecv(struct unicast_conn *uc, const linkaddr_t *from) {
         }
     }
 }
+void ResultUCRecv(struct unicast_conn *uc, const linkaddr_t *from) {
+    Result *r = (Result *)packetbuf_dataptr();
+    printf("[WL:DEBUG] receive query result forward\n");
+    if (csn.ID == r->Dest) {
+        printf("[WL:DEBUG] received query result %d\n", r->IsExist);
+    } else if (r->Next != csn.ID) {
+        ResultSendUCPacket(r, csn.Previous);
+    } else {
+        r->ReffererIndex -= 1;
+        ResultSendUCPacket(r, r->Refferer[r->ReffererIndex]);
+    }
+}
+
+void resultForward(Result *r, int id) {
+    return;
+}
+
 void WLSendUCPacket(WhiteListMessage *m, int id) {
     linkaddr_t to;
     to.u8[0] = id;
@@ -149,7 +174,7 @@ void QuerySendUCPacket(Query *q, int id) {
     if (csn.ID >= 10 && csn.ID < 100) delay = csn.ID % 10;
     if (csn.ID >= 100) delay = csn.ID % 100;
     clock_wait(DELAY_CLOCK + random_rand() % delay);
-    if (csn.IsRingTail && id == csn.Successor) {
+    if (csn.IsRingTail && id == csn.ClusterHeadID) {
         //multihop_send(whiteListMote.QMultihop, &to);
         to.u8[0] = csn.Previous;
     } else {
@@ -157,6 +182,24 @@ void QuerySendUCPacket(Query *q, int id) {
     }
     to.u8[1] = 0;
     unicast_send(&searchUC, &to);
+}
+void ResultSendUCPacket(Result *r, int id) {
+    linkaddr_t to;
+    r->Next = id;
+    packetbuf_copyfrom(r, 100);
+      int delay = 0;
+    if (csn.ID <= 10) delay = csn.ID;
+    if (csn.ID >= 10 && csn.ID < 100) delay = csn.ID % 10;
+    if (csn.ID >= 100) delay = csn.ID % 100;
+    clock_wait(DELAY_CLOCK + random_rand() % delay);
+    if (csn.IsRingTail && id == csn.ClusterHeadID) {
+        //multihop_send(whiteListMote.QMultihop, &to);
+        to.u8[0] = csn.Previous;
+    } else {
+        to.u8[0] = id;
+    }
+    to.u8[1] = 0;
+    unicast_send(&resultUC, &to);
 }
 
 void ResultSendMHPacket(Result *r) {
@@ -229,6 +272,7 @@ void HashRandomization(sha1_hash_t *h) {
 }
 void QueryPublish(Query *q) {
     q->Publisher = csn.ID;
+    StoreRefferer(q, csn.ID);
     if (csn.IsBot) {
         if (CheckRange(&q->Body)) {
             whiteListMote.R->IsExist = ScanWhiteList(&q->Body);
@@ -334,8 +378,13 @@ void StoreRefferer(Query *q, short int p) {
     q->ReffererIndex += 1;
 }
 void ReplyResult(Query *q, Result *r) {
+    int i;
+    for (i=0;i<ReffererLength;i++) {
+        r->Refferer[i] = q->Refferer[i];
+    }
+    r->ReffererIndex = q->ReffererIndex-1;
     r->IsExist = ScanWhiteList(&q->Body);
     DhtCopy(&q->Body, &r->Body);
     r->Dest = q->Publisher;
-    ResultSendMHPacket(r);
+    ResultSendUCPacket(r, r->Refferer[r->ReffererIndex]);
 }

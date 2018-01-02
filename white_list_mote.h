@@ -24,6 +24,7 @@ typedef struct Result {
     short int Dest;
     short int IsExist;
     short int Refferer[ReffererLength];
+    short int ReffererIndex;
     short int Next;
     sha1_hash_t Body;
 } Result;
@@ -59,6 +60,8 @@ void WhiteListMoteInit(void);
 void WhiteListUCRecv(struct unicast_conn *, const linkaddr_t *);
 void WhiteListBCRecv(struct broadcast_conn *, const linkaddr_t *);
 void SearchUCRecv(struct unicast_conn *,const linkaddr_t *);
+void ResultUCRecv(struct unicast_conn *,const linkaddr_t *);
+void resultForward(Result *, int);
 void InsertWLMessage(WhiteListMessage *, sha1_hash_t *);
 void WLSendUCPacket(WhiteListMessage *, int);
 void QuerySendUCPacket(Query *, int);
@@ -82,4 +85,5 @@ Result Dequeue(ResultQueue *);
 int Empty(ResultQueue *);
 void StoreRefferer(Query *, short int);
 void ReplyResult(Query *, Result *);
+void ResultSendUCPacket(Result *, int);
 #endif
