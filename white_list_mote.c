@@ -84,10 +84,13 @@ void WhiteListBCRecv(struct broadcast_conn *bc, const linkaddr_t *from) {
 }
 void SearchUCRecv(struct unicast_conn *uc, const linkaddr_t *from) {
     Query *q = (Query *)packetbuf_dataptr();
-
+    if (q->Next != csn.ID) {
+        QuerySendUCPacket(q, csn.Previous);
+        return;
+    }
     if (csn.Level == 1) {
         int index = ScanCache(&q->Body);
-        if (index > 0) {
+        if (index >= 0) {
             whiteListMote.R->IsExist = whiteListMote.ResultQueue->Data[index].IsExist;
             DhtCopy(&whiteListMote.ResultQueue->Data[index].Body, &whiteListMote.R->Body);
             whiteListMote.R->Dest = q->Publisher;
@@ -143,19 +146,21 @@ void WLSendUCPacket(WhiteListMessage *m, int id) {
 }
 void QuerySendUCPacket(Query *q, int id) {
     linkaddr_t to;
-    to.u8[0] = id;
-    to.u8[1] = 0;
-    packetbuf_copyfrom(q, 64);
+    q->Next = id;
+    packetbuf_copyfrom(q, 100);
     int delay = 0;
     if (csn.ID <= 10) delay = csn.ID;
     if (csn.ID >= 10 && csn.ID < 100) delay = csn.ID % 10;
     if (csn.ID >= 100) delay = csn.ID % 100;
     clock_wait(DELAY_CLOCK + random_rand() % delay);
     if (csn.IsRingTail && id == csn.Successor) {
-        multihop_send(whiteListMote.QMultihop, &to);
+        //multihop_send(whiteListMote.QMultihop, &to);
+        to.u8[0] = csn.Previous;
     } else {
-        unicast_send(&searchUC, &to);
+        to.u8[0] = id;
     }
+    to.u8[1] = 0;
+    unicast_send(&searchUC, &to);
 }
 
 void ResultSendMHPacket(Result *r) {
@@ -240,9 +245,11 @@ void QueryPublish(Query *q) {
             if (CheckChildRange(&q->Body)) {
                 whiteListMote.R->IsExist = ScanWhiteList(&q->Body);
             } else {
+                //StoreRefferer(q, csn.ID);
                 QuerySendUCPacket(q, csn.ChildSuccessor);
             }
         } else {
+            //StoreRefferer(q, csn.ID);
             QuerySendUCPacket(q, csn.Successor);
         }
     }
@@ -324,4 +331,9 @@ Result Dequeue(ResultQueue *rQueue) {
     }
     rQueue->Data[QUEUE_SIZE-1] = v;
     return r;
+}
+void StoreRefferer(Query *q, short int p) {
+    if (q->ReffererIndex >= ReffererLength - 1) return;
+    q->Refferer[q->ReffererIndex] = p;
+    q->ReffererIndex += 1;
 }

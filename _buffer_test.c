@@ -16,6 +16,7 @@ typedef struct Message {
     sha1_hash_t key;
     short int refferer[32];
     short int reffererIndex;
+    short int result;
 } Message;
 void UCReceiver(struct unicast_conn *c, const linkaddr_t *from) {
     int i=0;

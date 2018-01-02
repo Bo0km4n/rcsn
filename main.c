@@ -114,23 +114,6 @@ static void wlMhRecv(struct multihop_conn *c, const linkaddr_t *sender, const li
   }
 }
 
-static void queryMhRecv(struct multihop_conn *c, const linkaddr_t *sender, const linkaddr_t *prevhop, uint8_t hops) {
-  Query *q = (Query *)packetbuf_dataptr();
-    if (CheckRange(&q->Body)) {
-        if (CheckChildRange(&q->Body)) {
-            whiteListMote.R->IsExist = ScanWhiteList(&q->Body);
-            DhtCopy(&q->Body, &whiteListMote.R->Body);
-            whiteListMote.R->Dest = q->Publisher;
-            ResultSendMHPacket(whiteListMote.R);
-        } else {
-            printf("[WL:DEBUG] send to child \n");
-            QuerySendUCPacket(q, csn.ChildSuccessor);
-        }
-    } else {
-        QuerySendUCPacket(q, csn.Successor);
-    }
-}
-
 static void resultMhRecv(struct multihop_conn *c, const linkaddr_t *sender, const linkaddr_t *prevhop, uint8_t hops) {
   Result *r = (Result *)packetbuf_dataptr();
   printf("[WL:DEBUG] received query result %d\n", r->IsExist);
@@ -138,11 +121,9 @@ static void resultMhRecv(struct multihop_conn *c, const linkaddr_t *sender, cons
 
 static struct announcement announcement;
 static const struct multihop_callbacks wlMultihopCall = {wlMhRecv, mhForward};
-static const struct multihop_callbacks qMultihopCall = {queryMhRecv, mhForward};
 static const struct multihop_callbacks rMultihopCall = {resultMhRecv, resultMhForward};
 
 struct multihop_conn wlMultihop;
-struct multihop_conn qMultihop;
 struct multihop_conn rMultihop;
 
 
@@ -159,7 +140,6 @@ PROCESS_THREAD(main_process, ev, data)
   list_init(neighbor_table);
 
   /* Open a multihop connection on Rime channel CHANNEL. */
-  multihop_open(&qMultihop, MULTIHOP_QUERY_PORT, &qMultihopCall);
   multihop_open(&rMultihop, MULTIHOP_RESULT_PORT, &rMultihopCall);
 
   /* Register an announcement with the same announcement ID as the
@@ -173,7 +153,6 @@ PROCESS_THREAD(main_process, ev, data)
 
   struct Neighbor *n;  
   whiteListMote.Multihop = &wlMultihop;
-  whiteListMote.QMultihop = &qMultihop;
   whiteListMote.RMultihop = &rMultihop;
   for (i=0;i<3;i++) {
     etimer_set(&et, CLOCK_SECOND * 5 + random_rand() % (CLOCK_SECOND * 5));

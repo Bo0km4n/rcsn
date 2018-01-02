@@ -8,17 +8,23 @@
 
 #define KEY_LIST_LEN 16
 #define QUEUE_SIZE 32
+#define ReffererLength 32
 typedef struct WhiteListMessage {
     int Type;
     sha1_hash_t Body;
 } WhiteListMessage;
 typedef struct Query {
-    int Publisher;
+    short int Publisher;
+    short int Refferer[ReffererLength];
+    short int ReffererIndex;
+    short int Next;
     sha1_hash_t Body;
 } Query;
 typedef struct Result {
-    int Dest;
-    int IsExist;
+    short int Dest;
+    short int IsExist;
+    short int Refferer[ReffererLength];
+    short int Next;
     sha1_hash_t Body;
 } Result;
 typedef struct ResultQueue {
@@ -37,7 +43,6 @@ typedef struct WhiteList {
     Result *R;
     ResultQueue *ResultQueue;
     struct multihop_conn *Multihop;
-    struct multihop_conn *QMultihop;
     struct multihop_conn *RMultihop;
     void (*SwitchOn) (void);
     void (*SwitchOff) (void);
@@ -75,4 +80,5 @@ extern WhiteListMote whiteListMote;
 void Enqueue(ResultQueue *, Result *);
 Result Dequeue(ResultQueue *);
 int Empty(ResultQueue *);
+void StoreRefferer(Query *, short int);
 #endif
