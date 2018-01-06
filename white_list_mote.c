@@ -11,13 +11,16 @@
 #include "lib/list.h"
 #include "lib/memb.h"
 #include "dev/button-sensor.h"
+#include "powertrace.h"
 
 static struct unicast_conn whiteListUC;
 static struct unicast_conn resultUC;
 static struct unicast_conn searchUC;
+static struct unicast_conn notifyUC;
 static struct unicast_callbacks whiteListUCCallBacks = {WhiteListUCRecv};
 static struct unicast_callbacks searchUCCallBacks = {SearchUCRecv};
 static struct unicast_callbacks resultUCCallBacks = {ResultUCRecv};
+static struct unicast_callbacks notifyUCCallBacks = {NotifyUCRecv};
 static struct broadcast_conn whiteListBC;
 static struct broadcast_callbacks whiteListBCCallBacks = {WhiteListBCRecv};
 static struct etimer et;
@@ -30,9 +33,10 @@ PROCESS_THREAD(randomHashSearchProcess, ev, data)
 {
   PROCESS_BEGIN();
   printf("[WL:DEBUG] start random search hash process\n");
+  powertrace_start(CLOCK_SECOND * 10);
   while(whiteListMote.Switch) {
-      if (csn.ID != ALL_HEAD_ID) break; // for debug
-      etimer_set(&et, CLOCK_SECOND * (10 + (random_rand() % 60)));
+      //if (csn.ID != 12) break; // for debug
+      etimer_set(&et, CLOCK_SECOND * (10 + (random_rand() % 20)));
       PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
       HashRandomization(&whiteListMote.Q->Body);
       PrintHash(&whiteListMote.Q->Body);
@@ -46,6 +50,7 @@ void WhiteListMoteInit() {
     unicast_open(&whiteListUC, WL_UC_PORT, &whiteListUCCallBacks);
     unicast_open(&searchUC, WL_SEARCH_PORT, &searchUCCallBacks);
     unicast_open(&resultUC, WL_RESULT_PORT, &resultUCCallBacks);
+    unicast_open(&notifyUC, WL_RANDOM_QUERY_PORT, &notifyUCCallBacks);
     broadcast_open(&whiteListBC, WL_BC_PORT, &whiteListBCCallBacks);
     whiteListMote.Cursor = 0;
     whiteListMote.Switch = 0;
@@ -78,9 +83,10 @@ void WhiteListUCRecv(struct unicast_conn *uc, const linkaddr_t *from) {
     }
 }
 void WhiteListBCRecv(struct broadcast_conn *bc, const linkaddr_t *from) {
-    printf("[WL:DEBUG] received switch on message\n");
     if (!whiteListMote.Switch) {
+        printf("[WL:DEBUG] received switch on message\n");
         whiteListMote.SwitchOn();
+        clock_wait(random_rand() % 10);
         broadcast_send(bc);
         StartRandomSearch();
     }
@@ -88,23 +94,24 @@ void WhiteListBCRecv(struct broadcast_conn *bc, const linkaddr_t *from) {
 void SearchUCRecv(struct unicast_conn *uc, const linkaddr_t *from) {
     Query *q = (Query *)packetbuf_dataptr();
     int i;
+    //printf("[WL:DEBUG] debug received search uc from %d next %d\n", from->u8[0], q->Next);
     if (q->Next != csn.ID && q->Next == csn.ClusterHeadID) {
-        QuerySendUCPacket(q, csn.Previous);
+        QuerySendMHPacket(q, q->Next, csn.Previous);
         return;
     }
     if (csn.Level == 1) {
-        int index = ScanCache(&q->Body);
-        if (index >= 0) {
-            for (i=0;i<q->ReffererIndex;i++) {
-                whiteListMote.R->Refferer[i] = q->Refferer[i];
-            }
-            whiteListMote.R->ReffererIndex = q->ReffererIndex;
-            whiteListMote.R->IsExist = whiteListMote.ResultQueue->Data[index].IsExist;
-            DhtCopy(&whiteListMote.ResultQueue->Data[index].Body, &whiteListMote.R->Body);
-            whiteListMote.R->Dest = q->Publisher;
-            ResultSendMHPacket(whiteListMote.R);
-            return;
-        }
+        // int index = ScanCache(&q->Body);
+        // if (index >= 0) {
+        //     for (i=0;i<q->ReffererIndex;i++) {
+        //         whiteListMote.R->Refferer[i] = q->Refferer[i];
+        //     }
+        //     whiteListMote.R->ReffererIndex = q->ReffererIndex;
+        //     whiteListMote.R->IsExist = whiteListMote.ResultQueue->Data[index].IsExist;
+        //     DhtCopy(&whiteListMote.ResultQueue->Data[index].Body, &whiteListMote.R->Body);
+        //     whiteListMote.R->Dest = q->Publisher;
+        //     ResultSendMHPacket(whiteListMote.R);
+        //     return;
+        // }
     }
     if (csn.IsBot) {
         if (CheckRange(&q->Body)) {
@@ -134,14 +141,32 @@ void SearchUCRecv(struct unicast_conn *uc, const linkaddr_t *from) {
 }
 void ResultUCRecv(struct unicast_conn *uc, const linkaddr_t *from) {
     Result *r = (Result *)packetbuf_dataptr();
-    printf("[WL:DEBUG] receive query result forward\n");
+    //printf("[WL:DEBUG] received query result from %d dest %d\n", from->u8[0], r->Dest);
     if (csn.ID == r->Dest) {
-        printf("[WL:DEBUG] received query result %d\n", r->IsExist);
+        printf("[WL:DEBUG] received query result from %d\n", from->u8[0]);
     } else if (r->Next != csn.ID) {
         ResultSendUCPacket(r, csn.Previous);
     } else {
         r->ReffererIndex -= 1;
         ResultSendUCPacket(r, r->Refferer[r->ReffererIndex]);
+    }
+}
+void NotifyUCRecv(struct unicast_conn *uc, const linkaddr_t *from) {
+    whiteListMote.SwitchOn();
+    StartRandomSearch();
+    printf("[WL:DEBUG] received start random query notification\n");
+    linkaddr_t successor;
+    linkaddr_t childSuccessor;
+    successor.u8[0] = csn.Successor;
+    successor.u8[1] = 0;
+    childSuccessor.u8[0] = csn.ChildSuccessor;
+    childSuccessor.u8[1] = 0;
+    packetbuf_copyfrom("", 4);
+    if (!csn.IsRingTail) {
+        unicast_send(&notifyUC, &successor);
+    }
+    if (!csn.IsBot) {
+        unicast_send(&notifyUC, &childSuccessor);
     }
 }
 
@@ -175,12 +200,25 @@ void QuerySendUCPacket(Query *q, int id) {
     if (csn.ID >= 100) delay = csn.ID % 100;
     clock_wait(DELAY_CLOCK + random_rand() % delay);
     if (csn.IsRingTail && id == csn.ClusterHeadID) {
-        //multihop_send(whiteListMote.QMultihop, &to);
         to.u8[0] = csn.Previous;
     } else {
         to.u8[0] = id;
     }
     to.u8[1] = 0;
+    unicast_send(&searchUC, &to);
+}
+void QuerySendMHPacket(Query *q, int toID, int next) {
+    linkaddr_t to;
+    to.u8[0] = next;
+    to.u8[1] = 0;    
+    q->Next = toID;
+    StoreRefferer(q, csn.ID);
+    packetbuf_copyfrom(q, 100);
+    int delay = 0;
+    if (csn.ID <= 10) delay = csn.ID;
+    if (csn.ID >= 10 && csn.ID < 100) delay = csn.ID % 10;
+    if (csn.ID >= 100) delay = csn.ID % 100;
+    clock_wait(DELAY_CLOCK + random_rand() % delay);
     unicast_send(&searchUC, &to);
 }
 void ResultSendUCPacket(Result *r, int id) {
@@ -200,14 +238,6 @@ void ResultSendUCPacket(Result *r, int id) {
     }
     to.u8[1] = 0;
     unicast_send(&resultUC, &to);
-}
-
-void ResultSendMHPacket(Result *r) {
-    linkaddr_t to;
-    to.u8[0] = r->Dest;
-    to.u8[1] = 0;
-    packetbuf_copyfrom(r, 64);
-    multihop_send(whiteListMote.RMultihop, &to);
 }
 
 void InsertWLMessage(WhiteListMessage *m, sha1_hash_t *body) {
@@ -386,5 +416,30 @@ void ReplyResult(Query *q, Result *r) {
     r->IsExist = ScanWhiteList(&q->Body);
     DhtCopy(&q->Body, &r->Body);
     r->Dest = q->Publisher;
+    PrintRefferer(q);
     ResultSendUCPacket(r, r->Refferer[r->ReffererIndex]);
+}
+void StartRandomQuery() {
+    whiteListMote.SwitchOn();
+    linkaddr_t successor;
+    linkaddr_t childSuccessor;
+    successor.u8[0] = csn.Successor;
+    successor.u8[1] = 0;
+    childSuccessor.u8[0] = csn.ChildSuccessor;
+    childSuccessor.u8[1] = 0;
+    packetbuf_copyfrom("", 4);
+    if (!csn.IsRingTail) {
+        unicast_send(&notifyUC, &successor);
+    }
+    if (!csn.IsBot) {
+        unicast_send(&notifyUC, &childSuccessor);
+    }
+}
+void PrintRefferer(Query *q) {
+    int i;
+    printf("[WL:DEBUG] Refferer ");
+    for (i=0;i<ReffererLength;i++) {
+        printf("%d ", q->Refferer[i]);
+    }
+    printf("\n");
 }

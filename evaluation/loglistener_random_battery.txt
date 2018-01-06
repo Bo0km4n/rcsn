@@ -1,0 +1,742 @@
+00:02.765	ID:8	Rime started with address 8.0
+00:02.780	ID:8	MAC 08:00:00:00:00:00:00:00 Contiki-2.6-2450-geaa8760 started. Node id is set to 8.
+00:02.792	ID:8	CSMA ContikiMAC, channel check rate 8 Hz, radio channel 26
+00:02.796	ID:8	Starting 'daas main process'
+00:02.800	ID:8	[CSN:DEBUG] csn info initilized
+00:02.807	ID:8	[WL:DEBUG] white list initilized
+00:02.883	ID:11	Rime started with address 11.0
+00:02.899	ID:11	MAC 0b:00:00:00:00:00:00:00 Contiki-2.6-2450-geaa8760 started. Node id is set to 11.
+00:02.910	ID:11	CSMA ContikiMAC, channel check rate 8 Hz, radio channel 26
+00:02.914	ID:11	Starting 'daas main process'
+00:02.918	ID:11	[CSN:DEBUG] csn info initilized
+00:02.925	ID:11	[WL:DEBUG] white list initilized
+00:02.929	ID:2	Rime started with address 2.0
+00:02.943	ID:6	Rime started with address 6.0
+00:02.944	ID:2	MAC 02:00:00:00:00:00:00:00 Contiki-2.6-2450-geaa8760 started. Node id is set to 2.
+00:02.955	ID:2	CSMA ContikiMAC, channel check rate 8 Hz, radio channel 26
+00:02.958	ID:6	MAC 06:00:00:00:00:00:00:00 Contiki-2.6-2450-geaa8760 started. Node id is set to 6.
+00:02.959	ID:2	Starting 'daas main process'
+00:02.964	ID:2	[CSN:DEBUG] csn info initilized
+00:02.969	ID:6	CSMA ContikiMAC, channel check rate 8 Hz, radio channel 26
+00:02.971	ID:2	[WL:DEBUG] white list initilized
+00:02.974	ID:6	Starting 'daas main process'
+00:02.978	ID:6	[CSN:DEBUG] csn info initilized
+00:02.985	ID:6	[WL:DEBUG] white list initilized
+00:03.041	ID:4	Rime started with address 4.0
+00:03.056	ID:4	MAC 04:00:00:00:00:00:00:00 Contiki-2.6-2450-geaa8760 started. Node id is set to 4.
+00:03.067	ID:4	CSMA ContikiMAC, channel check rate 8 Hz, radio channel 26
+00:03.071	ID:4	Starting 'daas main process'
+00:03.075	ID:1	Rime started with address 1.0
+00:03.076	ID:4	[CSN:DEBUG] csn info initilized
+00:03.083	ID:4	[WL:DEBUG] white list initilized
+00:03.090	ID:1	MAC 01:00:00:00:00:00:00:00 Contiki-2.6-2450-geaa8760 started. Node id is set to 1.
+00:03.094	ID:7	Rime started with address 7.0
+00:03.101	ID:1	CSMA ContikiMAC, channel check rate 8 Hz, radio channel 26
+00:03.105	ID:1	Starting 'daas main process'
+00:03.109	ID:7	MAC 07:00:00:00:00:00:00:00 Contiki-2.6-2450-geaa8760 started. Node id is set to 7.
+00:03.110	ID:1	[CSN:DEBUG] csn info initilized
+00:03.117	ID:1	[WL:DEBUG] white list initilized
+00:03.121	ID:7	CSMA ContikiMAC, channel check rate 8 Hz, radio channel 26
+00:03.125	ID:7	Starting 'daas main process'
+00:03.129	ID:7	[CSN:DEBUG] csn info initilized
+00:03.136	ID:7	[WL:DEBUG] white list initilized
+00:03.143	ID:14	Rime started with address 14.0
+00:03.155	ID:15	Rime started with address 15.0
+00:03.158	ID:14	MAC 0e:00:00:00:00:00:00:00 Contiki-2.6-2450-geaa8760 started. Node id is set to 14.
+00:03.169	ID:14	CSMA ContikiMAC, channel check rate 8 Hz, radio channel 26
+00:03.171	ID:15	MAC 0f:00:00:00:00:00:00:00 Contiki-2.6-2450-geaa8760 started. Node id is set to 15.
+00:03.174	ID:14	Starting 'daas main process'
+00:03.178	ID:14	[CSN:DEBUG] csn info initilized
+00:03.182	ID:15	CSMA ContikiMAC, channel check rate 8 Hz, radio channel 26
+00:03.185	ID:14	[WL:DEBUG] white list initilized
+00:03.186	ID:15	Starting 'daas main process'
+00:03.191	ID:15	[CSN:DEBUG] csn info initilized
+00:03.197	ID:15	[WL:DEBUG] white list initilized
+00:03.249	ID:10	Rime started with address 10.0
+00:03.265	ID:10	MAC 0a:00:00:00:00:00:00:00 Contiki-2.6-2450-geaa8760 started. Node id is set to 10.
+00:03.276	ID:10	CSMA ContikiMAC, channel check rate 8 Hz, radio channel 26
+00:03.280	ID:10	Starting 'daas main process'
+00:03.284	ID:10	[CSN:DEBUG] csn info initilized
+00:03.287	ID:12	Rime started with address 12.0
+00:03.291	ID:10	[WL:DEBUG] white list initilized
+00:03.302	ID:12	MAC 0c:00:00:00:00:00:00:00 Contiki-2.6-2450-geaa8760 started. Node id is set to 12.
+00:03.314	ID:12	CSMA ContikiMAC, channel check rate 8 Hz, radio channel 26
+00:03.318	ID:12	Starting 'daas main process'
+00:03.322	ID:12	[CSN:DEBUG] csn info initilized
+00:03.329	ID:12	[WL:DEBUG] white list initilized
+00:03.401	ID:9	Rime started with address 9.0
+00:03.408	ID:5	Rime started with address 5.0
+00:03.416	ID:9	MAC 09:00:00:00:00:00:00:00 Contiki-2.6-2450-geaa8760 started. Node id is set to 9.
+00:03.423	ID:5	MAC 05:00:00:00:00:00:00:00 Contiki-2.6-2450-geaa8760 started. Node id is set to 5.
+00:03.427	ID:9	CSMA ContikiMAC, channel check rate 8 Hz, radio channel 26
+00:03.432	ID:9	Starting 'daas main process'
+00:03.434	ID:5	CSMA ContikiMAC, channel check rate 8 Hz, radio channel 26
+00:03.436	ID:9	[CSN:DEBUG] csn info initilized
+00:03.438	ID:5	Starting 'daas main process'
+00:03.443	ID:5	[CSN:DEBUG] csn info initilized
+00:03.443	ID:9	[WL:DEBUG] white list initilized
+00:03.450	ID:5	[WL:DEBUG] white list initilized
+00:03.577	ID:13	Rime started with address 13.0
+00:03.592	ID:3	Rime started with address 3.0
+00:03.592	ID:13	MAC 0d:00:00:00:00:00:00:00 Contiki-2.6-2450-geaa8760 started. Node id is set to 13.
+00:03.603	ID:13	CSMA ContikiMAC, channel check rate 8 Hz, radio channel 26
+00:03.607	ID:3	MAC 03:00:00:00:00:00:00:00 Contiki-2.6-2450-geaa8760 started. Node id is set to 3.
+00:03.607	ID:13	Starting 'daas main process'
+00:03.612	ID:13	[CSN:DEBUG] csn info initilized
+00:03.618	ID:3	CSMA ContikiMAC, channel check rate 8 Hz, radio channel 26
+00:03.619	ID:13	[WL:DEBUG] white list initilized
+00:03.622	ID:3	Starting 'daas main process'
+00:03.627	ID:3	[CSN:DEBUG] csn info initilized
+00:03.634	ID:3	[WL:DEBUG] white list initilized
+00:26.608	ID:1	[CSN:DEBUG] RSSI of of last received packet = -120 from 8
+00:48.292	ID:8	[CSN:DEBUG] Linked from 1 level: 1
+00:49.047	ID:8	[CSN:DEBUG] RSSI of of last received packet = -120 from 7
+01:12.624	ID:7	[CSN:DEBUG] Linked from 8 level: 1
+01:13.377	ID:7	[CSN:DEBUG] RSSI of of last received packet = -120 from 6
+01:37.221	ID:6	[CSN:DEBUG] Linked from 7 level: 1
+01:37.725	ID:6	[CSN:DEBUG] RSSI of of last received packet = -120 from 5
+02:01.938	ID:5	[CSN:DEBUG] Linked from 6 level: 1
+02:02.689	ID:5	[CSN:DEBUG] RSSI of of last received packet = -120 from 4
+02:28.318	ID:4	[CSN:DEBUG] Linked from 5 level: 1
+02:29.075	ID:4	[CSN:DEBUG] RSSI of of last received packet = -120 from 3
+02:53.121	ID:3	[CSN:DEBUG] Linked from 4 level: 1
+02:53.874	ID:3	[CSN:DEBUG] RSSI of of last received packet = -120 from 2
+03:17.459	ID:2	[CSN:DEBUG] Linked from 3 level: 1
+03:18.857	ID:1	[CSN:DEBUG] Received back hop finish notice from 8
+03:18.861	ID:1	[CSN:DEBUG] start child process
+03:27.609	ID:1	[CSN:DEBUG] RSSI of of last received packet = -119 from 9
+04:04.179	ID:9	[CSN:DEBUG] Linked from 1 level: 2
+04:04.686	ID:9	[CSN:DEBUG] RSSI of of last received packet = -127 from 14
+04:04.936	ID:9	[CSN:DEBUG] RSSI of of last received packet = -108 from 11
+04:16.914	ID:11	[CSN:DEBUG] Linked from 9 level: 2
+04:18.663	ID:11	[CSN:DEBUG] RSSI of of last received packet = -127 from 13
+04:19.167	ID:11	[CSN:DEBUG] RSSI of of last received packet = -108 from 12
+04:41.314	ID:12	[CSN:DEBUG] Linked from 11 level: 2
+04:41.857	ID:1	[CSN:DEBUG] Received back hop finish notice from 9
+04:42.043	ID:8	[CSN:DEBUG] received start child ring notice from 1
+04:42.048	ID:8	[CSN:DEBUG] start child process
+04:42.182	ID:9	[CSN:DEBUG] received start child ring notice from 1
+04:42.186	ID:9	[CSN:DEBUG] start child process
+04:52.683	ID:9	[CSN:DEBUG] RSSI of of last received packet = -127 from 14
+05:12.218	ID:8	[CSN:DEBUG] nothing child node
+05:12.376	ID:7	[CSN:DEBUG] received start child ring notice from 8
+05:12.381	ID:7	[CSN:DEBUG] start child process
+05:29.171	ID:14	[CSN:DEBUG] Linked from 9 level: 3
+05:29.431	ID:9	[CSN:DEBUG] Received back hop finish notice from 14
+05:29.665	ID:11	[CSN:DEBUG] received start child ring notice from 9
+05:29.669	ID:11	[CSN:DEBUG] start child process
+05:29.924	ID:14	[CSN:DEBUG] received start child ring notice from 9
+05:29.929	ID:14	[CSN:DEBUG] Reached bottom layer
+05:39.916	ID:11	[CSN:DEBUG] RSSI of of last received packet = -127 from 13
+05:42.547	ID:7	[CSN:DEBUG] nothing child node
+05:42.726	ID:6	[CSN:DEBUG] received start child ring notice from 7
+05:42.731	ID:6	[CSN:DEBUG] start child process
+06:00.355	ID:13	[CSN:DEBUG] Linked from 11 level: 3
+06:00.666	ID:11	[CSN:DEBUG] Received back hop finish notice from 13
+06:00.815	ID:12	[CSN:DEBUG] received start child ring notice from 11
+06:00.820	ID:12	[CSN:DEBUG] start child process
+06:00.857	ID:13	[CSN:DEBUG] received start child ring notice from 11
+06:00.861	ID:13	[CSN:DEBUG] Reached bottom layer
+06:11.570	ID:12	[CSN:DEBUG] RSSI of of last received packet = -114 from 15
+06:12.896	ID:6	[CSN:DEBUG] nothing child node
+06:13.188	ID:5	[CSN:DEBUG] received start child ring notice from 6
+06:13.192	ID:5	[CSN:DEBUG] start child process
+06:46.686	ID:15	[CSN:DEBUG] Linked from 12 level: 3
+06:46.817	ID:12	[CSN:DEBUG] Received back hop finish notice from 15
+06:46.938	ID:15	[CSN:DEBUG] received start child ring notice from 12
+06:46.943	ID:15	[CSN:DEBUG] Reached bottom layer
+06:58.642	ID:5	[CSN:DEBUG] nothing child node
+06:58.820	ID:4	[CSN:DEBUG] received start child ring notice from 5
+06:58.825	ID:4	[CSN:DEBUG] start child process
+07:28.994	ID:4	[CSN:DEBUG] nothing child node
+07:29.121	ID:3	[CSN:DEBUG] received start child ring notice from 4
+07:29.126	ID:3	[CSN:DEBUG] start child process
+07:59.295	ID:3	[CSN:DEBUG] nothing child node
+07:59.459	ID:2	[CSN:DEBUG] received start child ring notice from 3
+07:59.464	ID:2	[CSN:DEBUG] start child process
+08:47.975	ID:2	[CSN:DEBUG] nothing child node
+12:35.560	ID:1	[DHT:DEBUG] start hash allocate process
+12:35.686	ID:1	[DHT:DEBUG] hash: 1f ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+12:35.795	ID:8	[DHT:DEBUG] Received allocate hash order from 1
+12:35.808	ID:8	[DHT:DEBUG] ===== hash info max, min, unit, child unit, child max, child min =====
+12:35.824	ID:8	[DHT:DEBUG] hash: 1f ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+12:35.837	ID:8	[DHT:DEBUG] hash: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:35.853	ID:8	[DHT:DEBUG] hash: 1f ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+12:35.866	ID:8	[DHT:DEBUG] hash: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:35.880	ID:8	[DHT:DEBUG] hash: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:35.894	ID:8	[DHT:DEBUG] hash: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:35.906	ID:8	[DHT:DEBUG] ===== ========================================================== =====
+12:36.124	ID:7	[DHT:DEBUG] Received allocate hash order from 8
+12:36.138	ID:7	[DHT:DEBUG] ===== hash info max, min, unit, child unit, child max, child min =====
+12:36.153	ID:7	[DHT:DEBUG] hash: 3f ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+12:36.167	ID:7	[DHT:DEBUG] hash: 20 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:36.182	ID:7	[DHT:DEBUG] hash: 1f ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+12:36.196	ID:7	[DHT:DEBUG] hash: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:36.210	ID:7	[DHT:DEBUG] hash: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:36.223	ID:7	[DHT:DEBUG] hash: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:36.235	ID:7	[DHT:DEBUG] ===== ========================================================== =====
+12:36.474	ID:6	[DHT:DEBUG] Received allocate hash order from 7
+12:36.487	ID:6	[DHT:DEBUG] ===== hash info max, min, unit, child unit, child max, child min =====
+12:36.503	ID:6	[DHT:DEBUG] hash: 5f ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+12:36.517	ID:6	[DHT:DEBUG] hash: 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:36.532	ID:6	[DHT:DEBUG] hash: 1f ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+12:36.546	ID:6	[DHT:DEBUG] hash: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:36.559	ID:6	[DHT:DEBUG] hash: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:36.573	ID:6	[DHT:DEBUG] hash: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:36.585	ID:6	[DHT:DEBUG] ===== ========================================================== =====
+12:36.937	ID:5	[DHT:DEBUG] Received allocate hash order from 6
+12:36.951	ID:5	[DHT:DEBUG] ===== hash info max, min, unit, child unit, child max, child min =====
+12:36.966	ID:5	[DHT:DEBUG] hash: 7f ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+12:36.980	ID:5	[DHT:DEBUG] hash: 60 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:36.995	ID:5	[DHT:DEBUG] hash: 1f ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+12:37.009	ID:5	[DHT:DEBUG] hash: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:37.023	ID:5	[DHT:DEBUG] hash: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:37.036	ID:5	[DHT:DEBUG] hash: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:37.048	ID:5	[DHT:DEBUG] ===== ========================================================== =====
+12:37.320	ID:4	[DHT:DEBUG] Received allocate hash order from 5
+12:37.334	ID:4	[DHT:DEBUG] ===== hash info max, min, unit, child unit, child max, child min =====
+12:37.349	ID:4	[DHT:DEBUG] hash: 9f ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+12:37.363	ID:4	[DHT:DEBUG] hash: 80 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:37.378	ID:4	[DHT:DEBUG] hash: 1f ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+12:37.392	ID:4	[DHT:DEBUG] hash: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:37.406	ID:4	[DHT:DEBUG] hash: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:37.419	ID:4	[DHT:DEBUG] hash: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:37.431	ID:4	[DHT:DEBUG] ===== ========================================================== =====
+12:37.623	ID:3	[DHT:DEBUG] Received allocate hash order from 4
+12:37.636	ID:3	[DHT:DEBUG] ===== hash info max, min, unit, child unit, child max, child min =====
+12:37.652	ID:3	[DHT:DEBUG] hash: bf ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+12:37.665	ID:3	[DHT:DEBUG] hash: a0 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:37.681	ID:3	[DHT:DEBUG] hash: 1f ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+12:37.694	ID:3	[DHT:DEBUG] hash: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:37.708	ID:3	[DHT:DEBUG] hash: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:37.722	ID:3	[DHT:DEBUG] hash: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:37.734	ID:3	[DHT:DEBUG] ===== ========================================================== =====
+12:37.962	ID:2	[DHT:DEBUG] Received allocate hash order from 3
+12:37.976	ID:2	[DHT:DEBUG] ===== hash info max, min, unit, child unit, child max, child min =====
+12:37.991	ID:2	[DHT:DEBUG] hash: df ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+12:38.005	ID:2	[DHT:DEBUG] hash: c0 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:38.021	ID:2	[DHT:DEBUG] hash: 1f ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+12:38.034	ID:2	[DHT:DEBUG] hash: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:38.048	ID:2	[DHT:DEBUG] hash: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:38.062	ID:2	[DHT:DEBUG] hash: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:38.073	ID:2	[DHT:DEBUG] ===== ========================================================== =====
+12:39.357	ID:1	[DHT:DEBUG] Received allocate hash order from ring tail: 2
+12:39.504	ID:1	[DHT:DEBUG] ===== hash info max, min, unit, child unit, child max, child min =====
+12:39.520	ID:1	[DHT:DEBUG] hash: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+12:39.533	ID:1	[DHT:DEBUG] hash: e0 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:39.549	ID:1	[DHT:DEBUG] hash: 1f ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+12:39.564	ID:1	[DHT:DEBUG] hash: 07 ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+12:39.580	ID:1	[DHT:DEBUG] hash: e7 ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+12:39.595	ID:1	[DHT:DEBUG] hash: e0 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:39.607	ID:1	[DHT:DEBUG] ===== ========================================================== =====
+12:39.681	ID:9	[DHT:DEBUG] Received allocate hash order from 1
+12:39.805	ID:9	[DHT:DEBUG] ===== hash info max, min, unit, child unit, child max, child min =====
+12:39.821	ID:9	[DHT:DEBUG] hash: ef ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+12:39.834	ID:9	[DHT:DEBUG] hash: e8 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:39.850	ID:9	[DHT:DEBUG] hash: 07 ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+12:39.865	ID:9	[DHT:DEBUG] hash: 03 ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+12:39.881	ID:9	[DHT:DEBUG] hash: eb ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+12:39.895	ID:9	[DHT:DEBUG] hash: e8 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:39.906	ID:9	[DHT:DEBUG] ===== ========================================================== =====
+12:40.175	ID:14	[DHT:DEBUG] Received allocate hash order from 9
+12:40.188	ID:14	[DHT:DEBUG] ===== hash info max, min, unit, child unit, child max, child min =====
+12:40.204	ID:14	[DHT:DEBUG] hash: ef ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+12:40.217	ID:14	[DHT:DEBUG] hash: ec 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:40.233	ID:14	[DHT:DEBUG] hash: 03 ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+12:40.246	ID:14	[DHT:DEBUG] hash: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:40.260	ID:14	[DHT:DEBUG] hash: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:40.274	ID:14	[DHT:DEBUG] hash: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:40.285	ID:14	[DHT:DEBUG] ===== ========================================================== =====
+12:40.414	ID:11	[DHT:DEBUG] Received allocate hash order from 9
+12:40.538	ID:11	[DHT:DEBUG] ===== hash info max, min, unit, child unit, child max, child min =====
+12:40.553	ID:11	[DHT:DEBUG] hash: f7 ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+12:40.567	ID:11	[DHT:DEBUG] hash: f0 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:40.583	ID:11	[DHT:DEBUG] hash: 07 ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+12:40.598	ID:11	[DHT:DEBUG] hash: 03 ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+12:40.614	ID:11	[DHT:DEBUG] hash: f3 ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+12:40.627	ID:11	[DHT:DEBUG] hash: f0 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:40.639	ID:11	[DHT:DEBUG] ===== ========================================================== =====
+12:40.861	ID:13	[DHT:DEBUG] Received allocate hash order from 11
+12:40.874	ID:13	[DHT:DEBUG] ===== hash info max, min, unit, child unit, child max, child min =====
+12:40.890	ID:13	[DHT:DEBUG] hash: f7 ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+12:40.903	ID:13	[DHT:DEBUG] hash: f4 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:40.919	ID:13	[DHT:DEBUG] hash: 03 ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+12:40.933	ID:13	[DHT:DEBUG] hash: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:40.946	ID:13	[DHT:DEBUG] hash: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:40.960	ID:13	[DHT:DEBUG] hash: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:40.972	ID:13	[DHT:DEBUG] ===== ========================================================== =====
+12:41.068	ID:12	[DHT:DEBUG] Received allocate hash order from 11
+12:41.192	ID:12	[DHT:DEBUG] ===== hash info max, min, unit, child unit, child max, child min =====
+12:41.208	ID:12	[DHT:DEBUG] hash: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+12:41.222	ID:12	[DHT:DEBUG] hash: f8 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:41.237	ID:12	[DHT:DEBUG] hash: 07 ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+12:41.253	ID:12	[DHT:DEBUG] hash: 03 ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+12:41.268	ID:12	[DHT:DEBUG] hash: fb ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+12:41.282	ID:12	[DHT:DEBUG] hash: f8 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:41.294	ID:12	[DHT:DEBUG] ===== ========================================================== =====
+12:41.435	ID:15	[DHT:DEBUG] Received allocate hash order from 12
+12:41.449	ID:15	[DHT:DEBUG] ===== hash info max, min, unit, child unit, child max, child min =====
+12:41.464	ID:15	[DHT:DEBUG] hash: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+12:41.478	ID:15	[DHT:DEBUG] hash: fc 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:41.493	ID:15	[DHT:DEBUG] hash: 03 ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+12:41.507	ID:15	[DHT:DEBUG] hash: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:41.521	ID:15	[DHT:DEBUG] hash: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:41.534	ID:15	[DHT:DEBUG] hash: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+12:41.546	ID:15	[DHT:DEBUG] ===== ========================================================== =====
+12:42.109	ID:1	[DHT:DEBUG] Received allocate hash order from ring tail: 12
+14:08.427	ID:9	[WL:DEBUG] start random search hash process
+14:08.435	ID:9	[WL:DEBUG] received start random query notification
+14:08.544	ID:8	[WL:DEBUG] start random search hash process
+14:08.552	ID:8	[WL:DEBUG] received start random query notification
+14:08.621	ID:7	[WL:DEBUG] start random search hash process
+14:08.629	ID:7	[WL:DEBUG] received start random query notification
+14:08.721	ID:6	[WL:DEBUG] start random search hash process
+14:08.728	ID:6	[WL:DEBUG] received start random query notification
+14:08.920	ID:14	[WL:DEBUG] start random search hash process
+14:08.927	ID:14	[WL:DEBUG] received start random query notification
+14:08.933	ID:5	[WL:DEBUG] start random search hash process
+14:08.940	ID:5	[WL:DEBUG] received start random query notification
+14:09.066	ID:4	[WL:DEBUG] start random search hash process
+14:09.074	ID:4	[WL:DEBUG] received start random query notification
+14:09.162	ID:11	[WL:DEBUG] start random search hash process
+14:09.170	ID:11	[WL:DEBUG] received start random query notification
+14:09.355	ID:13	[WL:DEBUG] start random search hash process
+14:09.363	ID:13	[WL:DEBUG] received start random query notification
+14:09.565	ID:12	[WL:DEBUG] start random search hash process
+14:09.573	ID:12	[WL:DEBUG] received start random query notification
+14:09.684	ID:15	[WL:DEBUG] start random search hash process
+14:09.692	ID:15	[WL:DEBUG] received start random query notification
+14:10.119	ID:3	[WL:DEBUG] start random search hash process
+14:10.126	ID:3	[WL:DEBUG] received start random query notification
+14:10.207	ID:2	[WL:DEBUG] start random search hash process
+14:10.215	ID:2	[WL:DEBUG] received start random query notification
+14:28.469	ID:9	 55462 P 9.0 0 81449 14090697 33641 60601 0 41997 81449 14090697 33641 60601 0 41997 (radio 0.66% / 0.66% tx 0.23% / 0.23% listen 0.42% / 0.42%)
+14:28.583	ID:8	 55510 P 8.0 0 42964 14141473 17759 49969 0 41696 42964 14141473 17759 49969 0 41696 (radio 0.47% / 0.47% tx 0.12% / 0.12% listen 0.35% / 0.35%)
+14:28.662	ID:7	 55494 P 7.0 0 39575 14140769 16462 50396 0 42488 39575 14140769 16462 50396 0 42488 (radio 0.47% / 0.47% tx 0.11% / 0.11% listen 0.35% / 0.35%)
+14:28.761	ID:6	 55510 P 6.0 0 43737 14140702 18344 51479 0 42323 43737 14140702 18344 51479 0 42323 (radio 0.49% / 0.49% tx 0.12% / 0.12% listen 0.36% / 0.36%)
+14:28.960	ID:14	 55510 P 14.0 0 19354 14165084 7915 46927 0 41834 19354 14165084 7915 46927 0 41834 (radio 0.38% / 0.38% tx 0.05% / 0.05% listen 0.33% / 0.33%)
+14:28.961	ID:5	 55493 P 5.0 0 44365 14135727 19615 51319 0 41877 44365 14135727 19615 51319 0 41877 (radio 0.50% / 0.50% tx 0.13% / 0.13% listen 0.36% / 0.36%)
+14:29.095	ID:4	 55525 P 4.0 0 42452 14145824 18559 52396 0 42262 42452 14145824 18559 52396 0 42262 (radio 0.50% / 0.50% tx 0.13% / 0.13% listen 0.36% / 0.36%)
+14:29.201	ID:11	 55542 P 11.0 0 57990 14134629 27825 58477 0 43676 57990 14134629 27825 58477 0 43676 (radio 0.60% / 0.60% tx 0.19% / 0.19% listen 0.41% / 0.41%)
+14:29.394	ID:13	 55510 P 13.0 0 23405 14161034 10890 48620 0 42017 23405 14161034 10890 48620 0 42017 (radio 0.41% / 0.41% tx 0.07% / 0.07% listen 0.34% / 0.34%)
+14:29.605	ID:12	 55542 P 12.0 0 40559 14152069 18202 52680 0 42751 40559 14152069 18202 52680 0 42751 (radio 0.49% / 0.49% tx 0.12% / 0.12% listen 0.37% / 0.37%)
+14:29.722	ID:15	 55558 P 15.0 0 10119 14186609 2379 44177 0 42106 10119 14186609 2379 44177 0 42106 (radio 0.32% / 0.32% tx 0.01% / 0.01% listen 0.31% / 0.31%)
+14:30.160	ID:3	 55558 P 3.0 0 36377 14160348 16454 50118 0 42352 36377 14160348 16454 50118 0 42352 (radio 0.46% / 0.46% tx 0.11% / 0.11% listen 0.35% / 0.35%)
+14:30.246	ID:2	 55606 P 2.0 0 31609 14177414 15844 50996 0 42801 31609 14177414 15844 50996 0 42801 (radio 0.47% / 0.47% tx 0.11% / 0.11% listen 0.35% / 0.35%)
+14:48.464	ID:9	 56742 P 9.0 1 82130 14417695 33641 61561 0 42957 680 326998 0 960 0 960 (radio 0.65% / 0.29% tx 0.23% / 0.00% listen 0.42% / 0.29%)
+14:48.578	ID:8	 56790 P 8.0 1 43645 14468472 17759 50929 0 42656 680 326999 0 960 0 960 (radio 0.47% / 0.29% tx 0.12% / 0.00% listen 0.35% / 0.29%)
+14:48.657	ID:7	 56774 P 7.0 1 40258 14467765 16462 51356 0 43448 682 326996 0 960 0 960 (radio 0.46% / 0.29% tx 0.11% / 0.00% listen 0.35% / 0.29%)
+14:48.756	ID:6	 56790 P 6.0 1 44418 14467700 18344 52439 0 43283 680 326998 0 960 0 960 (radio 0.48% / 0.29% tx 0.12% / 0.00% listen 0.36% / 0.29%)
+14:48.955	ID:14	 56790 P 14.0 1 20023 14492095 7915 47887 0 42794 668 327011 0 960 0 960 (radio 0.38% / 0.29% tx 0.05% / 0.00% listen 0.32% / 0.29%)
+14:48.956	ID:5	 56773 P 5.0 1 45074 14462698 19615 52279 0 42837 708 326971 0 960 0 960 (radio 0.49% / 0.29% tx 0.13% / 0.00% listen 0.36% / 0.29%)
+14:49.090	ID:4	 56805 P 4.0 1 43161 14472795 18559 53356 0 43222 708 326971 0 960 0 960 (radio 0.49% / 0.29% tx 0.12% / 0.00% listen 0.36% / 0.29%)
+14:49.196	ID:11	 56822 P 11.0 1 58676 14461623 27825 59437 0 44636 685 326994 0 960 0 960 (radio 0.60% / 0.29% tx 0.19% / 0.00% listen 0.40% / 0.29%)
+14:49.389	ID:13	 56790 P 13.0 1 24088 14488031 10890 49580 0 42977 682 326997 0 960 0 960 (radio 0.41% / 0.29% tx 0.07% / 0.00% listen 0.34% / 0.29%)
+14:49.600	ID:12	 56822 P 12.0 1 41245 14479063 18202 53640 0 43711 685 326994 0 960 0 960 (radio 0.49% / 0.29% tx 0.12% / 0.00% listen 0.36% / 0.29%)
+14:49.718	ID:15	 56838 P 15.0 1 10788 14513620 2379 45137 0 43066 668 327011 0 960 0 960 (radio 0.32% / 0.29% tx 0.01% / 0.00% listen 0.31% / 0.29%)
+14:50.155	ID:3	 56838 P 3.0 1 37059 14487346 16454 51078 0 43312 681 326998 0 960 0 960 (radio 0.46% / 0.29% tx 0.11% / 0.00% listen 0.35% / 0.29%)
+14:50.241	ID:2	 56886 P 2.0 1 32291 14504412 15844 51956 0 43761 681 326998 0 960 0 960 (radio 0.46% / 0.29% tx 0.10% / 0.00% listen 0.35% / 0.29%)
+14:55.582	ID:12	[DHT:DEBUG] hash: 99 31 76 4e 74 6c f9 7c 6a da c4 6f 41 cf f7 5b 7b 5f 79 34 
+14:57.072	ID:4	[WL:DEBUG] key not hit...
+14:57.087	ID:4	[WL:DEBUG] Refferer 12 11 9 1 8 7 6 5 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+14:58.320	ID:12	[WL:DEBUG] received query result from 11
+15:08.466	ID:9	 58022 P 9.0 2 89490 14738013 36682 64245 0 44082 7359 320318 3041 2684 0 1125 (radio 0.68% / 1.74% tx 0.24% / 0.92% listen 0.43% / 0.81%)
+15:08.580	ID:8	 58070 P 8.0 2 46604 14793191 18321 52717 0 43781 2958 324719 562 1788 0 1125 (radio 0.47% / 0.71% tx 0.12% / 0.17% listen 0.35% / 0.54%)
+15:08.659	ID:7	 58054 P 7.0 2 49490 14786211 20249 54207 0 44561 9231 318446 3787 2851 0 1113 (radio 0.50% / 2.02% tx 0.13% / 1.15% listen 0.36% / 0.87%)
+15:08.759	ID:6	 58070 P 6.0 2 51165 14788631 21446 55074 0 44408 6746 320931 3102 2635 0 1125 (radio 0.51% / 1.75% tx 0.14% / 0.94% listen 0.37% / 0.80%)
+15:08.955	ID:14	 58070 P 14.0 2 20617 14819181 7915 48847 0 43754 593 327086 0 960 0 960 (radio 0.38% / 0.29% tx 0.05% / 0.00% listen 0.32% / 0.29%)
+15:08.959	ID:5	 58053 P 5.0 2 52585 14782865 22780 54818 0 43773 7510 320167 3165 2539 0 936 (radio 0.52% / 1.74% tx 0.15% / 0.96% listen 0.36% / 0.77%)
+15:09.092	ID:4	 58085 P 4.0 2 45766 14797869 19056 54916 0 44359 2604 325074 497 1560 0 1137 (radio 0.49% / 0.62% tx 0.12% / 0.15% listen 0.36% / 0.47%)
+15:09.198	ID:11	 58102 P 11.0 2 66270 14781706 31797 62238 0 45566 7593 320083 3972 2801 0 930 (radio 0.63% / 2.06% tx 0.21% / 1.21% listen 0.41% / 0.85%)
+15:09.390	ID:13	 58070 P 13.0 2 24690 14815109 10890 50735 0 44132 601 327078 0 1155 0 1155 (radio 0.41% / 0.35% tx 0.07% / 0.00% listen 0.34% / 0.35%)
+15:09.602	ID:12	 58102 P 12.0 2 43599 14804389 18637 55173 0 44848 2353 325326 435 1533 0 1137 (radio 0.49% / 0.60% tx 0.12% / 0.13% listen 0.37% / 0.46%)
+15:09.718	ID:15	 58118 P 15.0 2 11382 14840706 2379 46097 0 44026 593 327086 0 960 0 960 (radio 0.32% / 0.29% tx 0.01% / 0.00% listen 0.31% / 0.29%)
+15:10.155	ID:3	 58118 P 3.0 2 37658 14814427 16454 52038 0 44272 598 327081 0 960 0 960 (radio 0.46% / 0.29% tx 0.11% / 0.00% listen 0.35% / 0.29%)
+15:10.242	ID:2	 58166 P 2.0 2 32890 14831493 15844 53105 0 44910 598 327081 0 1149 0 1149 (radio 0.46% / 0.35% tx 0.10% / 0.00% listen 0.35% / 0.35%)
+15:28.464	ID:9	 59302 P 9.0 3 90130 15065052 36682 65205 0 45042 639 327039 0 960 0 960 (radio 0.67% / 0.29% tx 0.24% / 0.00% listen 0.43% / 0.29%)
+15:28.578	ID:8	 59350 P 8.0 3 47239 15120236 18321 53677 0 44741 634 327045 0 960 0 960 (radio 0.47% / 0.29% tx 0.12% / 0.00% listen 0.35% / 0.29%)
+15:28.657	ID:7	 59334 P 7.0 3 50129 15113252 20249 55167 0 45521 638 327041 0 960 0 960 (radio 0.49% / 0.29% tx 0.13% / 0.00% listen 0.36% / 0.29%)
+15:28.756	ID:6	 59350 P 6.0 3 51807 15115668 21446 56034 0 45368 641 327037 0 960 0 960 (radio 0.51% / 0.29% tx 0.14% / 0.00% listen 0.36% / 0.29%)
+15:28.955	ID:14	 59350 P 14.0 3 21211 15146267 7915 49807 0 44714 593 327086 0 960 0 960 (radio 0.38% / 0.29% tx 0.05% / 0.00% listen 0.32% / 0.29%)
+15:28.956	ID:5	 59333 P 5.0 3 53245 15109884 22780 55778 0 44733 659 327019 0 960 0 960 (radio 0.51% / 0.29% tx 0.15% / 0.00% listen 0.36% / 0.29%)
+15:29.090	ID:4	 59365 P 4.0 3 46426 15124889 19056 55876 0 45319 659 327020 0 960 0 960 (radio 0.49% / 0.29% tx 0.12% / 0.00% listen 0.36% / 0.29%)
+15:29.196	ID:11	 59382 P 11.0 3 66906 15108750 31797 63198 0 46526 635 327044 0 960 0 960 (radio 0.62% / 0.29% tx 0.20% / 0.00% listen 0.41% / 0.29%)
+15:29.389	ID:13	 59350 P 13.0 3 25305 15142174 10890 51695 0 45092 614 327065 0 960 0 960 (radio 0.41% / 0.29% tx 0.07% / 0.00% listen 0.34% / 0.29%)
+15:29.600	ID:12	 59382 P 12.0 3 44237 15131430 18637 56133 0 45808 637 327041 0 960 0 960 (radio 0.49% / 0.29% tx 0.12% / 0.00% listen 0.36% / 0.29%)
+15:29.718	ID:15	 59398 P 15.0 3 11976 15167792 2379 47057 0 44986 593 327086 0 960 0 960 (radio 0.32% / 0.29% tx 0.01% / 0.00% listen 0.30% / 0.29%)
+15:30.155	ID:3	 59398 P 3.0 3 38257 15141508 16454 52998 0 45232 598 327081 0 960 0 960 (radio 0.45% / 0.29% tx 0.10% / 0.00% listen 0.34% / 0.29%)
+15:30.241	ID:2	 59446 P 2.0 3 33502 15158561 15844 54065 0 45870 611 327068 0 960 0 960 (radio 0.46% / 0.29% tx 0.10% / 0.00% listen 0.35% / 0.29%)
+15:37.629	ID:12	[DHT:DEBUG] hash: b5 7d a7 06 8b 52 34 ef 8f 75 48 a7 64 98 e6 c2 6f 30 d6 94 
+15:39.871	ID:3	[WL:DEBUG] key not hit...
+15:39.887	ID:3	[WL:DEBUG] Refferer 12 12 11 9 1 8 7 6 5 4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+15:41.570	ID:12	[WL:DEBUG] received query result from 11
+15:48.466	ID:9	 60582 P 9.0 4 97491 15385369 39350 67766 0 46167 7360 320317 2668 2561 0 1125 (radio 0.69% / 1.59% tx 0.25% / 0.81% listen 0.43% / 0.78%)
+15:48.581	ID:8	 60630 P 8.0 4 58454 15436699 22663 56770 0 45842 11214 316463 4342 3093 0 1101 (radio 0.51% / 2.26% tx 0.14% / 1.32% listen 0.36% / 0.94%)
+15:48.660	ID:7	 60614 P 7.0 4 59288 15431771 23847 57999 0 46640 9158 318519 3598 2832 0 1119 (radio 0.52% / 1.96% tx 0.15% / 1.09% listen 0.37% / 0.86%)
+15:48.758	ID:6	 60630 P 6.0 4 58471 15436681 24115 58328 0 46304 6663 321013 2669 2294 0 936 (radio 0.53% / 1.51% tx 0.15% / 0.81% listen 0.37% / 0.70%)
+15:48.955	ID:14	 60630 P 14.0 4 21805 15473353 7915 50767 0 45674 593 327086 0 960 0 960 (radio 0.37% / 0.29% tx 0.05% / 0.00% listen 0.32% / 0.29%)
+15:48.959	ID:5	 60613 P 5.0 4 60839 15429967 25944 58448 0 45858 7593 320083 3164 2670 0 1125 (radio 0.54% / 1.78% tx 0.16% / 0.96% listen 0.37% / 0.81%)
+15:49.092	ID:4	 60645 P 4.0 4 53953 15445039 22035 58535 0 46438 7526 320150 2979 2659 0 1119 (radio 0.51% / 1.72% tx 0.14% / 0.90% listen 0.37% / 0.81%)
+15:49.198	ID:11	 60662 P 11.0 4 74513 15428821 35769 66003 0 47450 7606 320071 3972 2805 0 924 (radio 0.65% / 2.06% tx 0.23% / 1.21% listen 0.42% / 0.85%)
+15:49.390	ID:13	 60630 P 13.0 4 25907 15469252 10890 52850 0 46247 601 327078 0 1155 0 1155 (radio 0.41% / 0.35% tx 0.07% / 0.00% listen 0.34% / 0.35%)
+15:49.603	ID:12	 60662 P 12.0 4 49907 15453440 21490 58500 0 46933 5669 322010 2853 2367 0 1125 (radio 0.51% / 1.59% tx 0.13% / 0.87% listen 0.37% / 0.72%)
+15:49.718	ID:15	 60678 P 15.0 4 12570 15494878 2379 48206 0 46135 593 327086 0 1149 0 1149 (radio 0.32% / 0.35% tx 0.01% / 0.00% listen 0.31% / 0.35%)
+15:50.157	ID:3	 60678 P 3.0 4 42219 15465225 18129 54754 0 46180 3961 323717 1675 1756 0 948 (radio 0.46% / 1.04% tx 0.11% / 0.51% listen 0.35% / 0.53%)
+15:50.242	ID:2	 60726 P 2.0 4 34101 15485642 15844 55403 0 47208 598 327081 0 1338 0 1338 (radio 0.45% / 0.40% tx 0.10% / 0.00% listen 0.35% / 0.40%)
+16:07.675	ID:12	[DHT:DEBUG] hash: 23 a2 4c b3 d3 d7 99 55 b5 23 20 00 4a 99 c3 a7 d6 0f 2a 00 
+16:08.466	ID:9	 61862 P 9.0 5 101049 15709490 39599 69225 0 47103 3557 324121 249 1459 0 936 (radio 0.68% / 0.52% tx 0.25% / 0.07% listen 0.43% / 0.44%)
+16:08.657	ID:7	 61894 P 7.0 5 59929 15758810 23847 58959 0 47600 640 327039 0 960 0 960 (radio 0.52% / 0.29% tx 0.15% / 0.00% listen 0.37% / 0.29%)
+16:08.756	ID:6	 61910 P 6.0 5 59107 15763725 24115 59288 0 47264 635 327044 0 960 0 960 (radio 0.52% / 0.29% tx 0.15% / 0.00% listen 0.37% / 0.29%)
+16:08.877	ID:7	[WL:DEBUG] key not hit...
+16:08.893	ID:7	[WL:DEBUG] Refferer 12 12 12 11 9 1 8 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+16:08.912	ID:8	 61931 P 8.0 5 64570 15763690 25329 58905 0 46790 6115 326991 2666 2135 0 948 (radio 0.53% / 1.44% tx 0.16% / 0.80% listen 0.37% / 0.64%)
+16:08.955	ID:14	 61910 P 14.0 5 22399 15800439 7915 51727 0 46634 593 327086 0 960 0 960 (radio 0.37% / 0.29% tx 0.05% / 0.00% listen 0.32% / 0.29%)
+16:08.956	ID:5	 61893 P 5.0 5 61506 15756980 25944 59408 0 46818 666 327013 0 960 0 960 (radio 0.53% / 0.29% tx 0.16% / 0.00% listen 0.37% / 0.29%)
+16:09.090	ID:4	 61925 P 4.0 5 54620 15772052 22035 59495 0 47398 666 327013 0 960 0 960 (radio 0.51% / 0.29% tx 0.13% / 0.00% listen 0.37% / 0.29%)
+16:09.198	ID:11	 61942 P 11.0 5 79582 15751431 38437 68130 0 48386 5068 322610 2668 2127 0 936 (radio 0.67% / 1.46% tx 0.24% / 0.81% listen 0.43% / 0.64%)
+16:09.390	ID:13	 61910 P 13.0 5 26522 15796317 10890 54005 0 47402 614 327065 0 1155 0 1155 (radio 0.41% / 0.35% tx 0.06% / 0.00% listen 0.34% / 0.35%)
+16:09.602	ID:12	 61942 P 12.0 5 54710 15776316 23785 60513 0 48070 4802 322876 2295 2013 0 1137 (radio 0.53% / 1.31% tx 0.15% / 0.70% listen 0.38% / 0.61%)
+16:09.718	ID:15	 61958 P 15.0 5 13178 15821949 2379 49166 0 47095 607 327071 0 960 0 960 (radio 0.32% / 0.29% tx 0.01% / 0.00% listen 0.31% / 0.29%)
+16:09.820	ID:12	[WL:DEBUG] received query result from 11
+16:10.155	ID:3	 61958 P 3.0 5 42852 15792271 18129 55714 0 47140 632 327046 0 960 0 960 (radio 0.46% / 0.29% tx 0.11% / 0.00% listen 0.35% / 0.29%)
+16:10.242	ID:2	 62006 P 2.0 5 34713 15812710 15844 56552 0 48357 611 327068 0 1149 0 1149 (radio 0.45% / 0.35% tx 0.09% / 0.00% listen 0.35% / 0.35%)
+16:28.467	ID:9	 63142 P 9.0 6 105542 16032675 41274 71016 0 48252 4492 323185 1675 1789 0 1149 (radio 0.69% / 1.05% tx 0.25% / 0.51% listen 0.44% / 0.54%)
+16:28.580	ID:8	 63190 P 8.0 6 70356 16080156 27748 60899 0 47714 5784 316466 2419 1994 0 924 (radio 0.54% / 1.36% tx 0.17% / 0.75% listen 0.37% / 0.61%)
+16:28.659	ID:7	 63174 P 7.0 6 63327 16083091 25150 60619 0 48554 3397 324281 1303 1660 0 954 (radio 0.53% / 0.90% tx 0.15% / 0.39% listen 0.37% / 0.50%)
+16:28.757	ID:6	 63190 P 6.0 6 59706 16090806 24115 60437 0 48413 598 327081 0 1149 0 1149 (radio 0.52% / 0.35% tx 0.14% / 0.00% listen 0.37% / 0.35%)
+16:28.955	ID:14	 63190 P 14.0 6 22993 16127525 7915 52687 0 47594 593 327086 0 960 0 960 (radio 0.37% / 0.29% tx 0.04% / 0.00% listen 0.32% / 0.29%)
+16:28.956	ID:5	 63173 P 5.0 6 62132 16084034 25944 60368 0 47778 625 327054 0 960 0 960 (radio 0.53% / 0.29% tx 0.16% / 0.00% listen 0.37% / 0.29%)
+16:29.090	ID:4	 63205 P 4.0 6 55246 16099106 22035 60455 0 48358 625 327054 0 960 0 960 (radio 0.51% / 0.29% tx 0.13% / 0.00% listen 0.37% / 0.29%)
+16:29.198	ID:11	 63222 P 11.0 6 82788 16075904 39740 69776 0 49334 3205 324473 1303 1646 0 948 (radio 0.67% / 0.89% tx 0.24% / 0.39% listen 0.43% / 0.50%)
+16:29.389	ID:13	 63190 P 13.0 6 27137 16123382 10890 54965 0 48362 614 327065 0 960 0 960 (radio 0.40% / 0.29% tx 0.06% / 0.00% listen 0.34% / 0.29%)
+16:29.600	ID:12	 63222 P 12.0 6 55499 16103206 23785 61634 0 49018 788 326890 0 1121 0 948 (radio 0.52% / 0.34% tx 0.14% / 0.00% listen 0.38% / 0.34%)
+16:29.718	ID:15	 63238 P 15.0 6 13772 16149035 2379 50126 0 48055 593 327086 0 960 0 960 (radio 0.32% / 0.29% tx 0.01% / 0.00% listen 0.31% / 0.29%)
+16:30.155	ID:3	 63238 P 3.0 6 43451 16119352 18129 56674 0 48100 598 327081 0 960 0 960 (radio 0.46% / 0.29% tx 0.11% / 0.00% listen 0.35% / 0.29%)
+16:30.241	ID:2	 63286 P 2.0 6 35323 16139780 15844 57512 0 49317 609 327070 0 960 0 960 (radio 0.45% / 0.29% tx 0.09% / 0.00% listen 0.35% / 0.29%)
+16:48.464	ID:9	 64422 P 9.0 7 106190 16359707 41274 71976 0 49212 647 327032 0 960 0 960 (radio 0.68% / 0.29% tx 0.25% / 0.00% listen 0.43% / 0.29%)
+16:48.578	ID:8	 64470 P 8.0 7 70991 16407201 27748 61859 0 48674 634 327045 0 960 0 960 (radio 0.54% / 0.29% tx 0.16% / 0.00% listen 0.37% / 0.29%)
+16:48.657	ID:7	 64454 P 7.0 7 63963 16410135 25150 61579 0 49514 635 327044 0 960 0 960 (radio 0.52% / 0.29% tx 0.15% / 0.00% listen 0.37% / 0.29%)
+16:48.756   ID:6     64470 P 6.0 7 60318 16417874 24115 61397 0 49373 611 327068 0 960 0 960 (radio 0.51% / 0.29% tx 0.14% / 0.00% listen 0.37% / 0.29%)
+16:48.955	ID:14	 64470 P 14.0 7 23587 16454611 7915 53647 0 48554 593 327086 0 960 0 960 (radio 0.37% / 0.29% tx 0.04% / 0.00% listen 0.32% / 0.29%)
+16:48.956	ID:5	 64453 P 5.0 7 62758 16411088 25944 61328 0 48738 625 327054 0 960 0 960 (radio 0.52% / 0.29% tx 0.15% / 0.00% listen 0.37% / 0.29%)
+16:49.090	ID:4	 64485 P 4.0 7 55872 16426160 22035 61415 0 49318 625 327054 0 960 0 960 (radio 0.50% / 0.29% tx 0.13% / 0.00% listen 0.37% / 0.29%)
+16:49.196	ID:11	 64502 P 11.0 7 83426 16402946 39740 70736 0 50294 637 327042 0 960 0 960 (radio 0.67% / 0.29% tx 0.24% / 0.00% listen 0.42% / 0.29%)
+16:49.389	ID:13	 64470 P 13.0 7 27739 16450460 10890 55925 0 49322 601 327078 0 960 0 960 (radio 0.40% / 0.29% tx 0.06% / 0.00% listen 0.33% / 0.29%)
+16:49.600	ID:12	 64502 P 12.0 7 56110 16430275 23785 62594 0 49978 610 327069 0 960 0 960 (radio 0.52% / 0.29% tx 0.14% / 0.00% listen 0.37% / 0.29%)
+16:49.718	ID:15	 64518 P 15.0 7 14366 16476121 2379 51086 0 49015 593 327086 0 960 0 960 (radio 0.32% / 0.29% tx 0.01% / 0.00% listen 0.30% / 0.29%)
+16:49.722	ID:12	[DHT:DEBUG] hash: db bf ea b2 82 31 2a 61 c9 b3 44 04 18 ba fe ec 8f 7a dc 30 
+16:50.155	ID:3	 64518 P 3.0 7 44050 16446433 18129 57634 0 49060 598 327081 0 960 0 960 (radio 0.45% / 0.29% tx 0.10% / 0.00% listen 0.34% / 0.29%)
+16:50.241	ID:2	 64566 P 2.0 7 35920 16466863 15844 58472 0 50277 596 327083 0 960 0 960 (radio 0.45% / 0.29% tx 0.09% / 0.00% listen 0.35% / 0.29%)
+16:51.959	ID:2	[WL:DEBUG] key not hit...
+16:51.976	ID:2	[WL:DEBUG] Refferer 12 12 12 12 11 9 1 8 7 6 5 4 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+16:53.820	ID:12	[WL:DEBUG] received query result from 11
+17:08.467	ID:9	 65702 P 9.0 8 113565 16680010 43570 74396 0 50337 7374 320303 2296 2420 0 1125 (radio 0.70% / 1.43% tx 0.25% / 0.70% listen 0.44% / 0.73%)
+17:08.581	ID:8	 65750 P 8.0 8 82196 16723674 33580 65475 0 49775 11204 316473 5832 3616 0 1101 (radio 0.58% / 2.88% tx 0.19% / 1.77% listen 0.38% / 1.10%)
+17:08.660	ID:7	 65734 P 7.0 8 73123 16728653 28190 64215 0 50633 9159 318518 3040 2636 0 1119 (radio 0.54% / 1.73% tx 0.16% / 0.92% listen 0.38% / 0.80%)
+17:08.758	ID:6	 65750 P 6.0 8 66985 16738885 26783 63691 0 50309 6666 321011 2668 2294 0 936 (radio 0.53% / 1.51% tx 0.15% / 0.81% listen 0.37% / 0.70%)
+17:08.955	ID:14	 65750 P 14.0 8 24181 16781697 7915 54607 0 49514 593 327086 0 960 0 960 (radio 0.37% / 0.29% tx 0.04% / 0.00% listen 0.32% / 0.29%)
+17:08.959	ID:5	 65733 P 5.0 8 70348 16731176 29855 64262 0 49863 7589 320088 3911 2934 0 1125 (radio 0.56% / 2.08% tx 0.17% / 1.19% listen 0.38% / 0.89%)
+17:09.092	ID:4	 65765 P 4.0 8 63400 16746310 25760 64338 0 50437 7527 320150 3725 2923 0 1119 (radio 0.53% / 2.02% tx 0.15% / 1.13% listen 0.38% / 0.89%)
+17:09.198	ID:11	 65782 P 11.0 8 91019 16723030 43710 73554 0 51218 7592 320084 3970 2818 0 924 (radio 0.69% / 2.07% tx 0.25% / 1.21% listen 0.43% / 0.85%)
+17:09.390	ID:13	 65750 P 13.0 8 28341 16777538 10890 57080 0 50477 601 327078 0 1155 0 1155 (radio 0.40% / 0.35% tx 0.06% / 0.00% listen 0.33% / 0.35%)
+17:09.602	ID:12	 65782 P 12.0 8 60247 16753818 25523 64572 0 51103 4136 323543 1738 1978 0 1125 (radio 0.53% / 1.13% tx 0.15% / 0.53% listen 0.38% / 0.60%)
+17:09.718	ID:15	 65798 P 15.0 8 14960 16803207 2379 52046 0 49975 593 327086 0 960 0 960 (radio 0.32% / 0.29% tx 0.01% / 0.00% listen 0.30% / 0.29%)
+17:10.157	ID:3	 65798 P 3.0 8 49457 16768703 20487 59864 0 50002 5406 322270 2358 2230 0 942 (radio 0.47% / 1.40% tx 0.12% / 0.71% listen 0.35% / 0.68%)
+17:10.244	ID:2	 65846 P 2.0 8 39262 16791200 16899 60410 0 51603 3341 324337 1055 1938 0 1326 (radio 0.45% / 0.91% tx 0.10% / 0.32% listen 0.35% / 0.59%)
+17:28.464	ID:9	 66982 P 9.0 9 114215 17007040 43570 75356 0 51297 649 327030 0 960 0 960 (radio 0.69% / 0.29% tx 0.25% / 0.00% listen 0.44% / 0.29%)
+17:28.578	ID:8	 67030 P 8.0 9 82843 17050706 33580 66435 0 50735 646 327032 0 960 0 960 (radio 0.58% / 0.29% tx 0.19% / 0.00% listen 0.38% / 0.29%)
+17:28.657	ID:7	 67014 P 7.0 9 73763 17055692 28190 65175 0 51593 639 327039 0 960 0 960 (radio 0.54% / 0.29% tx 0.16% / 0.00% listen 0.38% / 0.29%)
+17:28.756	ID:6	 67030 P 6.0 9 67620 17065930 26783 64651 0 51269 634 327045 0 960 0 960 (radio 0.53% / 0.29% tx 0.15% / 0.00% listen 0.37% / 0.29%)
+17:28.955	ID:14	 67030 P 14.0 9 24775 17108783 7915 55567 0 50474 593 327086 0 960 0 960 (radio 0.37% / 0.29% tx 0.04% / 0.00% listen 0.32% / 0.29%)
+17:28.956	ID:5	 67013 P 5.0 9 71014 17058190 29855 65222 0 50823 665 327014 0 960 0 960 (radio 0.55% / 0.29% tx 0.17% / 0.00% listen 0.38% / 0.29%)
+17:29.090	ID:4	 67045 P 4.0 9 64066 17073324 25760 65298 0 51397 665 327014 0 960 0 960 (radio 0.53% / 0.29% tx 0.15% / 0.00% listen 0.38% / 0.29%)
+17:29.196	ID:11	 67062 P 11.0 9 91655 17050074 43710 74514 0 52178 635 327044 0 960 0 960 (radio 0.68% / 0.29% tx 0.25% / 0.00% listen 0.43% / 0.29%)
+17:29.389	ID:13	 67030 P 13.0 9 28956 17104603 10890 58040 0 51437 614 327065 0 960 0 960 (radio 0.40% / 0.29% tx 0.06% / 0.00% listen 0.33% / 0.29%)
+17:29.600	ID:12	 67062 P 12.0 9 60893 17080852 25523 65532 0 52063 645 327034 0 960 0 960 (radio 0.53% / 0.29% tx 0.14% / 0.00% listen 0.38% / 0.29%)
+17:29.718	ID:15	 67078 P 15.0 9 15554 17130293 2379 53006 0 50935 593 327086 0 960 0 960 (radio 0.32% / 0.29% tx 0.01% / 0.00% listen 0.30% / 0.29%)
+17:30.155	ID:3	 67078 P 3.0 9 50092 17095748 20487 60824 0 50962 634 327045 0 960 0 960 (radio 0.47% / 0.29% tx 0.11% / 0.00% listen 0.35% / 0.29%)
+17:30.241	ID:2	 67126 P 2.0 9 39902 17118240 16899 61370 0 52563 639 327040 0 960 0 960 (radio 0.45% / 0.29% tx 0.09% / 0.00% listen 0.35% / 0.29%)
+17:43.769	ID:12	[DHT:DEBUG] hash: 19 9f e9 28 46 82 04 d1 75 20 0b 87 ed 4c a3 fe b0 9b 33 aa 
+17:44.546	ID:8	[WL:DEBUG] key not hit...
+17:44.562	ID:8	[WL:DEBUG] Refferer 12 12 12 12 12 11 9 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+17:45.320	ID:12	[WL:DEBUG] received query result from 11
+17:48.467	ID:9	 68262 P 9.0 10 121591 17327342 45496 77644 0 52422 7375 320302 1926 2288 0 1125 (radio 0.70% / 1.28% tx 0.26% / 0.58% listen 0.44% / 0.69%)
+17:48.581	ID:8	 68310 P 8.0 10 88567 17372661 36558 68657 0 51671 5723 321955 2978 2222 0 936 (radio 0.60% / 1.58% tx 0.20% / 0.90% listen 0.39% / 0.67%)
+17:48.658	ID:7	 68294 P 7.0 10 74362 17382773 28190 66324 0 52742 598 327081 0 1149 0 1149 (radio 0.54% / 0.35% tx 0.16% / 0.00% listen 0.37% / 0.35%)
+17:48.756	ID:6	 68310 P 6.0 10 68219 17393011 26783 65611 0 52229 598 327081 0 960 0 960 (radio 0.52% / 0.29% tx 0.15% / 0.00% listen 0.37% / 0.29%)
+17:48.956	ID:14	 68310 P 14.0 10 25369 17435869 7915 56527 0 51434 593 327086 0 960 0 960 (radio 0.36% / 0.29% tx 0.04% / 0.00% listen 0.32% / 0.29%)
+17:48.957	ID:5	 68293 P 5.0 10 71640 17385244 29855 66182 0 51783 625 327054 0 960 0 960 (radio 0.55% / 0.29% tx 0.17% / 0.00% listen 0.37% / 0.29%)
+17:49.090	ID:4	 68325 P 4.0 10 64690 17400380 25760 66258 0 52357 623 327056 0 960 0 960 (radio 0.52% / 0.29% tx 0.14% / 0.00% listen 0.37% / 0.29%)
+17:49.199	ID:11	 68342 P 11.0 10 99335 17370071 47866 77314 0 53102 7679 319997 4156 2800 0 924 (radio 0.71% / 2.12% tx 0.27% / 1.26% listen 0.44% / 0.85%)
+17:49.391	ID:13	 68310 P 13.0 10 29558 17431681 10890 59195 0 52592 601 327078 0 1155 0 1155 (radio 0.40% / 0.35% tx 0.06% / 0.00% listen 0.33% / 0.35%)
+17:49.603	ID:12	 68342 P 12.0 10 64184 17405241 26641 67293 0 53188 3290 324389 1118 1761 0 1125 (radio 0.53% / 0.87% tx 0.15% / 0.34% listen 0.38% / 0.53%)
+17:49.718	ID:15	 68358 P 15.0 10 16148 17457379 2379 53966 0 51895 593 327086 0 960 0 960 (radio 0.32% / 0.29% tx 0.01% / 0.00% listen 0.30% / 0.29%)
+17:50.155	ID:3	 68358 P 3.0 10 50691 17422829 20487 61784 0 51922 598 327081 0 960 0 960 (radio 0.47% / 0.29% tx 0.11% / 0.00% listen 0.35% / 0.29%)
+17:50.243	ID:2	 68406 P 2.0 10 40499 17445323 16899 62519 0 53712 596 327083 0 1149 0 1149 (radio 0.45% / 0.35% tx 0.09% / 0.00% listen 0.35% / 0.35%)
+18:08.465	ID:9	 69542 P 9.0 11 122246 17654367 45496 78604 0 53382 654 327025 0 960 0 960 (radio 0.69% / 0.29% tx 0.25% / 0.00% listen 0.44% / 0.29%)
+18:08.578	ID:8	 69590 P 8.0 11 89209 17699698 36558 69617 0 52631 641 327037 0 960 0 960 (radio 0.59% / 0.29% tx 0.20% / 0.00% listen 0.39% / 0.29%)
+18:08.657	ID:7	 69574 P 7.0 11 74982 17709833 28190 67284 0 53702 619 327060 0 960 0 960 (radio 0.53% / 0.29% tx 0.15% / 0.00% listen 0.37% / 0.29%)
+18:08.756	ID:6	 69590 P 6.0 11 68825 17720085 26783 66571 0 53189 605 327074 0 960 0 960 (radio 0.52% / 0.29% tx 0.15% / 0.00% listen 0.37% / 0.29%)
+18:08.956	ID:14	 69590 P 14.0 11 25971 17762947 7915 57487 0 52394 601 327078 0 960 0 960 (radio 0.36% / 0.29% tx 0.04% / 0.00% listen 0.32% / 0.29%)
+18:08.957	ID:5	 69573 P 5.0 11 72271 17712293 29855 67142 0 52743 630 327049 0 960 0 960 (radio 0.54% / 0.29% tx 0.16% / 0.00% listen 0.37% / 0.29%)
+18:09.090	ID:4	 69605 P 4.0 11 65321 17727429 25760 67218 0 53317 630 327049 0 960 0 960 (radio 0.52% / 0.29% tx 0.14% / 0.00% listen 0.37% / 0.29%)
+18:09.196	ID:11	 69622 P 11.0 11 99982 17697104 47866 78274 0 54062 646 327033 0 960 0 960 (radio 0.70% / 0.29% tx 0.26% / 0.00% listen 0.43% / 0.29%)
+18:09.390	ID:13	 69590 P 13.0 11 30180 17758739 10890 60155 0 53552 621 327058 0 960 0 960 (radio 0.39% / 0.29% tx 0.06% / 0.00% listen 0.33% / 0.29%)
+18:09.600	ID:12	 69622 P 12.0 11 64838 17732266 26641 68253 0 54148 653 327025 0 960 0 960 (radio 0.53% / 0.29% tx 0.14% / 0.00% listen 0.38% / 0.29%)
+18:09.718	ID:15	 69638 P 15.0 11 16750 17784457 2379 54926 0 52855 601 327078 0 960 0 960 (radio 0.32% / 0.29% tx 0.01% / 0.00% listen 0.30% / 0.29%)
+18:10.155	ID:3	 69638 P 3.0 11 51297 17749903 20487 62744 0 52882 605 327074 0 960 0 960 (radio 0.46% / 0.29% tx 0.11% / 0.00% listen 0.35% / 0.29%)
+18:10.242	ID:2	 69686 P 2.0 11 41117 17772385 16899 63479 0 54672 617 327062 0 960 0 960 (radio 0.45% / 0.29% tx 0.09% / 0.00% listen 0.35% / 0.29%)
+18:17.817	ID:12	[DHT:DEBUG] hash: 70 59 a8 a6 6c 7a 7d 10 3d 30 43 50 07 af 7c 7a af ea 6d 64 
+18:19.186	ID:5	[WL:DEBUG] key not hit...
+18:19.202	ID:5	[WL:DEBUG] Refferer 12 12 12 12 12 12 11 9 1 8 7 6 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+18:20.570	ID:12	[WL:DEBUG] received query result from 11
+18:28.467	ID:9	 70822 P 9.0 12 129629 17974662 47420 80895 0 54507 7382 320295 1924 2291 0 1125 (radio 0.70% / 1.28% tx 0.26% / 0.58% listen 0.44% / 0.69%)
+18:28.581	ID:8	 70870 P 8.0 12 96177 18020408 38918 72023 0 53744 6967 320710 2360 2406 0 1113 (radio 0.61% / 1.45% tx 0.21% / 0.72% listen 0.39% / 0.73%)
+18:28.660	ID:7	 70854 P 7.0 12 84217 18028276 31605 70001 0 54815 9234 318443 3415 2717 0 1113 (radio 0.56% / 1.87% tx 0.17% / 1.04% listen 0.38% / 0.82%)
+18:28.759	ID:6	 70870 P 6.0 12 75496 18041092 29454 68863 0 54125 6670 321007 2671 2292 0 936 (radio 0.54% / 1.51% tx 0.16% / 0.81% listen 0.38% / 0.69%)
+18:28.956	ID:14	 70870 P 14.0 12 26573 18090025 7915 58447 0 53354 601 327078 0 960 0 960 (radio 0.36% / 0.29% tx 0.04% / 0.00% listen 0.32% / 0.29%)
+18:28.959	ID:5	 70853 P 5.0 12 77655 18034588 31964 69015 0 53679 5383 322295 2109 1873 0 936 (radio 0.55% / 1.21% tx 0.17% / 0.64% listen 0.38% / 0.57%)
+18:29.091	ID:4	 70885 P 4.0 12 65952 18054478 25760 68367 0 54466 630 327049 0 1149 0 1149 (radio 0.51% / 0.35% tx 0.14% / 0.00% listen 0.37% / 0.35%)
+18:29.199	ID:11	 70902 P 11.0 12 107582 18017181 51838 81076 0 54992 7599 320077 3972 2802 0 930 (radio 0.73% / 2.06% tx 0.28% / 1.21% listen 0.44% / 0.85%)
+18:29.391	ID:13	 70870 P 13.0 12 30790 18085809 10890 61310 0 54707 609 327070 0 1155 0 1155 (radio 0.39% / 0.35% tx 0.06% / 0.00% listen 0.33% / 0.35%)
+18:29.603	ID:12	 70902 P 12.0 12 67452 18057332 27263 69848 0 55285 2613 325066 622 1595 0 1137 (radio 0.53% / 0.67% tx 0.15% / 0.18% listen 0.38% / 0.48%)
+18:29.718	ID:15	 70918 P 15.0 12 17352 18111535 2379 55886 0 53815 601 327078 0 960 0 960 (radio 0.32% / 0.29% tx 0.01% / 0.00% listen 0.30% / 0.29%)
+18:30.155	ID:3	 70918 P 3.0 12 51903 18076977 20487 63704 0 53842 605 327074 0 960 0 960 (radio 0.46% / 0.29% tx 0.11% / 0.00% listen 0.35% / 0.29%)
+18:30.243	ID:2	 70966 P 2.0 12 41722 18099460 16899 64628 0 55821 604 327075 0 1149 0 1149 (radio 0.44% / 0.35% tx 0.09% / 0.00% listen 0.35% / 0.35%)
+18:48.465	ID:9	 72102 P 9.0 13 130284 18301687 47420 81855 0 55467 654 327025 0 960 0 960 (radio 0.70% / 0.29% tx 0.25% / 0.00% listen 0.44% / 0.29%)
+18:48.578	ID:8	 72150 P 8.0 13 96827 18347438 38918 72983 0 54704 649 327030 0 960 0 960 (radio 0.60% / 0.29% tx 0.21% / 0.00% listen 0.39% / 0.29%)
+18:48.657	ID:7	 72134 P 7.0 13 84865 18355307 31605 70961 0 55775 647 327031 0 960 0 960 (radio 0.55% / 0.29% tx 0.17% / 0.00% listen 0.38% / 0.29%)
+18:48.756	ID:6	 72150 P 6.0 13 76138 18368129 29454 69823 0 55085 641 327037 0 960 0 960 (radio 0.53% / 0.29% tx 0.15% / 0.00% listen 0.37% / 0.29%)
+18:48.956	ID:14	 72150 P 14.0 13 27175 18417103 7915 59407 0 54314 601 327078 0 960 0 960 (radio 0.36% / 0.29% tx 0.04% / 0.00% listen 0.32% / 0.29%)
+18:48.957	ID:5	 72133 P 5.0 13 78322 18361601 31964 69975 0 54639 666 327013 0 960 0 960 (radio 0.55% / 0.29% tx 0.17% / 0.00% listen 0.37% / 0.29%)
+18:49.090	ID:4	 72165 P 4.0 13 66598 18381512 25760 69327 0 55426 645 327034 0 960 0 960 (radio 0.51% / 0.29% tx 0.13% / 0.00% listen 0.37% / 0.29%)
+18:49.197	ID:11	 72182 P 11.0 13 108234 18344209 51838 82036 0 55952 651 327028 0 960 0 960 (radio 0.72% / 0.29% tx 0.28% / 0.00% listen 0.44% / 0.29%)
+18:49.390	ID:13	 72150 P 13.0 13 31412 18412867 10890 62270 0 55667 621 327058 0 960 0 960 (radio 0.39% / 0.29% tx 0.05% / 0.00% listen 0.33% / 0.29%)
+18:49.600	ID:12	 72182 P 12.0 13 68099 18384364 27263 70808 0 56245 646 327032 0 960 0 960 (radio 0.53% / 0.29% tx 0.14% / 0.00% listen 0.38% / 0.29%)
+18:49.718	ID:15	 72198 P 15.0 13 17954 18438613 2379 56846 0 54775 601 327078 0 960 0 960 (radio 0.32% / 0.29% tx 0.01% / 0.00% listen 0.30% / 0.29%)
+18:50.155	ID:3	 72198 P 3.0 13 52509 18404051 20487 64664 0 54802 605 327074 0 960 0 960 (radio 0.46% / 0.29% tx 0.11% / 0.00% listen 0.35% / 0.29%)
+18:50.242	ID:2	 72246 P 2.0 13 42340 18426522 16899 65588 0 56781 617 327062 0 960 0 960 (radio 0.44% / 0.29% tx 0.09% / 0.00% listen 0.35% / 0.29%)
+18:55.863	ID:12	[DHT:DEBUG] hash: f1 ed a3 ce fc f2 4d d3 9f 16 5a aa de eb 2c c4 7c c8 e7 59 
+18:57.165	ID:11	[WL:DEBUG] key not hit...
+18:57.181	ID:11	[WL:DEBUG] Refferer 12 12 12 12 12 12 12 11 9 1 9 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+18:58.070	ID:12	[WL:DEBUG] received query result from 11
+19:08.467	ID:9	 73382 P 9.0 14 148521 18611126 52573 85549 0 56367 18236 309439 5153 3694 0 900 (radio 0.73% / 2.69% tx 0.28% / 1.57% listen 0.45% / 1.12%)
+19:08.579	ID:8	 73430 P 8.0 14 97433 18674511 38918 73943 0 55664 605 327073 0 960 0 960 (radio 0.60% / 0.29% tx 0.20% / 0.00% listen 0.39% / 0.29%)
+19:08.657	ID:7	 73414 P 7.0 14 85471 18682381 31605 71921 0 56735 605 327074 0 960 0 960 (radio 0.55% / 0.29% tx 0.16% / 0.00% listen 0.38% / 0.29%)
+19:08.756	ID:6	 73430 P 6.0 14 76744 18695203 29454 70783 0 56045 605 327074 0 960 0 960 (radio 0.53% / 0.29% tx 0.15% / 0.00% listen 0.37% / 0.29%)
+19:08.956	ID:14	 73430 P 14.0 14 27777 18744181 7915 60562 0 55469 601 327078 0 1155 0 1155 (radio 0.36% / 0.35% tx 0.04% / 0.00% listen 0.32% / 0.35%)
+19:08.957	ID:5	 73413 P 5.0 14 78953 18688650 31964 70935 0 55599 630 327049 0 960 0 960 (radio 0.54% / 0.29% tx 0.17% / 0.00% listen 0.37% / 0.29%)
+19:09.090	ID:4	 73445 P 4.0 14 67229 18708561 25760 70287 0 56386 630 327049 0 960 0 960 (radio 0.51% / 0.29% tx 0.13% / 0.00% listen 0.37% / 0.29%)
+19:09.200	ID:11	 73462 P 11.0 14 120291 18659828 58291 86132 0 57041 12056 315619 6453 4096 0 1089 (radio 0.76% / 3.21% tx 0.31% / 1.96% listen 0.45% / 1.25%)
+19:09.391	ID:13	 73430 P 13.0 14 32021 18739937 10890 63620 0 57017 608 327070 0 1350 0 1350 (radio 0.39% / 0.41% tx 0.05% / 0.00% listen 0.33% / 0.41%)
+19:09.603	ID:12	 73462 P 12.0 14 74033 18706110 30304 73436 0 57559 5933 321746 3041 2628 0 1314 (radio 0.55% / 1.73% tx 0.16% / 0.92% listen 0.39% / 0.80%)
+19:09.719	ID:15	 73478 P 15.0 14 18556 18765691 2379 57995 0 55924 601 327078 0 1149 0 1149 (radio 0.32% / 0.35% tx 0.01% / 0.00% listen 0.30% / 0.35%)
+19:10.155	ID:3	 73478 P 3.0 14 53115 18731125 20487 65624 0 55762 605 327074 0 960 0 960 (radio 0.45% / 0.29% tx 0.10% / 0.00% listen 0.34% / 0.29%)
+19:10.242	ID:2	 73526 P 2.0 14 42945 18753597 16899 66548 0 57741 604 327075 0 960 0 960 (radio 0.44% / 0.29% tx 0.08% / 0.00% listen 0.35% / 0.29%)
+19:28.465	ID:9	 74662 P 9.0 15 149178 18938149 52573 86509 0 57327 656 327023 0 960 0 960 (radio 0.72% / 0.29% tx 0.27% / 0.00% listen 0.45% / 0.29%)
+19:28.579	ID:8	 74710 P 8.0 15 98040 19001584 38918 74903 0 56624 606 327073 0 960 0 960 (radio 0.59% / 0.29% tx 0.20% / 0.00% listen 0.39% / 0.29%)
+19:28.657	ID:7	 74694 P 7.0 15 86077 19009455 31605 72881 0 57695 605 327074 0 960 0 960 (radio 0.54% / 0.29% tx 0.16% / 0.00% listen 0.38% / 0.29%)
+19:28.756	ID:6	 74710 P 6.0 15 77350 19022277 29454 71743 0 57005 605 327074 0 960 0 960 (radio 0.52% / 0.29% tx 0.15% / 0.00% listen 0.37% / 0.29%)
+19:28.956	ID:14	 74710 P 14.0 15 28392 19071246 7915 61522 0 56429 614 327065 0 960 0 960 (radio 0.36% / 0.29% tx 0.04% / 0.00% listen 0.32% / 0.29%)
+19:28.957	ID:5	 74693 P 5.0 15 79584 19015698 31964 71895 0 56559 630 327048 0 960 0 960 (radio 0.54% / 0.29% tx 0.16% / 0.00% listen 0.37% / 0.29%)
+19:29.090	ID:4	 74725 P 4.0 15 67860 19035610 25760 71247 0 57346 630 327049 0 960 0 960 (radio 0.50% / 0.29% tx 0.13% / 0.00% listen 0.37% / 0.29%)
+19:29.197	ID:11	 74742 P 11.0 15 120958 18986841 58291 87092 0 58001 666 327013 0 960 0 960 (radio 0.76% / 0.29% tx 0.30% / 0.00% listen 0.45% / 0.29%)
+19:29.390	ID:13	 74710 P 13.0 15 32643 19066995 10890 64580 0 57977 621 327058 0 960 0 960 (radio 0.39% / 0.29% tx 0.05% / 0.00% listen 0.33% / 0.29%)
+19:29.600	ID:12	 74742 P 12.0 15 74688 19033135 30304 74396 0 58519 654 327025 0 960 0 960 (radio 0.54% / 0.29% tx 0.15% / 0.00% listen 0.38% / 0.29%)
+19:29.718	ID:15	 74758 P 15.0 15 19171 19092756 2379 58955 0 56884 614 327065 0 960 0 960 (radio 0.32% / 0.29% tx 0.01% / 0.00% listen 0.30% / 0.29%)
+19:29.910	ID:12	[DHT:DEBUG] hash: 4a ed 93 e8 dd 92 a3 bf 3b 10 77 11 46 5a 53 b1 a3 26 3b 34 
+19:30.155	ID:3	 74758 P 3.0 15 53721 19058199 20487 66584 0 56722 605 327074 0 960 0 960 (radio 0.45% / 0.29% tx 0.10% / 0.00% listen 0.34% / 0.29%)
+19:30.242	ID:2	 74806 P 2.0 15 43550 19080672 16899 67508 0 58701 604 327075 0 960 0 960 (radio 0.44% / 0.29% tx 0.08% / 0.00% listen 0.35% / 0.29%)
+19:31.471	ID:6	[WL:DEBUG] key not hit...
+19:31.488	ID:6	[WL:DEBUG] Refferer 12 12 12 12 12 12 12 12 11 9 1 8 7 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+19:32.570	ID:12	[WL:DEBUG] received query result from 11
+19:48.467	ID:9	 75942 P 9.0 16 156556 19258449 55242 89065 0 58452 7377 320300 2669 2556 0 1125 (radio 0.74% / 1.59% tx 0.28% / 0.81% listen 0.45% / 0.78%)
+19:48.582	ID:8	 75990 P 8.0 16 109259 19318043 43632 78126 0 57725 11218 316459 4714 3223 0 1101 (radio 0.62% / 2.42% tx 0.22% / 1.43% listen 0.40% / 0.98%)
+19:48.660	ID:7	 75974 P 7.0 16 95242 19327968 35390 75601 0 58625 9164 318513 3785 2720 0 930 (radio 0.57% / 1.98% tx 0.18% / 1.15% listen 0.38% / 0.83%)
+19:48.759	ID:6	 75990 P 6.0 16 80486 19346820 30509 73263 0 57953 3135 324543 1055 1520 0 948 (radio 0.53% / 0.78% tx 0.15% / 0.32% listen 0.37% / 0.46%)
+19:48.956	ID:14	 75990 P 14.0 16 28994 19398324 7915 62482 0 57389 601 327078 0 960 0 960 (radio 0.36% / 0.29% tx 0.04% / 0.00% listen 0.32% / 0.29%)
+19:48.957	ID:5	 75973 P 5.0 16 80215 19342747 31964 72855 0 57519 630 327049 0 960 0 960 (radio 0.53% / 0.29% tx 0.16% / 0.00% listen 0.37% / 0.29%)
+19:49.090	ID:4	 76005 P 4.0 16 68491 19362659 25760 72207 0 58306 630 327049 0 960 0 960 (radio 0.50% / 0.29% tx 0.13% / 0.00% listen 0.37% / 0.29%)
+19:49.199	ID:11	 76022 P 11.0 16 128581 19306896 62263 89904 0 58925 7622 320055 3972 2812 0 924 (radio 0.78% / 2.07% tx 0.32% / 1.21% listen 0.46% / 0.85%)
+19:49.391	ID:13	 75990 P 13.0 16 33252 19394065 10890 65735 0 59132 608 327070 0 1155 0 1155 (radio 0.39% / 0.35% tx 0.05% / 0.00% listen 0.33% / 0.35%)
+19:49.603	ID:12	 76022 P 12.0 16 79856 19355647 32785 76635 0 59644 5167 322512 2481 2239 0 1125 (radio 0.56% / 1.44% tx 0.16% / 0.75% listen 0.39% / 0.68%)
+19:49.718	ID:15	 76038 P 15.0 16 19773 19419834 2379 59915 0 57844 601 327078 0 960 0 960 (radio 0.32% / 0.29% tx 0.01% / 0.00% listen 0.30% / 0.29%)
+19:50.155	ID:3	 76038 P 3.0 16 54327 19385273 20487 67544 0 57682 605 327074 0 960 0 960 (radio 0.45% / 0.29% tx 0.10% / 0.00% listen 0.34% / 0.29%)
+19:50.243	ID:2	 76086 P 2.0 16 44155 19407747 16899 68657 0 59850 604 327075 0 1149 0 1149 (radio 0.43% / 0.35% tx 0.08% / 0.00% listen 0.35% / 0.35%)
+20:07.957	ID:12	[DHT:DEBUG] hash: e0 11 8c 8c ed 6b 4b 01 e7 09 a0 ca 90 3d af 1e 6e 1b 5b ec 
+20:08.579	ID:8	 77270 P 8.0 17 109921 19645060 43632 79086 0 58685 661 327017 0 960 0 960 (radio 0.62% / 0.29% tx 0.22% / 0.00% listen 0.40% / 0.29%)
+20:08.608	ID:1	[WL:DEBUG] key not hit...
+20:08.625	ID:1	[WL:DEBUG] Refferer 12 12 12 12 12 12 12 12 12 11 9 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+20:08.642	ID:9	 77233 P 9.0 17 160126 19585436 55862 90479 0 59400 3569 326987 620 1414 0 948 (radio 0.74% / 0.61% tx 0.28% / 0.18% listen 0.45% / 0.42%)
+20:08.658	ID:7	 77254 P 7.0 17 95885 19655005 35390 76561 0 59585 642 327037 0 960 0 960 (radio 0.56% / 0.29% tx 0.17% / 0.00% listen 0.38% / 0.29%)
+20:08.756	ID:6	 77270 P 6.0 17 81128 19673857 30509 74223 0 58913 641 327037 0 960 0 960 (radio 0.53% / 0.29% tx 0.15% / 0.00% listen 0.37% / 0.29%)
+20:08.956	ID:14	 77270 P 14.0 17 29596 19725402 7915 63442 0 58349 601 327078 0 960 0 960 (radio 0.36% / 0.29% tx 0.04% / 0.00% listen 0.32% / 0.29%)
+20:08.957	ID:5	 77253 P 5.0 17 80846 19669795 31964 73815 0 58479 630 327048 0 960 0 960 (radio 0.53% / 0.29% tx 0.16% / 0.00% listen 0.37% / 0.29%)
+20:09.070	ID:12	[WL:DEBUG] received query result from 11
+20:09.090	ID:4	 77285 P 4.0 17 69122 19689708 25760 73167 0 59266 630 327049 0 960 0 960 (radio 0.50% / 0.29% tx 0.13% / 0.00% listen 0.37% / 0.29%)
+20:09.199	ID:11	 77302 P 11.0 17 136233 19626922 66233 92719 0 59849 7651 320026 3970 2815 0 924 (radio 0.80% / 2.07% tx 0.33% / 1.21% listen 0.46% / 0.85%)
+20:09.391	ID:13	 77270 P 13.0 17 33874 19721123 10890 66890 0 60287 621 327058 0 1155 0 1155 (radio 0.39% / 0.35% tx 0.05% / 0.00% listen 0.33% / 0.35%)
+20:09.603	ID:12	 77302 P 12.0 17 84303 19678880 34707 78678 0 60769 4446 323233 1922 2043 0 1125 (radio 0.57% / 1.21% tx 0.17% / 0.58% listen 0.39% / 0.62%)
+20:09.718	ID:15	 77318 P 15.0 17 20375 19746912 2379 60875 0 58804 601 327078 0 960 0 960 (radio 0.31% / 0.29% tx 0.01% / 0.00% listen 0.30% / 0.29%)
+20:10.155	ID:3	 77318 P 3.0 17 54933 19712347 20487 68504 0 58642 605 327074 0 960 0 960 (radio 0.45% / 0.29% tx 0.10% / 0.00% listen 0.34% / 0.29%)
+20:10.242	ID:2	 77366 P 2.0 17 44774 19734807 16899 69617 0 60810 618 327060 0 960 0 960 (radio 0.43% / 0.29% tx 0.08% / 0.00% listen 0.35% / 0.29%)
+20:28.467	ID:9	 78502 P 9.0 18 164617 19905746 57723 92325 0 60348 4489 320310 1861 1846 0 948 (radio 0.74% / 1.14% tx 0.28% / 0.57% listen 0.46% / 0.56%)
+20:28.579	ID:8	 78550 P 8.0 18 110535 19972126 43632 80046 0 59645 613 327066 0 960 0 960 (radio 0.61% / 0.29% tx 0.21% / 0.00% listen 0.39% / 0.29%)
+20:28.657	ID:7	 78534 P 7.0 18 96492 19982078 35390 77521 0 60545 606 327073 0 960 0 960 (radio 0.56% / 0.29% tx 0.17% / 0.00% listen 0.38% / 0.29%)
+20:28.756	ID:6	 78550 P 6.0 18 81734 20000931 30509 75183 0 59873 605 327074 0 960 0 960 (radio 0.52% / 0.29% tx 0.15% / 0.00% listen 0.37% / 0.29%)
+20:28.956	ID:14	 78550 P 14.0 18 30198 20052480 7915 64402 0 59309 601 327078 0 960 0 960 (radio 0.36% / 0.29% tx 0.03% / 0.00% listen 0.32% / 0.29%)
+20:28.957	ID:5	 78533 P 5.0 18 81477 19996844 31964 74775 0 59439 630 327049 0 960 0 960 (radio 0.53% / 0.29% tx 0.15% / 0.00% listen 0.37% / 0.29%)
+20:29.090	ID:4	 78565 P 4.0 18 69753 20016757 25760 74127 0 60226 630 327049 0 960 0 960 (radio 0.49% / 0.29% tx 0.12% / 0.00% listen 0.36% / 0.29%)
+20:29.197	ID:11	 78582 P 11.0 18 136885 19953950 66233 93679 0 60809 651 327028 0 960 0 960 (radio 0.79% / 0.29% tx 0.32% / 0.00% listen 0.46% / 0.29%)
+20:29.390	ID:13	 78550 P 13.0 18 34496 20048181 10890 67850 0 61247 621 327058 0 960 0 960 (radio 0.39% / 0.29% tx 0.05% / 0.00% listen 0.33% / 0.29%)
+20:29.600	ID:12	 78582 P 12.0 18 84958 20005905 34707 79638 0 61729 654 327025 0 960 0 960 (radio 0.56% / 0.29% tx 0.17% / 0.00% listen 0.39% / 0.29%)
+20:29.718	ID:15	 78598 P 15.0 18 20977 20073990 2379 61835 0 59764 601 327078 0 960 0 960 (radio 0.31% / 0.29% tx 0.01% / 0.00% listen 0.30% / 0.29%)
+20:30.155	ID:3	 78598 P 3.0 18 55539 20039421 20487 69464 0 59602 605 327074 0 960 0 960 (radio 0.44% / 0.29% tx 0.10% / 0.00% listen 0.34% / 0.29%)
+20:30.242	ID:2	 78646 P 2.0 18 45379 20061882 16899 70577 0 61770 604 327075 0 960 0 960 (radio 0.43% / 0.29% tx 0.08% / 0.00% listen 0.35% / 0.29%)
+20:48.465	ID:9	 79782 P 9.0 19 165267 20232776 57723 93285 0 61308 649 327030 0 960 0 960 (radio 0.74% / 0.29% tx 0.28% / 0.00% listen 0.45% / 0.29%)
+20:48.579	ID:8	 79830 P 8.0 19 111149 20299192 43632 81006 0 60605 613 327066 0 960 0 960 (radio 0.61% / 0.29% tx 0.21% / 0.00% listen 0.39% / 0.29%)
+20:48.657	ID:7	 79814 P 7.0 19 97098 20309151 35390 78481 0 61505 605 327073 0 960 0 960 (radio 0.55% / 0.29% tx 0.17% / 0.00% listen 0.38% / 0.29%)
+20:48.756	ID:6	 79830 P 6.0 19 82340 20328004 30509 76143 0 60833 605 327073 0 960 0 960 (radio 0.52% / 0.29% tx 0.14% / 0.00% listen 0.37% / 0.29%)
+20:48.956	ID:14	 79830 P 14.0 19 30800 20379558 7915 65362 0 60269 601 327078 0 960 0 960 (radio 0.35% / 0.29% tx 0.03% / 0.00% listen 0.32% / 0.29%)
+20:48.957	ID:5	 79813 P 5.0 19 82108 20323892 31964 75735 0 60399 630 327048 0 960 0 960 (radio 0.52% / 0.29% tx 0.15% / 0.00% listen 0.37% / 0.29%)
+20:49.090	ID:4	 79845 P 4.0 19 70384 20343806 25760 75087 0 61186 630 327049 0 960 0 960 (radio 0.49% / 0.29% tx 0.12% / 0.00% listen 0.36% / 0.29%)
+20:49.197	ID:11	 79862 P 11.0 19 137502 20281013 66233 94639 0 61769 616 327063 0 960 0 960 (radio 0.78% / 0.29% tx 0.32% / 0.00% listen 0.46% / 0.29%)
+20:49.390	ID:13	 79830 P 13.0 19 35105 20375251 10890 68810 0 62207 608 327070 0 960 0 960 (radio 0.39% / 0.29% tx 0.05% / 0.00% listen 0.33% / 0.29%)
+20:49.600	ID:12	 79862 P 12.0 19 85570 20332973 34707 80598 0 62689 611 327068 0 960 0 960 (radio 0.56% / 0.29% tx 0.16% / 0.00% listen 0.39% / 0.29%)
+20:49.718	ID:15	 79878 P 15.0 19 21579 20401068 2379 62795 0 60724 601 327078 0 960 0 960 (radio 0.31% / 0.29% tx 0.01% / 0.00% listen 0.30% / 0.29%)
+20:50.155	ID:3	 79878 P 3.0 19 56145 20366495 20487 70424 0 60562 605 327074 0 960 0 960 (radio 0.44% / 0.29% tx 0.10% / 0.00% listen 0.34% / 0.29%)
+20:50.242	ID:2	 79926 P 2.0 19 45984 20388957 16899 71537 0 62730 604 327075 0 960 0 960 (radio 0.43% / 0.29% tx 0.08% / 0.00% listen 0.35% / 0.29%)
+21:06.003	ID:12	[DHT:DEBUG] hash: fa e0 20 3b 2b 9d ce f3 d9 37 d5 8a a9 61 38 95 00 8f ba 66 
+21:06.008	ID:12	[WL:DEBUG] key not hit...
+21:08.465	ID:9	 81062 P 9.0 20 165881 20559842 57723 94245 0 62268 613 327066 0 960 0 960 (radio 0.73% / 0.29% tx 0.27% / 0.00% listen 0.45% / 0.29%)
+21:08.579	ID:8	 81110 P 8.0 20 111763 20626258 43632 81966 0 61565 613 327066 0 960 0 960 (radio 0.60% / 0.29% tx 0.21% / 0.00% listen 0.39% / 0.29%)
+21:08.657	ID:7	 81094 P 7.0 20 97705 20636224 35390 79441 0 62465 606 327073 0 960 0 960 (radio 0.55% / 0.29% tx 0.17% / 0.00% listen 0.38% / 0.29%)
+21:08.756	ID:6	 81110 P 6.0 20 82946 20655078 30509 77103 0 61793 605 327074 0 960 0 960 (radio 0.51% / 0.29% tx 0.14% / 0.00% listen 0.37% / 0.29%)
+21:08.956	ID:14	 81110 P 14.0 20 31402 20706636 7915 66322 0 61229 601 327078 0 960 0 960 (radio 0.35% / 0.29% tx 0.03% / 0.00% listen 0.31% / 0.29%)
+21:08.957	ID:5	 81093 P 5.0 20 82739 20650940 31964 76695 0 61359 630 327048 0 960 0 960 (radio 0.52% / 0.29% tx 0.15% / 0.00% listen 0.36% / 0.29%)
+21:09.090	ID:4	 81125 P 4.0 20 71015 20670854 25760 76047 0 62146 630 327048 0 960 0 960 (radio 0.49% / 0.29% tx 0.12% / 0.00% listen 0.36% / 0.29%)
+21:09.197	ID:11	 81142 P 11.0 20 138119 20608076 66233 95599 0 62729 616 327063 0 960 0 960 (radio 0.78% / 0.29% tx 0.31% / 0.00% listen 0.46% / 0.29%)
+21:09.390	ID:13	 81110 P 13.0 20 35715 20702321 10890 69770 0 63167 609 327070 0 960 0 960 (radio 0.38% / 0.29% tx 0.05% / 0.00% listen 0.33% / 0.29%)
+21:09.600	ID:12	 81142 P 12.0 20 86562 20659661 34707 81558 0 63649 991 326688 0 960 0 960 (radio 0.56% / 0.29% tx 0.16% / 0.00% listen 0.39% / 0.29%)
+21:09.718	ID:15	 81158 P 15.0 20 22181 20728146 2379 63755 0 61684 601 327078 0 960 0 960 (radio 0.31% / 0.29% tx 0.01% / 0.00% listen 0.30% / 0.29%)
+21:10.155	ID:3	 81158 P 3.0 20 56751 20693569 20487 71384 0 61522 605 327074 0 960 0 960 (radio 0.44% / 0.29% tx 0.09% / 0.00% listen 0.34% / 0.29%)
+21:10.242	ID:2	 81206 P 2.0 20 46589 20716032 16899 72497 0 63690 604 327075 0 960 0 960 (radio 0.43% / 0.29% tx 0.08% / 0.00% listen 0.34% / 0.29%)
+21:28.465	ID:9	 82342 P 9.0 21 166495 20886908 57723 95205 0 63228 613 327066 0 960 0 960 (radio 0.72% / 0.29% tx 0.27% / 0.00% listen 0.45% / 0.29%)
+21:28.579	ID:8	 82390 P 8.0 21 112377 20953324 43632 82926 0 62525 613 327066 0 960 0 960 (radio 0.60% / 0.29% tx 0.20% / 0.00% listen 0.39% / 0.29%)
+21:28.657	ID:7	 82374 P 7.0 21 98311 20963298 35390 80401 0 63425 605 327074 0 960 0 960 (radio 0.54% / 0.29% tx 0.16% / 0.00% listen 0.38% / 0.29%)
+21:28.756	ID:6	 82390 P 6.0 21 83552 20982152 30509 78063 0 62753 605 327074 0 960 0 960 (radio 0.51% / 0.29% tx 0.14% / 0.00% listen 0.37% / 0.29%)
+21:28.956	ID:14	 82390 P 14.0 21 32004 21033714 7915 67282 0 62189 601 327078 0 960 0 960 (radio 0.35% / 0.29% tx 0.03% / 0.00% listen 0.31% / 0.29%)
+21:28.957	ID:5	 82373 P 5.0 21 83371 20977988 31964 77655 0 62319 631 327048 0 960 0 960 (radio 0.52% / 0.29% tx 0.15% / 0.00% listen 0.36% / 0.29%)
+21:29.090	ID:4	 82405 P 4.0 21 71646 20997903 25760 77007 0 63106 630 327049 0 960 0 960 (radio 0.48% / 0.29% tx 0.12% / 0.00% listen 0.36% / 0.29%)
+21:29.197	ID:11	 82422 P 11.0 21 138736 20935139 66233 96559 0 63689 616 327063 0 960 0 960 (radio 0.77% / 0.29% tx 0.31% / 0.00% listen 0.45% / 0.29%)
+21:29.390	ID:13	 82390 P 13.0 21 36325 21029391 10890 70730 0 64127 609 327070 0 960 0 960 (radio 0.38% / 0.29% tx 0.05% / 0.00% listen 0.33% / 0.29%)
+21:29.600	ID:12	 82422 P 12.0 21 87174 20986729 34707 82518 0 64609 611 327068 0 960 0 960 (radio 0.55% / 0.29% tx 0.16% / 0.00% listen 0.39% / 0.29%)
+21:29.718	ID:15	 82438 P 15.0 21 22783 21055224 2379 64715 0 62644 601 327078 0 960 0 960 (radio 0.31% / 0.29% tx 0.01% / 0.00% listen 0.30% / 0.29%)
+21:30.155	ID:3	 82438 P 3.0 21 57356 21020644 20487 72344 0 62482 604 327075 0 960 0 960 (radio 0.44% / 0.29% tx 0.09% / 0.00% listen 0.34% / 0.29%)
+21:30.242	ID:2	 82486 P 2.0 21 47194 21043107 16899 73457 0 64650 604 327075 0 960 0 960 (radio 0.42% / 0.29% tx 0.08% / 0.00% listen 0.34% / 0.29%)
+21:48.465	ID:9	 83622 P 9.0 22 167109 21213974 57723 96165 0 64188 613 327066 0 960 0 960 (radio 0.71% / 0.29% tx 0.26% / 0.00% listen 0.44% / 0.29%)
+21:48.579	ID:8	 83670 P 8.0 22 112991 21280390 43632 83886 0 63485 613 327066 0 960 0 960 (radio 0.59% / 0.29% tx 0.20% / 0.00% listen 0.39% / 0.29%)
+21:48.657	ID:7	 83654 P 7.0 22 98917 21290372 35390 81361 0 64385 605 327074 0 960 0 960 (radio 0.54% / 0.29% tx 0.16% / 0.00% listen 0.38% / 0.29%)
+21:48.756	ID:6	 83670 P 6.0 22 84158 21309226 30509 79023 0 63713 605 327074 0 960 0 960 (radio 0.51% / 0.29% tx 0.14% / 0.00% listen 0.36% / 0.29%)
+21:48.956	ID:14	 83670 P 14.0 22 32606 21360792 7915 68242 0 63149 601 327078 0 960 0 960 (radio 0.35% / 0.29% tx 0.03% / 0.00% listen 0.31% / 0.29%)
+21:48.957	ID:5	 83653 P 5.0 22 84002 21305037 31964 78615 0 63279 630 327049 0 960 0 960 (radio 0.51% / 0.29% tx 0.14% / 0.00% listen 0.36% / 0.29%)
+21:49.090	ID:4	 83685 P 4.0 22 72277 21324952 25760 77967 0 64066 630 327049 0 960 0 960 (radio 0.48% / 0.29% tx 0.12% / 0.00% listen 0.36% / 0.29%)
+21:49.197	ID:11	 83702 P 11.0 22 139353 21262202 66233 97519 0 64649 616 327063 0 960 0 960 (radio 0.76% / 0.29% tx 0.30% / 0.00% listen 0.45% / 0.29%)
+21:49.390	ID:13	 83670 P 13.0 22 36934 21356462 10890 71690 0 65087 608 327071 0 960 0 960 (radio 0.38% / 0.29% tx 0.05% / 0.00% listen 0.33% / 0.29%)
+21:49.600	ID:12	 83702 P 12.0 22 87786 21313797 34707 83478 0 65569 611 327068 0 960 0 960 (radio 0.55% / 0.29% tx 0.16% / 0.00% listen 0.39% / 0.29%)
+21:49.718	ID:15	 83718 P 15.0 22 23385 21382302 2379 65675 0 63604 601 327078 0 960 0 960 (radio 0.31% / 0.29% tx 0.01% / 0.00% listen 0.30% / 0.29%)
+21:50.155	ID:3	 83718 P 3.0 22 57961 21347719 20487 73304 0 63442 604 327075 0 960 0 960 (radio 0.43% / 0.29% tx 0.09% / 0.00% listen 0.34% / 0.29%)
+21:50.242	ID:2	 83766 P 2.0 22 47799 21370182 16899 74417 0 65610 604 327075 0 960 0 960 (radio 0.42% / 0.29% tx 0.07% / 0.00% listen 0.34% / 0.29%)
+21:58.019	ID:12	[DHT:DEBUG] hash: 4d 79 04 cc f1 91 bd c1 bc 33 0f 39 c1 42 ed 79 d5 63 0d 84 
+21:59.472	ID:6	[WL:DEBUG] key not hit...
+21:59.490	ID:6	[WL:DEBUG] Refferer 12 12 12 12 12 12 12 12 12 12 12 11 9 1 8 7 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+22:00.570	ID:12	[WL:DEBUG] received query result from 11
+22:08.468	ID:9	 84902 P 9.0 23 178492 21530269 61631 99139 0 65301 11382 316295 3908 2974 0 1113 (radio 0.74% / 2.10% tx 0.28% / 1.19% listen 0.45% / 0.90%)
+22:08.581	ID:8	 84950 P 8.0 23 124219 21596840 49092 87176 0 64397 11227 316450 5460 3290 0 912 (radio 0.62% / 2.67% tx 0.22% / 1.66% listen 0.40% / 1.00%)
+22:08.660	ID:7	 84934 P 7.0 23 103987 21612980 37501 83699 0 65516 5069 322608 2111 2338 0 1131 (radio 0.55% / 1.35% tx 0.17% / 0.64% listen 0.38% / 0.71%)
+22:08.758	ID:6	 84950 P 6.0 23 87289 21633774 30634 80419 0 64850 3130 324548 125 1396 0 1137 (radio 0.51% / 0.46% tx 0.14% / 0.03% listen 0.37% / 0.42%)
+22:08.956	ID:14	 84950 P 14.0 23 33208 21687870 7915 69397 0 64304 601 327078 0 1155 0 1155 (radio 0.35% / 0.35% tx 0.03% / 0.00% listen 0.31% / 0.35%)
+22:08.957	ID:5	 84933 P 5.0 23 84633 21632085 31964 79575 0 64239 630 327048 0 960 0 960 (radio 0.51% / 0.29% tx 0.14% / 0.00% listen 0.36% / 0.29%)
+22:09.090	ID:4	 84965 P 4.0 23 72908 21652001 25760 78927 0 65026 630 327049 0 960 0 960 (radio 0.48% / 0.29% tx 0.11% / 0.00% listen 0.36% / 0.29%)
+22:09.200	ID:11	 84982 P 11.0 23 146963 21582270 70203 100529 0 65762 7609 320068 3970 3010 0 1113 (radio 0.78% / 2.13% tx 0.32% / 1.21% listen 0.46% / 0.91%)
+22:09.391	ID:13	 84950 P 13.0 23 37543 21683533 10890 72845 0 66242 608 327071 0 1155 0 1155 (radio 0.38% / 0.35% tx 0.05% / 0.00% listen 0.33% / 0.35%)
+22:09.603	ID:12	 84982 P 12.0 23 91168 21638095 35699 85205 0 66706 3381 324298 992 1727 0 1137 (radio 0.55% / 0.82% tx 0.16% / 0.30% listen 0.39% / 0.52%)
+22:09.718	ID:15	 84998 P 15.0 23 23987 21709380 2379 66635 0 64564 601 327078 0 960 0 960 (radio 0.31% / 0.29% tx 0.01% / 0.00% listen 0.30% / 0.29%)
+22:10.155	ID:3	 84998 P 3.0 23 58566 21674794 20487 74264 0 64402 604 327075 0 960 0 960 (radio 0.43% / 0.29% tx 0.09% / 0.00% listen 0.34% / 0.29%)
+22:10.243	ID:2	 85046 P 2.0 23 48404 21697257 16899 75566 0 66759 604 327075 0 1149 0 1149 (radio 0.42% / 0.35% tx 0.07% / 0.00% listen 0.34% / 0.35%)
+22:28.465	ID:9	 86182 P 9.0 24 179154 21857286 61631 100099 0 66261 661 327017 0 960 0 960 (radio 0.73% / 0.29% tx 0.27% / 0.00% listen 0.45% / 0.29%)
+22:28.579	ID:8	 86230 P 8.0 24 124873 21923866 49092 88136 0 65357 653 327026 0 960 0 960 (radio 0.62% / 0.29% tx 0.22% / 0.00% listen 0.39% / 0.29%)
+22:28.658	ID:7	 86214 P 7.0 24 104642 21940005 37501 84659 0 66476 654 327025 0 960 0 960 (radio 0.55% / 0.29% tx 0.17% / 0.00% listen 0.38% / 0.29%)
+22:28.756	ID:6	 86230 P 6.0 24 87930 21960813 30634 81379 0 65810 640 327039 0 960 0 960 (radio 0.50% / 0.29% tx 0.13% / 0.00% listen 0.36% / 0.29%)
+22:28.956	ID:14	 86230 P 14.0 24 33823 22014935 7915 70357 0 65264 614 327065 0 960 0 960 (radio 0.35% / 0.29% tx 0.03% / 0.00% listen 0.31% / 0.29%)
+22:28.957	ID:5	 86213 P 5.0 24 85264 21959134 31964 80535 0 65199 630 327049 0 960 0 960 (radio 0.51% / 0.29% tx 0.14% / 0.00% listen 0.36% / 0.29%)
+22:29.090	ID:4	 86245 P 4.0 24 73539 21979050 25760 79887 0 65986 630 327049 0 960 0 960 (radio 0.47% / 0.29% tx 0.11% / 0.00% listen 0.36% / 0.29%)
+22:29.197	ID:11	 86262 P 11.0 24 147630 21909283 70203 101489 0 66722 666 327013 0 960 0 960 (radio 0.77% / 0.29% tx 0.31% / 0.00% listen 0.46% / 0.29%)
+22:29.390	ID:13	 86230 P 13.0 24 38165 22010591 10890 73805 0 67202 621 327058 0 960 0 960 (radio 0.38% / 0.29% tx 0.04% / 0.00% listen 0.33% / 0.29%)
+22:29.600	ID:12	 86262 P 12.0 24 91815 21965127 35699 86165 0 67666 646 327032 0 960 0 960 (radio 0.55% / 0.29% tx 0.16% / 0.00% listen 0.39% / 0.29%)
+22:29.718	ID:15	 86278 P 15.0 24 24589 22036458 2379 67595 0 65524 601 327078 0 960 0 960 (radio 0.31% / 0.29% tx 0.01% / 0.00% listen 0.30% / 0.29%)
+22:30.155	ID:3	 86278 P 3.0 24 59171 22001869 20487 75224 0 65362 604 327075 0 960 0 960 (radio 0.43% / 0.29% tx 0.09% / 0.00% listen 0.34% / 0.29%)
+22:30.242	ID:2	 86326 P 2.0 24 49022 22024319 16899 76526 0 67719 617 327062 0 960 0 960 (radio 0.42% / 0.29% tx 0.07% / 0.00% listen 0.34% / 0.29%)
+22:38.082	ID:12	[DHT:DEBUG] hash: 56 82 22 68 7e f3 f0 eb 48 11 c1 c4 26 9e e9 17 4c 20 7c c7 
+22:39.222	ID:6	[WL:DEBUG] key not hit...
+22:39.240	ID:6	[WL:DEBUG] Refferer 12 12 12 12 12 12 12 12 12 12 12 12 11 9 1 8 7 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+22:40.070	ID:12	[WL:DEBUG] received query result from 11
+22:48.468	ID:9	 87462 P 9.0 25 186540 22177578 64485 102715 0 67386 7385 320292 2854 2616 0 1125 (radio 0.74% / 1.66% tx 0.28% / 0.87% listen 0.45% / 0.79%)
+22:48.581	ID:8	 87510 P 8.0 25 132018 22244399 52317 90653 0 66281 7144 320533 3225 2517 0 924 (radio 0.63% / 1.75% tx 0.23% / 0.98% listen 0.40% / 0.76%)
+22:48.660	ID:7	 87494 P 7.0 25 109732 22262592 39425 86734 0 67418 5089 322587 1924 2075 0 942 (radio 0.56% / 1.22% tx 0.17% / 0.58% listen 0.38% / 0.63%)
+22:48.759	ID:6	 87510 P 6.0 25 91053 22285369 31689 83103 0 66947 3122 324556 1055 1724 0 1137 (radio 0.51% / 0.84% tx 0.14% / 0.32% listen 0.37% / 0.52%)
+22:48.956	ID:14	 87510 P 14.0 25 34425 22342013 7915 71317 0 66224 601 327078 0 960 0 960 (radio 0.35% / 0.29% tx 0.03% / 0.00% listen 0.31% / 0.29%)
+22:48.957	ID:5	 87493 P 5.0 25 85895 22286183 31964 81495 0 66159 630 327049 0 960 0 960 (radio 0.50% / 0.29% tx 0.14% / 0.00% listen 0.36% / 0.29%)
+22:49.090	ID:4	 87525 P 4.0 25 74170 22306099 25760 80847 0 66946 630 327049 0 960 0 960 (radio 0.47% / 0.29% tx 0.11% / 0.00% listen 0.36% / 0.29%)
+22:49.199	ID:11	 87542 P 11.0 25 155240 22229350 74173 104289 0 67652 7609 320067 3970 2800 0 930 (radio 0.79% / 2.06% tx 0.33% / 1.21% listen 0.46% / 0.85%)
+22:49.391	ID:13	 87510 P 13.0 25 38774 22337661 10890 74960 0 68357 608 327070 0 1155 0 1155 (radio 0.38% / 0.35% tx 0.04% / 0.00% listen 0.33% / 0.35%)
+22:49.602	ID:12	 87542 P 12.0 25 94180 22290442 35948 87632 0 68803 2364 325315 249 1467 0 1137 (radio 0.55% / 0.52% tx 0.16% / 0.07% listen 0.39% / 0.44%)
+22:49.718	ID:15	 87558 P 15.0 25 25191 22363536 2379 68555 0 66484 601 327078 0 960 0 960 (radio 0.31% / 0.29% tx 0.01% / 0.00% listen 0.30% / 0.29%)
+22:50.155	ID:3	 87558 P 3.0 25 59776 22328944 20487 76184 0 66322 604 327075 0 960 0 960 (radio 0.43% / 0.29% tx 0.09% / 0.00% listen 0.34% / 0.29%)
+22:50.243	ID:2	 87606 P 2.0 25 49627 22351394 16899 77675 0 68868 604 327075 0 1149 0 1149 (radio 0.42% / 0.35% tx 0.07% / 0.00% listen 0.34% / 0.35%)
+23:06.144	ID:12	[DHT:DEBUG] hash: a5 fd 9b 0e 48 72 2c 60 b4 25 59 cb bf b9 d7 52 fd 93 1b b7 
+23:08.121	ID:3	[WL:DEBUG] key not hit...
+23:08.139	ID:3	[WL:DEBUG] Refferer 12 12 12 12 12 12 12 12 12 12 12 12 12 11 9 1 8 7 6 5 4 0 0 0 0 0 0 0 0 0 0 0 
+23:08.467	ID:9	 88742 P 9.0 26 190117 22501679 64921 104256 0 68523 3576 324101 436 1541 0 1137 (radio 0.74% / 0.60% tx 0.28% / 0.13% listen 0.45% / 0.47%)
+23:08.581	ID:8	 88790 P 8.0 26 133968 22570128 52504 92097 0 67418 1949 325729 187 1444 0 1137 (radio 0.63% / 0.49% tx 0.23% / 0.05% listen 0.40% / 0.44%)
+23:08.660	ID:7	 88774 P 7.0 26 116142 22583861 42465 89126 0 68543 6409 321269 3040 2392 0 1125 (radio 0.57% / 1.65% tx 0.18% / 0.92% listen 0.39% / 0.72%)
+23:08.908	ID:6	 88799 P 6.0 26 97856 22608696 34792 85548 0 67883 6802 323327 3103 2445 0 936 (radio 0.52% / 1.68% tx 0.15% / 0.93% listen 0.37% / 0.74%)
+23:08.956	ID:14	 88790 P 14.0 26 35027 22669091 7915 72277 0 67184 601 327078 0 960 0 960 (radio 0.35% / 0.29% tx 0.03% / 0.00% listen 0.31% / 0.29%)
+23:08.959	ID:5	 88773 P 5.0 26 93412 22606344 35315 84285 0 67290 7516 320161 3351 2790 0 1131 (radio 0.52% / 1.87% tx 0.15% / 1.02% listen 0.37% / 0.85%)
+23:09.093	ID:4	 88805 P 4.0 26 81786 22626161 28924 83514 0 68059 7615 320062 3164 2667 0 1113 (radio 0.49% / 1.77% tx 0.12% / 0.96% listen 0.36% / 0.81%)
+23:09.199	ID:11	 88822 P 11.0 26 160334 22551935 76841 106408 0 68588 5093 322585 2668 2119 0 936 (radio 0.80% / 1.46% tx 0.33% / 0.81% listen 0.46% / 0.64%)
+23:09.391	ID:13	 88790 P 13.0 26 39396 22664719 10890 76115 0 69512 621 327058 0 1155 0 1155 (radio 0.38% / 0.35% tx 0.04% / 0.00% listen 0.33% / 0.35%)
+23:09.603	ID:12	 88822 P 12.0 26 99493 22612809 38430 89712 0 69940 5312 322367 2482 2080 0 1137 (radio 0.56% / 1.39% tx 0.16% / 0.75% listen 0.39% / 0.63%)
+23:09.718	ID:15	 88838 P 15.0 26 25793 22690614 2379 69515 0 67444 601 327078 0 960 0 960 (radio 0.31% / 0.29% tx 0.01% / 0.00% listen 0.30% / 0.29%)
+23:09.820	ID:12	[WL:DEBUG] received query result from 11
+23:10.157	ID:3	 88838 P 3.0 26 63663 22652736 21915 77852 0 67270 3886 323792 1428 1668 0 948 (radio 0.43% / 0.94% tx 0.09% / 0.43% listen 0.34% / 0.50%)
+23:10.243	ID:2	 88886 P 2.0 26 50245 22678456 16899 79013 0 70206 617 327062 0 1338 0 1338 (radio 0.42% / 0.40% tx 0.07% / 0.00% listen 0.34% / 0.40%)
+23:28.467	ID:9	 90022 P 9.0 27 194628 22824847 65666 105707 0 69471 4510 323168 745 1451 0 948 (radio 0.74% / 0.67% tx 0.28% / 0.22% listen 0.45% / 0.44%)
+23:28.581	ID:8	 90070 P 8.0 27 139760 22892015 54737 94042 0 68354 5791 321887 2233 1945 0 936 (radio 0.64% / 1.27% tx 0.23% / 0.68% listen 0.40% / 0.59%)
+23:28.660	ID:7	 90054 P 7.0 27 119663 22908019 43025 90483 0 69491 3520 324158 560 1357 0 948 (radio 0.57% / 0.58% tx 0.18% / 0.17% listen 0.39% / 0.41%)
+23:28.756	ID:6	 90070 P 6.0 27 98499 22933281 34792 86508 0 68843 642 324585 0 960 0 960 (radio 0.52% / 0.29% tx 0.15% / 0.00% listen 0.37% / 0.29%)
+23:28.956	ID:14	 90070 P 14.0 27 35629 22996169 7915 73237 0 68144 601 327078 0 960 0 960 (radio 0.35% / 0.29% tx 0.03% / 0.00% listen 0.31% / 0.29%)
+23:28.957	ID:5	 90053 P 5.0 27 94085 22933351 35315 85245 0 68250 672 327007 0 960 0 960 (radio 0.52% / 0.29% tx 0.15% / 0.00% listen 0.37% / 0.29%)
+23:29.090	ID:4	 90085 P 4.0 27 82460 22953167 28924 84474 0 69019 673 327006 0 960 0 960 (radio 0.49% / 0.29% tx 0.12% / 0.00% listen 0.36% / 0.29%)
+23:29.199	ID:11	 90102 P 11.0 27 163561 22876387 78145 108059 0 69536 3226 324452 1304 1651 0 948 (radio 0.80% / 0.90% tx 0.33% / 0.39% listen 0.46% / 0.50%)
+23:29.390	ID:13	 90070 P 13.0 27 40018 22991777 10890 77075 0 70472 621 327058 0 960 0 960 (radio 0.38% / 0.29% tx 0.04% / 0.00% listen 0.33% / 0.29%)
+23:29.601	ID:12	 90102 P 12.0 27 100292 22939690 38430 90833 0 70888 798 326881 0 1121 0 948 (radio 0.56% / 0.34% tx 0.16% / 0.00% listen 0.39% / 0.34%)
+23:29.718	ID:15	 90118 P 15.0 27 26395 23017692 2379 70475 0 68404 601 327078 0 960 0 960 (radio 0.31% / 0.29% tx 0.01% / 0.00% listen 0.30% / 0.29%)
+23:30.155	ID:3	 90118 P 3.0 27 64304 22979775 21915 78812 0 68230 640 327039 0 960 0 960 (radio 0.43% / 0.29% tx 0.09% / 0.00% listen 0.34% / 0.29%)
+23:30.242	ID:2	 90166 P 2.0 27 50864 23005516 16899 79973 0 71166 618 327060 0 960 0 960 (radio 0.42% / 0.29% tx 0.07% / 0.00% listen 0.34% / 0.29%)
+23:48.465	ID:9	 91302 P 9.0 28 195278 23151877 65666 106667 0 70431 649 327030 0 960 0 960 (radio 0.73% / 0.29% tx 0.28% / 0.00% listen 0.45% / 0.29%)
+23:48.579	ID:8	 91350 P 8.0 28 140410 23219045 54737 95002 0 69314 649 327030 0 960 0 960 (radio 0.64% / 0.29% tx 0.23% / 0.00% listen 0.40% / 0.29%)
+23:48.658	ID:7	 91334 P 7.0 28 120305 23235056 43025 91443 0 70451 641 327037 0 960 0 960 (radio 0.57% / 0.29% tx 0.18% / 0.00% listen 0.39% / 0.29%)
+23:48.756	ID:6	 91350 P 6.0 28 99105 23260355 34792 87468 0 69803 605 327074 0 960 0 960 (radio 0.52% / 0.29% tx 0.14% / 0.00% listen 0.37% / 0.29%)
+23:48.956	ID:14	 91350 P 14.0 28 36231 23323247 7915 74197 0 69104 601 327078 0 960 0 960 (radio 0.35% / 0.29% tx 0.03% / 0.00% listen 0.31% / 0.29%)
+23:48.957	ID:5	 91333 P 5.0 28 94716 23260400 35315 86205 0 69210 630 327049 0 960 0 960 (radio 0.52% / 0.29% tx 0.15% / 0.00% listen 0.36% / 0.29%)
+23:49.090	ID:4	 91365 P 4.0 28 83091 23280216 28924 85434 0 69979 630 327049 0 960 0 960 (radio 0.48% / 0.29% tx 0.12% / 0.00% listen 0.36% / 0.29%)
+23:49.197	ID:11	 91382 P 11.0 28 164221 23203407 78145 109019 0 70496 659 327020 0 960 0 960 (radio 0.80% / 0.29% tx 0.33% / 0.00% listen 0.46% / 0.29%)
+23:49.390	ID:13	 91350 P 13.0 28 40627 23318847 10890 78035 0 71432 608 327070 0 960 0 960 (radio 0.38% / 0.29% tx 0.04% / 0.00% listen 0.33% / 0.29%)
+23:49.601	ID:12	 91382 P 12.0 28 100916 23266746 38430 91793 0 71848 623 327056 0 960 0 960 (radio 0.55% / 0.29% tx 0.16% / 0.00% listen 0.39% / 0.29%)
+23:49.718	ID:15	 91398 P 15.0 28 26997 23344770 2379 71435 0 69364 601 327078 0 960 0 960 (radio 0.31% / 0.29% tx 0.01% / 0.00% listen 0.30% / 0.29%)
+23:50.155	ID:3	 91398 P 3.0 28 64909 23306850 21915 79772 0 69190 604 327075 0 960 0 960 (radio 0.43% / 0.29% tx 0.09% / 0.00% listen 0.34% / 0.29%)
+23:50.242	ID:2	 91446 P 2.0 28 51469 23332591 16899 80933 0 72126 604 327075 0 960 0 960 (radio 0.41% / 0.29% tx 0.07% / 0.00% listen 0.34% / 0.29%)
+23:54.207	ID:12	[DHT:DEBUG] hash: 33 ae e1 69 da c6 ba 05 a7 9e 79 ea cd ba 32 fd 40 5e ba e2 
+23:55.377	ID:7	[WL:DEBUG] key not hit...
+23:55.396	ID:7	[WL:DEBUG] Refferer 12 12 12 12 12 12 12 12 12 12 12 12 12 12 11 9 1 8 0 0 0 0 0 0 0 0 0 0 0 0 0 0 

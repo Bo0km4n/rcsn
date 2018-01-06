@@ -27,9 +27,10 @@ PROCESS_THREAD(whiteListProcess, ev, data)
   unicast_open(&whiteListServerUC, WL_UC_PORT, &whiteListServerCallBacks);
   broadcast_open(&whiteListServerBC, WL_BC_PORT, &whiteListServerBCCallBacks);
   WhiteListInit(whiteList);
-  PROCESS_WAIT_EVENT_UNTIL(ev == sensors_event && data == &button_sensor);
-  printf("[WL:DEBUG] starting white list server...\n");
-  broadcast_send(&whiteListServerBC);
+  while(1) {
+    PROCESS_WAIT_EVENT_UNTIL(ev == sensors_event && data == &button_sensor);
+    broadcast_send(&whiteListServerBC);
+  }
   PROCESS_END();
 }
 
@@ -46,7 +47,6 @@ void Pub(sha1_hash_t *h, int a) {
     unicast_send(&whiteListServerUC, &to);
     return;
 }
-
 // WhiteListInit ホワイトリストにランダムなハッシュ値を挿入
 void WhiteListInit(sha1_hash_t *list) {
     int i;
@@ -59,7 +59,6 @@ void WhiteListInit(sha1_hash_t *list) {
     }
     return;
 }
-
 void debugServerWL(sha1_hash_t *list) {
     int i;
     int j;
