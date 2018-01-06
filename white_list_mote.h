@@ -90,4 +90,5 @@ void ResultSendUCPacket(Result *, int);
 void QuerySendMHPacket(Query *, int, int);
 void StartRandomQuery(void);
 void PrintRefferer(Query *);
+void CleanRefferer(Query *);
 #endif
