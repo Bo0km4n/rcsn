@@ -35,7 +35,7 @@ PROCESS_THREAD(randomHashSearchProcess, ev, data)
   printf("[WL:DEBUG] start random search hash process\n");
   powertrace_start(CLOCK_SECOND * 10);
   while(whiteListMote.Switch) {
-      //if (csn.ID != 12) break; // for debug
+      if (csn.ID != 12) break; // for debug
       etimer_set(&et, CLOCK_SECOND * (10 + (random_rand() % 20)));
       PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
       HashRandomization(&whiteListMote.Q->Body);
@@ -95,7 +95,7 @@ void SearchUCRecv(struct unicast_conn *uc, const linkaddr_t *from) {
     Query *q = (Query *)packetbuf_dataptr();
     int i;
     //printf("[WL:DEBUG] debug received search uc from %d next %d\n", from->u8[0], q->Next);
-    if (q->Next != csn.ID && q->Next == csn.ClusterHeadID) {
+    if (q->Next != csn.ID) {
         QuerySendMHPacket(q, q->Next, csn.Previous);
         return;
     }
@@ -302,6 +302,7 @@ void HashRandomization(sha1_hash_t *h) {
 }
 void QueryPublish(Query *q) {
     q->Publisher = csn.ID;
+    CleanRefferer(q);    
     StoreRefferer(q, csn.ID);
     if (csn.IsBot) {
         if (CheckRange(&q->Body)) {
@@ -406,6 +407,7 @@ void StoreRefferer(Query *q, short int p) {
     if (q->ReffererIndex >= ReffererLength - 1) return;
     q->Refferer[q->ReffererIndex] = p;
     q->ReffererIndex += 1;
+    printf("[WL:DEBUG] stored refferer %d\n", p);
 }
 void ReplyResult(Query *q, Result *r) {
     int i;
@@ -442,4 +444,11 @@ void PrintRefferer(Query *q) {
         printf("%d ", q->Refferer[i]);
     }
     printf("\n");
+}
+void CleanRefferer(Query *q) {
+    int i;
+    for (i=0;i<ReffererLength;i++) {
+        q->Refferer[i] = 0;
+    }
+    q->ReffererIndex = 0;
 }
