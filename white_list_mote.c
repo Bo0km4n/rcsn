@@ -14,8 +14,10 @@
 
 static struct unicast_conn whiteListUC;
 static struct unicast_conn searchUC;
+static struct unicast_conn notifyUC;
 static struct unicast_callbacks whiteListUCCallBacks = {WhiteListUCRecv};
 static struct unicast_callbacks searchUCCallBacks = {SearchUCRecv};
+static struct unicast_callbacks notifyUCCallBacks = {NotifyUCRecv};
 static struct broadcast_conn whiteListBC;
 static struct broadcast_callbacks whiteListBCCallBacks = {WhiteListBCRecv};
 static struct etimer et;
@@ -29,7 +31,7 @@ PROCESS_THREAD(randomHashSearchProcess, ev, data)
   PROCESS_BEGIN();
   printf("[WL:DEBUG] start random search hash process\n");
   while(whiteListMote.Switch) {
-      if (csn.ID != ALL_HEAD_ID) break; // for debug
+      //if (csn.ID != ALL_HEAD_ID) break; // for debug
       etimer_set(&et, CLOCK_SECOND * (10 + (random_rand() % 60)));
       PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
       HashRandomization(&whiteListMote.Q->Body);
@@ -43,6 +45,7 @@ PROCESS_THREAD(randomHashSearchProcess, ev, data)
 void WhiteListMoteInit() {
     unicast_open(&whiteListUC, WL_UC_PORT, &whiteListUCCallBacks);
     unicast_open(&searchUC, WL_SEARCH_PORT, &searchUCCallBacks);
+    unicast_open(&notifyUC, WL_RANDOM_QUERY_PORT, &notifyUCCallBacks);
     broadcast_open(&whiteListBC, WL_BC_PORT, &whiteListBCCallBacks);
     whiteListMote.Cursor = 0;
     whiteListMote.Switch = 0;
@@ -74,6 +77,25 @@ void WhiteListUCRecv(struct unicast_conn *uc, const linkaddr_t *from) {
         break;
     }
 }
+void NotifyUCRecv(struct unicast_conn *uc, const linkaddr_t *from) {
+    whiteListMote.SwitchOn();
+    StartRandomSearch();
+    printf("[WL:DEBUG] received start random query notification\n");
+    linkaddr_t successor;
+    linkaddr_t childSuccessor;
+    successor.u8[0] = csn.Successor;
+    successor.u8[1] = 0;
+    childSuccessor.u8[0] = csn.ChildSuccessor;
+    childSuccessor.u8[1] = 0;
+    packetbuf_copyfrom("", 4);
+    if (!csn.IsRingTail) {
+        unicast_send(&notifyUC, &successor);
+    }
+    if (!csn.IsBot) {
+        unicast_send(&notifyUC, &childSuccessor);
+    }
+}
+
 void WhiteListBCRecv(struct broadcast_conn *bc, const linkaddr_t *from) {
     printf("[WL:DEBUG] received switch on message\n");
     if (!whiteListMote.Switch) {
@@ -324,4 +346,20 @@ Result Dequeue(ResultQueue *rQueue) {
     }
     rQueue->Data[QUEUE_SIZE-1] = v;
     return r;
+}
+void StartRandomQuery() {
+    whiteListMote.SwitchOn();
+    linkaddr_t successor;
+    linkaddr_t childSuccessor;
+    successor.u8[0] = csn.Successor;
+    successor.u8[1] = 0;
+    childSuccessor.u8[0] = csn.ChildSuccessor;
+    childSuccessor.u8[1] = 0;
+    packetbuf_copyfrom("", 4);
+    if (!csn.IsRingTail) {
+        unicast_send(&notifyUC, &successor);
+    }
+    if (!csn.IsBot) {
+        unicast_send(&notifyUC, &childSuccessor);
+    }
 }

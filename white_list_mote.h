@@ -52,6 +52,7 @@ enum WLMessageTypes {
 
 void WhiteListMoteInit(void);
 void WhiteListUCRecv(struct unicast_conn *, const linkaddr_t *);
+void NotifyUCRecv(struct unicast_conn *, const linkaddr_t *);
 void WhiteListBCRecv(struct broadcast_conn *, const linkaddr_t *);
 void SearchUCRecv(struct unicast_conn *,const linkaddr_t *);
 void InsertWLMessage(WhiteListMessage *, sha1_hash_t *);
@@ -75,4 +76,5 @@ extern WhiteListMote whiteListMote;
 void Enqueue(ResultQueue *, Result *);
 Result Dequeue(ResultQueue *);
 int Empty(ResultQueue *);
+void StartRandomQuery(void);
 #endif

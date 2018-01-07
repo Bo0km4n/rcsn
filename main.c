@@ -199,6 +199,10 @@ PROCESS_THREAD(main_process, ev, data)
 			    data == &button_sensor);
   StartHashAllocation();
 
+  PROCESS_WAIT_EVENT_UNTIL(ev == sensors_event &&
+			    data == &button_sensor);
+  StartRandomQuery();
+
   /*
   * Your application logic
   */
