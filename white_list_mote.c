@@ -11,7 +11,7 @@
 #include "lib/list.h"
 #include "lib/memb.h"
 #include "dev/button-sensor.h"
-
+#include "powertrace.h"
 static struct unicast_conn whiteListUC;
 static struct unicast_conn searchUC;
 static struct unicast_conn notifyUC;
@@ -21,6 +21,7 @@ static struct unicast_callbacks notifyUCCallBacks = {NotifyUCRecv};
 static struct broadcast_conn whiteListBC;
 static struct broadcast_callbacks whiteListBCCallBacks = {WhiteListBCRecv};
 static struct etimer et;
+int queryCounter = 0;
 WhiteListMote whiteListMote;
 
 /*---------------------------------------------------------------------------*/
@@ -30,13 +31,23 @@ PROCESS_THREAD(randomHashSearchProcess, ev, data)
 {
   PROCESS_BEGIN();
   printf("[WL:DEBUG] start random search hash process\n");
+  powertrace_start(CLOCK_SECOND * 10);
   while(whiteListMote.Switch) {
       //if (csn.ID != ALL_HEAD_ID) break; // for debug
+      queryCounter += 1;
       etimer_set(&et, CLOCK_SECOND * (10 + (random_rand() % 60)));
       PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
       HashRandomization(&whiteListMote.Q->Body);
-      PrintHash(&whiteListMote.Q->Body);
+      //PrintHash(&whiteListMote.Q->Body);
       QueryPublish(whiteListMote.Q);
+      printf("[EVAL:DEBUG] query counter %d\n", queryCounter);
+      if (queryCounter == 10) {
+            etimer_set(&et, CLOCK_SECOND * 20);
+            PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
+            printf("[EVAL:DEBUG] stop powertrace\n");
+            powertrace_stop();
+            process_exit(&randomHashSearchProcess);
+      }
   }
   PROCESS_END();
 }

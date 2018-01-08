@@ -166,7 +166,7 @@ void CsnUCReceiver(struct unicast_conn *c, const linkaddr_t *from) {
       csn.ClusterHeadID = m->clusterHead;
       progress = m->progress;
       csn.MaxRingNode = MAX_NODE / orgPow(2, csn.Level - 1);
-      printf("[CSN:DEBUG] Linked from %d level: %d\n", from->u8[0], csn.Level);
+      printf("[CSN:DEBUG] Linked from %d level: %d process: %d\n", from->u8[0], csn.Level, progress);
       
       if (progress < csn.MaxRingNode) {
         process_start(&csnProcess, (void *)0);
