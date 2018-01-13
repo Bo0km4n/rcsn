@@ -28,17 +28,15 @@ def read_file(file_name):
         for row in reader:
             if (len(row) > 2):
                 if row[2] is 'P':
-                    data[row[3]].append(int(row[11]))
+                    data[row[3]].append(int(row[5]))
     return data
 
 def calc_average_consumption(data):
     a = np.array([])
     for i in data:
-        a = np.append(a, data[i][-1], data[i][0])
-    average = np.average(a)
-    print(average)
-    return average
-
+        for j in range(1, len(data[i])):
+            e =  (data[i][j] - data[i][j-1]) * 0.33 * 3 / 32768 / 10
+            print(e)
 
 unicast_data = read_file('loglistener_random_multihop.txt')
 multihop_data = read_file('loglistener_random_unicast.txt')
