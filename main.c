@@ -19,7 +19,7 @@ PROCESS_THREAD(main_process, ev, data)
 {
   PROCESS_BEGIN();
   SENSORS_ACTIVATE(button_sensor);
-  
+  printf("Ticks per second: %u\n", RTIMER_SECOND);
   if(node_id == ALL_HEAD_ID) {
     StartStructCsn();
     DHTInit();
